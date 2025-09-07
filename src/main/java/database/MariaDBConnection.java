@@ -15,7 +15,11 @@ public class MariaDBConnection {
         String url = dotenv.get("DB_URL");
         String user = dotenv.get("DB_USER");
         String password = dotenv.get("DB_PASSWORD");
-        System.out.println("URL=" + url);
+
+        if (url == null || user == null || password == null) {
+            throw new IllegalStateException("Database credentials are not set in .env");
+        }
+
         if (conn==null) {
             try {
                 conn = DriverManager.getConnection(url, user, password);
@@ -26,14 +30,15 @@ public class MariaDBConnection {
         } return conn;
     }
 
-    public static void main(String[] args) {
-        try (Connection conn = MariaDBConnection.getConnection()) {
-            if (conn != null) {
-                System.out.println("Connected successfully!");
-            }
-        } catch (SQLException e) {
-            System.out.println("WRONG");
-            e.printStackTrace();
-        }
-    }
+    //For testing the connection
+//    public static void main(String[] args) {
+//        try (Connection conn = MariaDBConnection.getConnection()) {
+//            if (conn != null) {
+//                System.out.println("Connected successfully!");
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("No connection.");
+//            e.printStackTrace();
+//        }
+//    }
 }
