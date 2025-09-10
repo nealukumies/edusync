@@ -58,6 +58,15 @@ public class AssignmentDaoTest {
     }
 
     /**
+     * Test deleting an assignment with an invalid ID.
+     */
+    @Test
+    void deleteAssignmentFailTest() {
+        boolean deleted = assignmentDao.deleteAssignment(-100);
+        assertFalse(deleted, "Deletion should fail for invalid ID");
+    }
+
+    /**
      * Test inserting and deleting assignments without a course id. Delete the inserted assignment after testing.
      */
     @Test

@@ -55,6 +55,11 @@ class StudentDaoTest {
         assertTrue(studentDao.deleteStudent(id), "Deletion successful for ID: " + id);
     }
 
+    @Test
+    void deleteStudentFailTest() {
+        assertFalse(studentDao.deleteStudent(-100), "Deletion should fail for non-existent student ID");
+    }
+
     /**
      * Test adding a student with a duplicate email. The second insertion should fail.
      */

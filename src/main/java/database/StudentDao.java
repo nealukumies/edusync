@@ -84,11 +84,11 @@ public class StudentDao {
         }
     }
 
-    // Simple main method for manual testing
-    public static void main(String[] args) {
-        StudentDao studentDao = new StudentDao();
-        //studentDao.addStudent("John", "john@gmail.com");
-        System.out.println("With john@gmail.com found student: " + studentDao.getStudent("john@gmail.com"));
-
-    }
+//    // Simple main method for manual testing
+//    public static void main(String[] args) {
+//        StudentDao studentDao = new StudentDao();
+//        //studentDao.addStudent("John", "john@gmail.com");
+//        System.out.println("With john@gmail.com found student: " + studentDao.getStudent("john@gmail.com"));
+//
+//    }
 }

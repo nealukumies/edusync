@@ -58,6 +58,15 @@ class CourseDaoTest {
     }
 
     /**
+     * Test deleting a course with a non-existent ID. The deletion should fail.
+     */
+    @Test
+    void deleteCourseFailTest() {
+        boolean result = courseDao.deleteCourse(-100); // Assuming -100 is an invalid ID
+        assertFalse(result, "Deletion should fail for non-existent ID");
+    }
+
+    /**
      * Test adding a course with an invalid student ID. The insertion should fail.
      */
     @Test

@@ -159,17 +159,17 @@ public class AssignmentDao {
         }
     }
 
-    // For testing purposes
-    public static void main(String[] args) {
-        AssignmentDao dao = new AssignmentDao();
-        //dao.insertAssignment(1, 1, "Math Homework", "Complete exercises 1-10", Date.valueOf("2025-10-11"));
-        //dao.setStatus(2, Status.IN_PROGRESS);
-        List<Assignment> assignments = dao.getAssignments(1);
-        for (Assignment a : assignments) {
-            System.out.println("ID: " + a.getAssignmentId() + ", Title: " + a.getTitle() + ", Status: " + a.getStatus());
-        }
-//        System.out.println("Assignment with id 3: " + dao.getAssignmentById(3));
-//        dao.deleteAssignment(3);
-//        System.out.println("After deletion, assignment with id 2: " + dao.getAssignmentById(3));
-    }
+//    // For testing purposes
+//    public static void main(String[] args) {
+//        AssignmentDao dao = new AssignmentDao();
+//        //dao.insertAssignment(1, 1, "Math Homework", "Complete exercises 1-10", Date.valueOf("2025-10-11"));
+//        //dao.setStatus(2, Status.IN_PROGRESS);
+//        List<Assignment> assignments = dao.getAssignments(1);
+//        for (Assignment a : assignments) {
+//            System.out.println("ID: " + a.getAssignmentId() + ", Title: " + a.getTitle() + ", Status: " + a.getStatus());
+//        }
+////        System.out.println("Assignment with id 3: " + dao.getAssignmentById(3));
+////        dao.deleteAssignment(3);
+////        System.out.println("After deletion, assignment with id 2: " + dao.getAssignmentById(3));
+//    }
 }
