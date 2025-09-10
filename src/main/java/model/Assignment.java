@@ -1,3 +1,5 @@
+// This class represents an assignment entity in the system.
+
 package model;
 
 import java.util.Date;
@@ -43,4 +45,17 @@ public class Assignment {
         return status;
     }
 
+    // For debugging purposes
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "assignmentId=" + assignmentId +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", deadline=" + deadline +
+                ", status=" + status +
+                '}';
+    }
 }
