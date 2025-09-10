@@ -57,6 +57,11 @@ public class ScheduleDao {
         }
     }
 
+    /**
+     * Deletes a schedule by its ID. Returns true if deletion was successful, false otherwise.
+     * @param scheduleId
+     * @return
+     */
     public boolean deleteSchedule(int scheduleId) {
         Connection conn = MariaDBConnection.getConnection();
         String sql = "DELETE FROM schedule WHERE schedule_id = ?;";
@@ -71,6 +76,11 @@ public class ScheduleDao {
         }
     }
 
+    /**
+     * Retrieves a schedule by its ID. Returns a Schedule object if found, or null if not found or an error occurs.
+     * @param scheduleId
+     * @return
+     */
     public Schedule getSchedule(int scheduleId) {
         Connection conn = MariaDBConnection.getConnection();
         String sql = "SELECT * FROM schedule WHERE schedule_id = ?;";
