@@ -18,6 +18,10 @@ public class StudentDao {
      * @param email
      */
     public int addStudent(String name, String email) {
+        if (name == null || name.isEmpty() || email == null || email.isEmpty()) {
+            System.out.println("Error: Name and email cannot be null or empty.");
+            return -1;
+        }
         Connection conn = MariaDBConnection.getConnection();
         String sql = "INSERT INTO students (name, email) VALUES (?, ?);";
         try {

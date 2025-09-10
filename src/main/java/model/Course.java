@@ -28,4 +28,19 @@ public class Course {
                 '}';
     }
 
+    public int getCourseId() {
+        return courseId;
+    }
+    public int getStudentId() {
+        return studentId;
+    }
+    public String getCourseName() {
+        return courseName;
+    }
+    public Date getStartDate() {
+        return startDate;
+    }
+    public Date getEndDate() {
+        return endDate;
+    }
 }
