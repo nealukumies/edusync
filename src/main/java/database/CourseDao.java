@@ -100,13 +100,21 @@ public class CourseDao {
         }
     }
 
+    /**
+     * Deletes a course by its ID. Also deletes associated schedules.
+     * Returns true if deletion was successful, false otherwise.
+     * @param courseId
+     * @return boolean
+     */
     public boolean deleteCourse(int courseId) {
         Connection conn = MariaDBConnection.getConnection();
-        String sql = "DELETE FROM courses WHERE course_id = ?;";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, courseId);
-            int rows = ps.executeUpdate();
+            PreparedStatement psSchedules = conn.prepareStatement("DELETE FROM schedule WHERE course_id = ?;");
+            psSchedules.setInt(1, courseId);
+            psSchedules.executeUpdate();
+            PreparedStatement psCourse = conn.prepareStatement("DELETE FROM courses WHERE course_id = ?;");
+            psCourse.setInt(1, courseId);
+            int rows = psCourse.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
             System.out.println("Error deleting course.");

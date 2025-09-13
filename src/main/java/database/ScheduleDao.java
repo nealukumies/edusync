@@ -29,6 +29,10 @@ public class ScheduleDao {
             throw new IllegalArgumentException("Course ID, weekday, start time, and end time must not be null");
         }
 
+        if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+            throw new IllegalArgumentException("Start time must be before end time");
+        }
+
         Connection conn = MariaDBConnection.getConnection();
         String sql = "INSERT INTO schedule (course_id, weekday, start_time, end_time) VALUES (?, ?, ?, ?);";
         try {
