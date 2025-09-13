@@ -6,11 +6,9 @@ package database;
 import model.Schedule;
 import model.Weekday;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static java.sql.Time.valueOf;
 
@@ -24,10 +22,10 @@ public class ScheduleDao {
      * @param weekday
      * @param startTime
      * @param endTime
-     * @return
+     * @return int - schedule ID, 0 if no rows affected, -1 if error occurs
      */
     public int insertSchedule(Integer courseId, Weekday weekday, LocalTime startTime, LocalTime endTime) {
-        if (weekday == null || startTime == null || endTime == null) {
+        if (courseId == null || weekday == null || startTime == null || endTime == null) {
             throw new IllegalArgumentException("Course ID, weekday, start time, and end time must not be null");
         }
 
@@ -35,11 +33,7 @@ public class ScheduleDao {
         String sql = "INSERT INTO schedule (course_id, weekday, start_time, end_time) VALUES (?, ?, ?, ?);";
         try {
             PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            if (courseId != null) {
-                ps.setInt(1, courseId);
-            } else {
-                ps.setNull(1, java.sql.Types.INTEGER);
-            }
+            ps.setInt(1, courseId);
             ps.setString(2, weekday.name());
             ps.setTime(3, valueOf(startTime));
             ps.setTime(4, valueOf(endTime));
@@ -60,7 +54,7 @@ public class ScheduleDao {
     /**
      * Deletes a schedule by its ID. Returns true if deletion was successful, false otherwise.
      * @param scheduleId
-     * @return
+     * @return boolean
      */
     public boolean deleteSchedule(int scheduleId) {
         Connection conn = MariaDBConnection.getConnection();
@@ -79,7 +73,7 @@ public class ScheduleDao {
     /**
      * Retrieves a schedule by its ID. Returns a Schedule object if found, or null if not found or an error occurs.
      * @param scheduleId
-     * @return
+     * @return Schedule
      */
     public Schedule getSchedule(int scheduleId) {
         Connection conn = MariaDBConnection.getConnection();
@@ -102,16 +96,82 @@ public class ScheduleDao {
         }
     }
 
-    // For testing purposes
-//    public static void main(String[] args) {
-//        ScheduleDao dao = new ScheduleDao();
-//        int newId = dao.insertSchedule(1, Weekday.MONDAY, LocalTime.of(9, 0), LocalTime.of(10, 30));
+    /**
+     * Retrieves all schedules for a given course ID. Returns a list of Schedule objects, or an empty list if none found or an error occurs.
+     * @param courseId
+     * @return ArrayList<Schedule>
+     */
+    public ArrayList<Schedule> getAllSchedulesForCourse(int courseId) {
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "SELECT * FROM schedule WHERE course_id = ?;";
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int scheduleId = rs.getInt("schedule_id");
+                courseId = rs.getInt("course_id");
+                Weekday weekday = Weekday.valueOf(rs.getString("weekday").toUpperCase());
+                LocalTime startTime = rs.getTime("start_time").toLocalTime();
+                LocalTime endTime = rs.getTime("end_time").toLocalTime();
+                schedules.add(new Schedule(scheduleId, courseId, weekday, startTime, endTime));
+            }
+            return schedules;
+        } catch (SQLException e) {
+            System.out.println("Error retrieving schedules: " + e.getMessage());
+            return schedules; // Return empty list on failure
+        }
+    }
+
+    /**
+     * Retrieves all schedules for all courses of a given student ID.
+     * Returns a list of Schedule objects, or an empty list if none found or an error occurs.
+     * @param studentId
+     * @return ArrayList<Schedule>
+     */
+
+    public ArrayList<Schedule> getAllSchedulesForStudent(int studentId) {
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "SELECT s.schedule_id, s.course_id, s.weekday, s.start_time, s.end_time " +
+                     "FROM schedule s " +
+                     "JOIN courses c ON s.course_id = c.course_id " +
+                     "WHERE c.student_id = ?;";
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, studentId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int scheduleId = rs.getInt("schedule_id");
+                int courseId = rs.getInt("course_id");
+                Weekday weekday = Weekday.valueOf(rs.getString("weekday").toUpperCase());
+                LocalTime startTime = rs.getTime("start_time").toLocalTime();
+                LocalTime endTime = rs.getTime("end_time").toLocalTime();
+                schedules.add(new Schedule(scheduleId, courseId, weekday, startTime, endTime));
+            }
+            return schedules;
+        } catch (SQLException e) {
+            System.out.println("Error retrieving schedules for student: " + e.getMessage());
+            return schedules; // Return empty list on failure
+        }
+    }
+
+    //For testing purposes
+    public static void main(String[] args) {
+        ScheduleDao dao = new ScheduleDao();
+//        int newId = dao.insertSchedule(1, Weekday.THURSDAY, LocalTime.of(12, 0), LocalTime.of(15, 30));
 //        System.out.println("Inserted schedule ID: " + newId);
 //
 //        Schedule schedule = dao.getSchedule(newId);
 //        System.out.println("Retrieved schedule: " + schedule);
-//
+
+        //dao.insertSchedule(null, Weekday.TUESDAY, LocalTime.of(9, 0), LocalTime.of(10, 30));
+
+        ArrayList<Schedule> schedules = dao.getAllSchedulesForStudent(1);
+        System.out.println("All schedules for student 1: " + schedules);
+
 //        boolean deleted = dao.deleteSchedule(newId);
 //        System.out.println("Deleted schedule: " + deleted);
-//    }
+    }
 }
