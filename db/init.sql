@@ -31,7 +31,7 @@ FOREIGN KEY (student_id) REFERENCES students(student_id)
 CREATE TABLE schedule (
 schedule_id INT AUTO_INCREMENT,
 course_id int NOT NULL,
-weekday ENUM('monday','tuesday','wednesday','thursday','friday','saturday','sunday'),
+weekday ENUM('monday','tuesday','wednesday','thursday','friday','saturday','sunday') NOT NULL,
 start_time TIME NOT NULL,
 end_time TIME NOT NULL,
 PRIMARY KEY (schedule_id),
