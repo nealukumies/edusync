@@ -123,6 +123,31 @@ public class CourseDao {
         }
     }
 
+    public boolean updateCourse(int courseId, String courseName, Date startDate, Date endDate) {
+        if (startDate != null && endDate != null && endDate.before(startDate)) {
+            System.out.println("Error: End date cannot be before start date.");
+            return false;
+        }
+        if (courseName == null || courseName.isEmpty()) {
+            System.out.println("Error: Course name cannot be null or empty.");
+            return false;
+        }
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "UPDATE courses SET course_name = ?, start_date = ?, end_date = ? WHERE course_id = ?;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, courseName);
+            ps.setDate(2, startDate);
+            ps.setDate(3, endDate);
+            ps.setInt(4, courseId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating course.");
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         CourseDao dao = new CourseDao();
         //dao.addCourse(1, "Mathematics", Date.valueOf("2024-09-01"), Date.valueOf("2025-06-30"));

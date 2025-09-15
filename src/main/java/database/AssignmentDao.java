@@ -159,6 +159,28 @@ public class AssignmentDao {
         }
     }
 
+    public boolean updateAssignment(int assignmentId, String title, String description, Date deadline, Integer courseId) {
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "UPDATE assignments SET title = ?, description = ?, deadline = ?, course_id = ? WHERE assignment_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setDate(3, deadline);
+            if (courseId != null) {
+                ps.setInt(4, courseId);
+            } else {
+                ps.setNull(4, Types.INTEGER);
+            }
+            ps.setInt(5, assignmentId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating assignment: " + e.getMessage());
+            return false;
+        }
+    }
+
 //    // For testing purposes
 //    public static void main(String[] args) {
 //        AssignmentDao dao = new AssignmentDao();

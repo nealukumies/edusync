@@ -117,4 +117,68 @@ class CourseDaoTest {
         assertNull(course, "Course should be null for non-existent ID");
     }
 
+    /**
+     * Test updating an existing course. The update should be successful and details should match the new values.
+     */
+    @Test
+    void updateCourseTest() {
+        int id = courseDao.addCourse(1, "Test101", Date.valueOf("2025-02-01"), Date.valueOf("2025-06-01"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedCourses.add(id);
+
+        boolean updated = courseDao.updateCourse(id, "Test Basics", Date.valueOf("2025-03-01"), Date.valueOf("2025-07-01"));
+        assertTrue(updated, "Update should be successful");
+
+        Course course = courseDao.getCourseById(id);
+        assertNotNull(course, "Course should not be null after update");
+        assertEquals("Test Basics", course.getCourseName(), "Course name should be updated");
+        assertEquals(Date.valueOf("2025-03-01"), course.getStartDate(), "Start date should be updated");
+        assertEquals(Date.valueOf("2025-07-01"), course.getEndDate(), "End date should be updated");
+    }
+
+    /**
+     * Test updating a course with end date before start date. The update should fail.
+     */
+    @Test
+    void updateCourseWithInvalidDatesTest() {
+        int id = courseDao.addCourse(1, "Test101", Date.valueOf("2025-02-01"), Date.valueOf("2025-06-01"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedCourses.add(id);
+
+        boolean updated = courseDao.updateCourse(id, "Test101", Date.valueOf("2025-07-01"), Date.valueOf("2025-06-01"));
+        assertFalse(updated, "Update should fail when end date is before start date");
+    }
+
+    /**
+     * Test updating a course with a null (empty) name. The update should fail.
+     */
+    @Test
+    void updateCourseWithNullNameTest() {
+        int id = courseDao.addCourse(1, "Test101", Date.valueOf("2025-02-01"), Date.valueOf("2025-06-01"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedCourses.add(id);
+
+        boolean updated = courseDao.updateCourse(id, null, Date.valueOf("2025-03-01"), Date.valueOf("2025-07-01"));
+        assertFalse(updated, "Update should fail with null course name");
+    }
+
+    /**
+     * Test updating a non-existent course. The update should fail.
+     */
+    @Test
+    void updateNonExistentCourseTest() {
+        boolean updated = courseDao.updateCourse(-300, "NonExistent", Date.valueOf("2025-03-01"), Date.valueOf("2025-07-01"));
+        assertFalse(updated, "Update should fail for non-existent course ID");
+    }
+
+    @Test
+    void updateCourseTestWithNulLDatesTest() {
+        int id = courseDao.addCourse(1, "Test101", Date.valueOf("2025-02-01"), Date.valueOf("2025-06-01"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedCourses.add(id);
+
+        boolean updated = courseDao.updateCourse(id, "Test101", null, null);
+        assertFalse(updated, "Update should fail with null dates");
+    }
+
 }
