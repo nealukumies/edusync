@@ -131,14 +131,14 @@ public class AssignmentDaoTest {
         assertTrue(assignments.isEmpty(), "Assignments list for invalid student should be empty");
     }
 
-    // This test should be completed when StudentDao is implemented
-//    @Test
-//    void getAssignmentsForStudentWithNoAssignmentsTest() {
-//        //Creation of student before testing
-//        List<Assignment> assignments = assignmentDao.getAssignments(99999);
-//        assertTrue(assignments.isEmpty(), "Assignments list for student with no assignments should be empty");
-//        //Deletion of student after testing
-//    }
+    @Test
+    void getAssignmentsForStudentWithNoAssignmentsTest() {
+        StudentDao studentDao = new StudentDao();
+        int studentId = studentDao.addStudent("NoAssign", "nojob@today.fi");
+        List<Assignment> assignments = assignmentDao.getAssignments(studentId);
+        assertTrue(assignments.isEmpty(), "Assignments list for student with no assignments should be empty");
+        studentDao.deleteStudent(studentId);
+    }
 
     /**
      * Test updating the status of an assignment.
@@ -199,5 +199,56 @@ public class AssignmentDaoTest {
     void getAssignmentByInvalidIdTest() {
         Assignment assignment = assignmentDao.getAssignmentById(-100);
         assertNull(assignment, "Assignment should be null for invalid ID");
+    }
+
+    @Test
+    void updateAssignmentTest() {
+        int id = assignmentDao.insertAssignment(1, 1, "Update Test", "Testing update", Date.valueOf("2025-10-10"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedAssignments.add(id);
+        boolean updated = assignmentDao.updateAssignment(id, "Updated Title", "Updated Description", Date.valueOf("2025-11-11"), 1);
+        assertTrue(updated, "Update should be successful for ID: " + id);
+        Assignment assignment = assignmentDao.getAssignmentById(id);
+        assertEquals("Updated Title", assignment.getTitle(), "Title should be updated");
+        assertEquals("Updated Description", assignment.getDescription(), "Description should be updated");
+        assertEquals(Date.valueOf("2025-11-11"), assignment.getDeadline(), "Deadline should be updated");
+    }
+
+    @Test
+    void updateAssignmentFailTest() {
+        boolean updated = assignmentDao.updateAssignment(-100, "Should Fail", "This should not work", Date.valueOf("2025-11-11"), 1);
+        assertFalse(updated, "Update should fail for invalid assignment ID");
+    }
+
+    @Test
+    void updateAssignmentWithNullCourseTest() {
+        int id = assignmentDao.insertAssignment(1, 1, "Update Null Course Test", "Testing update with null course", Date.valueOf("2025-10-10"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedAssignments.add(id);
+        boolean updated = assignmentDao.updateAssignment(id, "Updated Title", "Updated Description", Date.valueOf("2025-11-11"), null);
+        assertTrue(updated, "Update should be successful for ID: " + id);
+        Assignment assignment = assignmentDao.getAssignmentById(id);
+        assertEquals("Updated Title", assignment.getTitle(), "Title should be updated");
+        assertEquals("Updated Description", assignment.getDescription(), "Description should be updated");
+        assertEquals(Date.valueOf("2025-11-11"), assignment.getDeadline(), "Deadline should be updated");
+        assertNull(assignment.getCourseId(), "Course ID should be null after update");
+    }
+
+    @Test
+    void updateAssignmentFailNoTitleTest() {
+        int id = assignmentDao.insertAssignment(1, 1, "Update No Title Test", "Testing update with no title", Date.valueOf("2025-10-10"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedAssignments.add(id);
+        boolean updated = assignmentDao.updateAssignment(id, null, "Updated Description", Date.valueOf("2025-11-11"), 1);
+        assertFalse(updated, "Update should fail for null title");
+    }
+
+    @Test
+    void updateAssignmentFailNoDeadlineTest() {
+        int id = assignmentDao.insertAssignment(1, 1, "Update No Deadline Test", "Testing update with no deadline", Date.valueOf("2025-10-10"));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedAssignments.add(id);
+        boolean updated = assignmentDao.updateAssignment(id, "Updated Title", "Updated Description", null, 1);
+        assertFalse(updated, "Update should fail for null deadline");
     }
 }

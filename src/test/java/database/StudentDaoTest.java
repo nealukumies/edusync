@@ -93,6 +93,21 @@ class StudentDaoTest {
         assertNull(student, "Student should not be found");
     }
 
+    @Test
+    void getStudentByIdTest() {
+        int studentId = studentDao.addStudent("Eve", "eve@eevee.com");
+        insertedStudents.add(studentId);
+        Student fetchedStudent = studentDao.getStudentById(studentId);
+        assertNotNull(fetchedStudent, "Student should be found");
+        assertEquals("Eve", fetchedStudent.getName(), "Student name should match");
+    }
+
+    @Test
+    void getNonExistentStudentByIdTest() {
+        Student student = studentDao.getStudentById(-150);
+        assertNull(student, "Student should not be found");
+    }
+
     /**
      * Test deleting a non-existent student. The deletion should fail.
      */
@@ -100,5 +115,59 @@ class StudentDaoTest {
     void deleteNonExistentStudentTest() {
         boolean result = studentDao.deleteStudent(-200);
         assertFalse(result, "Deletion should fail for non-existent student ID");
+    }
+
+
+    /**
+     * Test updating a student's name. The update should be successful and the name should be changed.
+     */
+    @Test
+    void updateStudentNameTest() {
+        int studentId = studentDao.addStudent("Bob", "bobs@email.fi");
+        insertedStudents.add(studentId);
+        boolean updateResult = studentDao.updateStudentName(studentId, "Bobby");
+        assertTrue(updateResult, "Update should be successful");
+        Student updatedStudent = studentDao.getStudentById(studentId);
+        assertNotNull(updatedStudent, "Updated student should be found");
+        assertEquals("Bobby", updatedStudent.getName(), "Student name should be updated");
+    }
+
+    /**
+     * Test updating a student's name with a null name. The update should fail and the name should remain unchanged.
+     */
+    @Test
+    void updateStudentNameWithNullNameTest() {
+        int studentId = studentDao.addStudent("Kalle", "pikku@kalle.fi");
+        insertedStudents.add(studentId);
+        boolean updateResult = studentDao.updateStudentName(studentId, null);
+        assertFalse(updateResult, "Update should fail with null name");
+        Student fetchedStudent = studentDao.getStudentById(studentId);
+        assertNotNull(fetchedStudent, "Student should be found");
+        assertEquals("Kalle", fetchedStudent.getName(), "Student name should remain unchanged");
+    }
+
+    /**
+     * Test updating a student's email. The update should be successful and the email should be changed.
+     */
+    @Test
+    void updateStudentEmailTest() {
+        int studentId = studentDao.addStudent("Ida", "idan@posti.fi");
+        insertedStudents.add(studentId);
+        boolean updateResult = studentDao.updateStudentEmail(studentId, "uusi@posti.fi");
+        assertTrue(updateResult, "Update should be successful");
+        Student updatedStudent = studentDao.getStudentById(studentId);
+        assertNotNull(updatedStudent, "Updated student should be found");
+        assertEquals("uusi@posti.fi", updatedStudent.getEmail(), "Student email should be updated");
+    }
+
+    /**
+     * Test updating a student's email with a null email. The update should fail and the email should remain unchanged.
+     */
+    @Test
+    void updateStudentEmailWithNullEmailTest() {
+        int studentId = studentDao.addStudent("Matti", "matti@teppo.fi");
+        insertedStudents.add(studentId);
+        boolean updateResult = studentDao.updateStudentEmail(studentId, null);
+        assertFalse(updateResult, "Update should fail with null email");
     }
 }

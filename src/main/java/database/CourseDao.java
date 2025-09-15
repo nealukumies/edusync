@@ -7,6 +7,7 @@ import model.Course;
 
 import java.sql.Connection;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CourseDao {
 
@@ -76,13 +77,44 @@ public class CourseDao {
         }
     }
 
-    public boolean deleteCourse(int courseId) {
+    public ArrayList<Course> getAllCourses(int studentId) {
+        ArrayList<Course> courses = new ArrayList<>();
         Connection conn = MariaDBConnection.getConnection();
-        String sql = "DELETE FROM courses WHERE course_id = ?;";
+        String sql = "SELECT * FROM courses WHERE student_id = ?;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, courseId);
-            int rows = ps.executeUpdate();
+            ps.setInt(1, studentId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int courseId = rs.getInt("course_id");
+                studentId = rs.getInt("student_id");
+                String courseName = rs.getString("course_name");
+                Date startDate = rs.getDate("start_date");
+                Date endDate = rs.getDate("end_date");
+                courses.add(new Course(courseId, studentId, courseName, startDate, endDate));
+            }
+            return courses;
+        } catch (SQLException e) {
+            System.out.println("Error retrieving courses.");
+            return null;
+        }
+    }
+
+    /**
+     * Deletes a course by its ID. Also deletes associated schedules.
+     * Returns true if deletion was successful, false otherwise.
+     * @param courseId
+     * @return boolean
+     */
+    public boolean deleteCourse(int courseId) {
+        Connection conn = MariaDBConnection.getConnection();
+        try {
+            PreparedStatement psSchedules = conn.prepareStatement("DELETE FROM schedule WHERE course_id = ?;");
+            psSchedules.setInt(1, courseId);
+            psSchedules.executeUpdate();
+            PreparedStatement psCourse = conn.prepareStatement("DELETE FROM courses WHERE course_id = ?;");
+            psCourse.setInt(1, courseId);
+            int rows = psCourse.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
             System.out.println("Error deleting course.");
@@ -91,10 +123,38 @@ public class CourseDao {
         }
     }
 
-//    public static void main(String[] args) {
-//        CourseDao dao = new CourseDao();
-//        //dao.addCourse(1, "Mathematics", Date.valueOf("2024-09-01"), Date.valueOf("2025-06-30"));
-//        System.out.println("Course with id 1: " + dao.getCourseById(1));
-//
-//    }
+    public boolean updateCourse(int courseId, String courseName, Date startDate, Date endDate) {
+        if (startDate != null && endDate != null && endDate.before(startDate)) {
+            System.out.println("Error: End date cannot be before start date.");
+            return false;
+        }
+        if (courseName == null || courseName.isEmpty()) {
+            System.out.println("Error: Course name cannot be null or empty.");
+            return false;
+        }
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "UPDATE courses SET course_name = ?, start_date = ?, end_date = ? WHERE course_id = ?;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, courseName);
+            ps.setDate(2, startDate);
+            ps.setDate(3, endDate);
+            ps.setInt(4, courseId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating course.");
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        CourseDao dao = new CourseDao();
+        //dao.addCourse(1, "Mathematics", Date.valueOf("2024-09-01"), Date.valueOf("2025-06-30"));
+        //System.out.println("Course with id 1: " + dao.getCourseById(1));
+        //dao.addCourse(1, "History", Date.valueOf("2025-09-01"), Date.valueOf("2025-12-30"));
+        //dao.addCourse(1, "Biology", Date.valueOf("2025-10-01"), Date.valueOf("2026-01-30"));
+        System.out.println("All courses for student with id 1: " + dao.getAllCourses(1));
+
+    }
 }

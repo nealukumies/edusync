@@ -23,7 +23,7 @@ public class AssignmentDao {
      * @param title
      * @param description
      * @param deadline
-     * @return
+     * @return int - assignment ID, 0 if no rows affected, -1 if error occurs
      */
     public int insertAssignment(int studentId, Integer courseId, String title, String description, Date deadline) {
         Connection conn = MariaDBConnection.getConnection();
@@ -90,7 +90,7 @@ public class AssignmentDao {
      * Returns true if the update was successful, false otherwise.
      * @param assignmentId
      * @param status
-     * @return
+     * @return boolean
      */
     public boolean setStatus(int assignmentId, Status status){
         if (status == null) {
@@ -115,7 +115,7 @@ public class AssignmentDao {
      * Retrieves an assignment by its ID.
      * Returns the Assignment object if found, or null if not found or an error occurs.
      * @param assignmentId
-     * @return
+     * @return Assignment
      */
     public Assignment getAssignmentById(int assignmentId) {
         Connection conn = MariaDBConnection.getConnection();
@@ -143,7 +143,7 @@ public class AssignmentDao {
      * Deletes an assignment by its ID.
      * Returns true if the deletion was successful, false otherwise.
      * @param assignmentId
-     * @return
+     * @return boolean
      */
     public boolean deleteAssignment(int assignmentId) {
         Connection conn = MariaDBConnection.getConnection();
@@ -155,6 +155,28 @@ public class AssignmentDao {
             return rows > 0;
         } catch (SQLException e) {
             System.out.println("Error deleting assignment: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateAssignment(int assignmentId, String title, String description, Date deadline, Integer courseId) {
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "UPDATE assignments SET title = ?, description = ?, deadline = ?, course_id = ? WHERE assignment_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setDate(3, deadline);
+            if (courseId != null) {
+                ps.setInt(4, courseId);
+            } else {
+                ps.setNull(4, Types.INTEGER);
+            }
+            ps.setInt(5, assignmentId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating assignment: " + e.getMessage());
             return false;
         }
     }
