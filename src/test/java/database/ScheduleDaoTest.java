@@ -216,4 +216,60 @@ class ScheduleDaoTest {
         assertNotNull(schedules, "Schedules list should not be null");
         assertTrue(schedules.isEmpty(), "Schedules list should be empty");
     }
+
+    /**
+     * Test updating an existing schedule. Inserts a schedule, updates it, then retrieves it to verify the update.
+     */
+    @Test
+    void updateScheduleTest() {
+        int id = scheduleDao.insertSchedule(1, model.Weekday.MONDAY, LocalTime.of(9, 0), LocalTime.of(11, 0));
+        assertTrue(id > 0, "Insertion successful, got ID: " + id);
+        insertedSchedules.add(id);
+        boolean updated = scheduleDao.updateSchedule(id, 1, model.Weekday.WEDNESDAY, LocalTime.of(12, 0), LocalTime.of(15, 0));
+        assertTrue(updated, "Update should be successful");
+        Schedule schedule = scheduleDao.getSchedule(id);
+        assertNotNull(schedule, "Schedule should not be null after update");
+        assertEquals(model.Weekday.WEDNESDAY, schedule.getWeekday(), "Weekday should be updated");
+        assertEquals(LocalTime.of(12, 0), schedule.getStartTime(), "Start time should be updated");
+        assertEquals(LocalTime.of(15, 0), schedule.getEndTime(), "End time should be updated");
+    }
+
+    /**
+     * Test updating a schedule with a non-existent ID. The update should fail.
+     */
+    @Test
+    void updateScheduleWithInvalidIdTest() {
+        boolean updated = scheduleDao.updateSchedule(-100, 2, model.Weekday.WEDNESDAY, LocalTime.of(12, 0), LocalTime.of(15, 0));
+        assertFalse(updated, "Update should fail for non-existent schedule ID");
+    }
+
+    /**
+     * Test updating a schedule with null parameters. Each case should throw IllegalArgumentException.
+     */
+    @Test
+    void updateScheduleWithNullCourseIdTest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            scheduleDao.updateSchedule(1, null, model.Weekday.WEDNESDAY, LocalTime.of(12, 0), LocalTime.of(15, 0));
+        });
+    }
+
+    /**
+     * Test updating a schedule with a null weekday. Should throw IllegalArgumentException.
+     */
+    @Test
+    void updateScheduleWithNullWeekdayTest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            scheduleDao.updateSchedule(1, 1, null, LocalTime.of(12, 0), LocalTime.of(15, 0));
+        });
+    }
+
+    /**
+     * Test updating a schedule with start time after end time. Should throw IllegalArgumentException.
+     */
+    @Test
+    void updateScheduleWithStartTimeAfterEndTimeTest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            scheduleDao.updateSchedule(1, 1, model.Weekday.WEDNESDAY, LocalTime.of(16, 0), LocalTime.of(15, 0));
+        });
+    }
 }

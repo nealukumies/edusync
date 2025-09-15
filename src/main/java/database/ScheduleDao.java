@@ -161,9 +161,45 @@ public class ScheduleDao {
         }
     }
 
+    /**
+     * Updates an existing schedule identified by scheduleId with new details.
+     * Returns true if the update was successful, false otherwise.
+     * @param scheduleId
+     * @param courseId
+     * @param weekday
+     * @param startTime
+     * @param endTime
+     * @return boolean
+     */
+    public boolean updateSchedule(int scheduleId, Integer courseId, Weekday weekday, LocalTime startTime, LocalTime endTime) {
+        if (courseId == null || weekday == null || startTime == null || endTime == null) {
+            throw new IllegalArgumentException("Course ID, weekday, start time, and end time must not be null");
+        }
+
+        if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+            throw new IllegalArgumentException("Start time must be before end time");
+        }
+
+        Connection conn = MariaDBConnection.getConnection();
+        String sql = "UPDATE schedule SET course_id = ?, weekday = ?, start_time = ?, end_time = ? WHERE schedule_id = ?;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, courseId);
+            ps.setString(2, weekday.name());
+            ps.setTime(3, valueOf(startTime));
+            ps.setTime(4, valueOf(endTime));
+            ps.setInt(5, scheduleId);
+            int rows = ps.executeUpdate();
+            return rows > 0; // Return true if a row was updated
+        } catch (SQLException e) {
+            System.out.println("Error updating schedule: " + e.getMessage());
+            return false; // Indicate failure
+        }
+    }
+
     //For testing purposes
-    public static void main(String[] args) {
-        ScheduleDao dao = new ScheduleDao();
+//    public static void main(String[] args) {
+//        ScheduleDao dao = new ScheduleDao();
 //        int newId = dao.insertSchedule(1, Weekday.THURSDAY, LocalTime.of(12, 0), LocalTime.of(15, 30));
 //        System.out.println("Inserted schedule ID: " + newId);
 //
@@ -171,11 +207,11 @@ public class ScheduleDao {
 //        System.out.println("Retrieved schedule: " + schedule);
 
         //dao.insertSchedule(null, Weekday.TUESDAY, LocalTime.of(9, 0), LocalTime.of(10, 30));
-
-        ArrayList<Schedule> schedules = dao.getAllSchedulesForStudent(1);
-        System.out.println("All schedules for student 1: " + schedules);
+//
+//        ArrayList<Schedule> schedules = dao.getAllSchedulesForStudent(1);
+//        System.out.println("All schedules for student 1: " + schedules);
 
 //        boolean deleted = dao.deleteSchedule(newId);
 //        System.out.println("Deleted schedule: " + deleted);
-    }
+//    }
 }
