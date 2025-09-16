@@ -7,18 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static model.DataFetcher.fetchCourse;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataFetcherTest {
-
-    private AssignmentDao assignmentDao;
-    private CourseDao courseDao;
-
-    @BeforeEach
-    void setUp() {
-        assignmentDao = new AssignmentDao();
-        courseDao = new CourseDao();
-    }
 
     @Test
     void fetchUserAssignmentsForWorkingId() {
@@ -36,13 +28,13 @@ class DataFetcherTest {
 
     @Test
     void fetchCourseWithWorkingId() {
-        Course course = courseDao.getCourseById(1);
+        Course course = fetchCourse(1);
         assertEquals(1, course.getCourseId());
     }
 
     @Test
     void fetchCourseWithInvalidId() {
-        Course course = courseDao.getCourseById(-1);
+        Course course = fetchCourse(-1);
         assertNull(course);
     }
 }
