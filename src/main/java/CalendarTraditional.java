@@ -5,9 +5,9 @@ import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 
-public class Calendar extends VBox {
+public class CalendarTraditional extends VBox {
 
-    public Calendar() {
+    public CalendarTraditional() {
         GridPane calendarGrid = new GridPane();
 
 
