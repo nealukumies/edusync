@@ -1,4 +1,4 @@
-package layout_model;
+package controller;
 
 public class MainLayoutController {
 }
