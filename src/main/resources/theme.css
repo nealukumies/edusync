@@ -30,6 +30,7 @@
 
 * {
   -fx-text-fill: -fx-contrast-col;
+  -fx-font-family: "Roboto Serif 28pt";
 }
 
 .app {
