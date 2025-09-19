@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 public class CalendarTestApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Calendar calendar = new Calendar();
+        CalendarModern calendar = new CalendarModern();
         Scene scene = new Scene(calendar);
         stage.setScene(scene);
         stage.show();
