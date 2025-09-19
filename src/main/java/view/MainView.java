@@ -11,7 +11,7 @@ public class MainView extends Application {
     public void start(Stage stage) throws Exception {
         // Load fonts
         Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
-        System.out.println(roboto.getFamily());
+        //System.out.println(roboto.getFamily());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainLayout.fxml"));
         Parent root = fxmlLoader.load();

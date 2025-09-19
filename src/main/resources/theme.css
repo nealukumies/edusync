@@ -16,6 +16,10 @@
   -fx-font-size: 96;
 }
 
+.large-title {
+  -fx-font-size: 48;
+}
+
 .medium-title {
   -fx-font-size: 36;
 }
@@ -53,4 +57,29 @@
 
 .button:hover {
   -fx-background-color: -fx-lighter-col;
+}
+
+.longer-button {
+  -fx-pref-width: 265;
+  -fx-padding: 10;
+}
+
+.text-area, .text-field {
+  -fx-background-color: -fx-foreground-col;
+  -fx-pref-width: 315;
+}
+
+.text-field {
+  -fx-font-size: 24;
+  -fx-pref-height: 36;
+}
+
+.text-area {
+  -fx-font-size: 24;
+  -fx-pref-height: 170;
+}
+
+.input-container {
+  -fx-spacing: 20;
+  -fx-pref-size: 450;
 }
