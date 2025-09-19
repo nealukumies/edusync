@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="app" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox prefHeight="90.0" prefWidth="1600.0" style="-fx-background-color: #151515;" styleClass="header-container" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="1600.0" style="-fx-background-color: #151515;" styleClass="header-container" BorderPane.alignment="CENTER">
          <children>
             <Label text="EduSync">
                <styleClass>
@@ -17,6 +16,7 @@
                   <String fx:value="header-title" />
                </styleClass>
             </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="1420.0" styleClass="header-content" />
          </children>
       </HBox>
    </top>

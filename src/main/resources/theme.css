@@ -35,3 +35,8 @@
 .header-container {
   -fx-padding: 20;
 }
+
+.header-content {
+  -fx-alignment: center;
+  -fx-spacing: 10;
+}
