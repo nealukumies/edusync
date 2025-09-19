@@ -24,6 +24,10 @@
   -fx-font-size: 24;
 }
 
+.link:hover {
+  -fx-underline: true;
+}
+
 * {
   -fx-text-fill: -fx-contrast-col;
 }
@@ -39,4 +43,13 @@
 .header-content {
   -fx-alignment: center;
   -fx-spacing: 10;
+}
+
+.button {
+  -fx-background-color: -fx-foreground-col;
+  -fx-padding: 20;
+}
+
+.button:hover {
+  -fx-background-color: -fx-lighter-col;
 }

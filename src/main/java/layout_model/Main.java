@@ -1,7 +1,9 @@
 package layout_model;
 
+import view.MainView;
+
 public class Main {
     public static void main(String[] args) {
-        MainLayout.launch(MainLayout.class);
+        MainView.launch(MainView.class);
     }
 }
