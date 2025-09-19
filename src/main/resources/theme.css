@@ -1,0 +1,37 @@
+.root {
+  /* Theme colours */
+  -fx-background-col: #070707;
+  -fx-foreground-col: #151515;
+  -fx-darker-col: #000000;
+  -fx-contrast-col: #FFFFFF;
+  -fx-lighter-col: #383838;
+
+  /* Default font styles */
+  -fx-text-fill: -fx-contrast-col;
+}
+
+/* Some font sizes */
+
+.huge-title {
+  -fx-font-size: 96;
+}
+
+.medium-title {
+  -fx-font-size: 36;
+}
+
+.medium-text {
+  -fx-font-size: 24;
+}
+
+* {
+  -fx-text-fill: -fx-contrast-col;
+}
+
+.app {
+  -fx-background-color: -fx-background-col;
+}
+
+.header-container {
+  -fx-padding: 20;
+}
