@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 
-public class MainLayoutController {
+public class MainController {
     @FXML
     private HBox headerContent;
     @FXML
@@ -34,7 +34,7 @@ public class MainLayoutController {
         headerContent.getChildren().addAll(spacer, loginText);
     }
 
-    public void changePage(Page page) throws IOException {
+    public void changePage(Page page) {
         generateHeader();
 
         content.getChildren().clear();
@@ -46,12 +46,27 @@ public class MainLayoutController {
             case DASHBOARD_PAGE:
                 loadPage("/DashboardView.fxml");
                 break;
+            case ADD_COURSE_PAGE:
+                loadPage("/AddCourseView.fxml");
+                break;
         }
     }
 
-    public void loadPage(String path) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-        Parent root = fxmlLoader.load();
-        content.getChildren().add(root);
+    public void loadPage(String path) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            Parent root = fxmlLoader.load();
+            SubController subController = fxmlLoader.getController();
+            subController.setMainViewController(this);
+            subController.initializeFully();
+            content.getChildren().add(root);
+        }
+        catch (IOException e) {
+            Label  error = new Label();
+            error.getStyleClass().add("error");
+            error.setText(e.getMessage());
+            error.setWrapText(true);
+            content.getChildren().add(error);
+        }
     }
 }
