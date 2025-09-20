@@ -101,3 +101,11 @@
   -fx-text-fill: -fx-background-col;
   -fx-padding: 0;
 }
+
+.course-card {
+  -fx-pref-width: 360;
+  -fx-background-color: -fx-foreground-col;
+  -fx-border-color: -fx-contrast-col;
+  -fx-border-width: 2;
+  -fx-padding: 10;
+}

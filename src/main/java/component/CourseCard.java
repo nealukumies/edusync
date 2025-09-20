@@ -13,6 +13,7 @@ public class CourseCard {
     public VBox create() {
         VBox card = new VBox();
         card.setSpacing(10);
+        card.getStyleClass().add("course-card");
 
         // Start by adding title
         Label courseName = new Label(course.getCourseName());
