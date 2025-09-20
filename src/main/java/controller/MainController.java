@@ -15,9 +15,14 @@ public class MainController {
     private HBox headerContent;
     @FXML
     private StackPane content;
+    @FXML
+    private Hyperlink mainTitle;
+
+    private Page currentPage;
 
     public void initialize() throws IOException {
         changePage(Page.FRONT_PAGE);
+        mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
     }
 
     public void generateHeader() {
@@ -39,6 +44,9 @@ public class MainController {
     }
 
     public void changePage(Page page) {
+        if (page == currentPage) {
+            return;
+        }
         generateHeader();
 
         content.getChildren().clear();
@@ -56,7 +64,12 @@ public class MainController {
             case LOGIN_PAGE:
                 loadPage("/LogInView.fxml");
                 break;
+            case REGISTER_PAGE:
+                loadPage("/RegisterView.fxml");
+                break;
         }
+
+        this.currentPage = page;
     }
 
     public void loadPage(String path) {
