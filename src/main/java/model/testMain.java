@@ -1,31 +1,21 @@
 package model;
 
-import database.AssignmentDao;
-import database.CourseDao;
-import database.StudentDao;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import model.Authetication.Delete;
+import model.Authetication.Login;
+import model.Authetication.Register;
+import model.Authetication.Update;
 
 public class testMain {
-    public static void main(String[] args) {
-//        AssignmentDao assignmentDao = new AssignmentDao();
-//
-//        List<Assignment> assignments = assignmentDao.getAssignments(1);
-//
-//        for (Assignment assignment : assignments) {
-//            System.out.println(assignment);
-//        }
-
-        //StudentDao studentDao = new StudentDao();
-        //int newStudentId = studentDao.addStudent("Katti Matikainen", "Katti.Matikainen@katti.org");
-        //System.out.println("New student ID: " + newStudentId);
-
-        //AssignmentDao assignmentDao = new AssignmentDao();
-        //assignmentDao.insertAssignment(32, 1, "Physics Homework", "Complete exercises 1-10", Date.valueOf("2025-10-11"));
-
-        //CourseDao courseDao = new CourseDao();
-        //List<Course> courses = courseDao.getCourses(32);
+    public static void main(String[] args) throws JsonProcessingException {
+        System.out.println(Login.tryLogin("katti@matikainen.fi", "salasana"));
+        Delete.tryDelete();
     }
 }
+
+
+//Login.tryLogin("matti@matikainen.fi", "salasana")
+//Update.tryUpdate("Katti", "katti@matikainen.fi")
+//Register.tryRegister("Matti", "katti@matikainen.fi", "salasana")
+//Delete.tryDelete()
+
