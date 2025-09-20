@@ -1,6 +1,10 @@
 package controller;
 
 public abstract class SubController {
-    public abstract void setMainViewController(MainController mainController);
+    private MainController mainController;
+    public void setMainViewController(MainController mainController) {
+        this.mainController = mainController;
+    };
     public abstract void initializeFully();
+    public MainController getMainController() { return this.mainController; }
 }

@@ -4,6 +4,7 @@ import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -28,9 +29,12 @@ public class MainController {
         Region spacer = new Region();
         headerContent.setHgrow(spacer, Priority.ALWAYS);
 
-        Label loginText = new Label("Log In");
+        Hyperlink loginText = new Hyperlink("Log In");
         loginText.getStyleClass().add("medium-title");
         loginText.getStyleClass().add("link");
+        loginText.setOnAction(e -> {
+            changePage(Page.LOGIN_PAGE);
+        });
         headerContent.getChildren().addAll(spacer, loginText);
     }
 
@@ -48,6 +52,9 @@ public class MainController {
                 break;
             case ADD_COURSE_PAGE:
                 loadPage("/AddCourseView.fxml");
+                break;
+            case LOGIN_PAGE:
+                loadPage("/LogInView.fxml");
                 break;
         }
     }
