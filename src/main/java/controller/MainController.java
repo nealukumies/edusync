@@ -21,7 +21,7 @@ public class MainController {
     private Page currentPage;
 
     public void initialize() throws IOException {
-        changePage(Page.FRONT_PAGE);
+        changePage(Page.COURSE_LIST_PAGE);
         mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
     }
 
@@ -66,6 +66,9 @@ public class MainController {
                 break;
             case REGISTER_PAGE:
                 loadPage("/RegisterView.fxml");
+                break;
+            case COURSE_LIST_PAGE:
+                loadPage("/CourseListView.fxml");
                 break;
         }
 
