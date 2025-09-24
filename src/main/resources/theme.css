@@ -117,3 +117,7 @@
 .tiny-field {
   -fx-pref-width: 140;
 }
+
+.table-view * {
+  -fx-background-color: -fx-background-col;
+}

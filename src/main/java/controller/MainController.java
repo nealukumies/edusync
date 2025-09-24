@@ -1,5 +1,6 @@
 package controller;
 
+import component.AssignmentList;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import model.Assignment;
+import model.Status;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainController {
     @FXML
@@ -85,7 +92,11 @@ public class MainController {
             SubController subController = fxmlLoader.getController();
             subController.setMainViewController(this);
             subController.initializeFully();
+            Assignment test = new Assignment(0, 0, 0, "Test", "test", new Date(), Status.IN_PROGRESS);
+            List<Assignment> testList = new ArrayList<>();
+            testList.add(test);
             content.getChildren().add(root);
+            content.getChildren().add(new AssignmentList(testList).createList());
         }
         catch (IOException e) {
             Label  error = new Label();

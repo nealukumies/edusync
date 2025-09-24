@@ -16,26 +16,26 @@
       <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Add assignment" />
       <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
          <children>
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="courseSelect" prefWidth="150.0" />
             <Label styleClass="medium-title" text="Course" />
          </children>
       </HBox>
       <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
          <children>
-            <TextField />
+            <TextField fx:id="title" />
             <Label styleClass="medium-title" text="Title" />
          </children>
       </HBox>
       <HBox maxWidth="-Infinity" prefHeight="170.0" prefWidth="650.0" styleClass="input-container">
          <children>
-            <TextArea prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="desc" prefHeight="200.0" prefWidth="200.0" />
             <Label styleClass="medium-title" text="Description" />
          </children>
       </HBox>
       <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
          <children>
-            <DatePicker styleClass="small-field" />
-            <TextField promptText="HH:mm" styleClass="tiny-field" />
+            <DatePicker fx:id="dateSelect" styleClass="small-field" />
+            <TextField fx:id="timeSelect" promptText="HH:mm" styleClass="tiny-field" />
             <Label styleClass="medium-title" text="Deadline">
                <tooltip>
                   <Tooltip text="Set deadline time in format HH:mm (hours and minutes)" />
@@ -50,7 +50,7 @@
                   <String fx:value="longer-button" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" text="Cancel">
+            <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
                <styleClass>
                   <String fx:value="medium-title" />
                   <String fx:value="longer-button" />
