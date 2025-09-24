@@ -15,8 +15,8 @@ public class CalendarCourse {
         this.courseId = courseId;
         this.studentId = studentId;
         this.courseName = courseName;
-        this.startDate = LocalDate.now();
-        this.endDate = LocalDate.now();
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getCourseId() {
@@ -57,5 +57,9 @@ public class CalendarCourse {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isDuringCourse(LocalDate date) {
+        return !date.isBefore(startDate) && !date.isAfter(endDate);
     }
 }

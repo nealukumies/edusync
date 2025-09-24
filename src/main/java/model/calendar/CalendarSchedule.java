@@ -9,10 +9,6 @@ public class CalendarSchedule {
     int startTime;
     int endTime;
 
-    String courseName;
-    LocalDate startDate;
-    LocalDate endDate;
-
     CalendarCourse  calendarCourse;
 
     public CalendarSchedule(int scheduleId, int courseId, String weekday, int startTime, int endTime) {
@@ -43,18 +39,6 @@ public class CalendarSchedule {
         return endTime;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
     public CalendarCourse getCalendarCourse() {
         return calendarCourse;
     }
@@ -79,19 +63,11 @@ public class CalendarSchedule {
         this.endTime = endTime;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     public void setCalendarCourse(CalendarCourse calendarCourse) {
         this.calendarCourse = calendarCourse;
+    }
+
+    public boolean isDuringSchedule(int clock){
+        return startTime <= clock && clock <= endTime;
     }
 }
