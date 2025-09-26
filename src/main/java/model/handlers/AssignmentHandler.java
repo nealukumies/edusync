@@ -1,5 +1,8 @@
 package model.handlers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Enums.Status;
 import model.Singletons.Account;
 import model.Singletons.Connection;
@@ -62,7 +65,7 @@ public class AssignmentHandler {
         return null;
     }
 
-    public static int createAssignment(int courseId, String title, String description, String deadline) {
+    public static int createAssignment(int courseId, String title, String description, String deadline) throws JsonProcessingException {
         Connection conn = Connection.getInstance();
 
         String inputString = String.format("""
@@ -79,8 +82,17 @@ public class AssignmentHandler {
 
         switch (status) {
             case 201 -> {
+                ObjectMapper mapper = new ObjectMapper();
+
+                JsonNode jsonNode = mapper.readTree(response.body());
+
+                JsonNode assignmentIdNode = jsonNode.get("assignmentId");
+                if (assignmentIdNode == null) {
+                    return -1;
+                }
+
                 System.out.println("Successfully created assignment");
-                return 1;
+                return assignmentIdNode.asInt();
             }
             case 400 -> {
                 System.out.println("400 Bad Request: Invalid input data for creating the assignment.");

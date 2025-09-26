@@ -1,5 +1,8 @@
 package model.handlers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Singletons.Account;
 import model.Singletons.Connection;
 
@@ -88,7 +91,7 @@ public class ScheduleHandler {
         return null;
     }
 
-    public static int createSchedule(int courseId, String weekday, String startTime, String endTime) {
+    public static int createSchedule(int courseId, String weekday, String startTime, String endTime) throws JsonProcessingException {
         Connection conn = Connection.getInstance();
 
         String inputString = String.format("""
@@ -105,8 +108,14 @@ public class ScheduleHandler {
 
         switch (status) {
             case 201 -> {
+                ObjectMapper mapper = new ObjectMapper();
+
+                JsonNode jsonNode = mapper.readTree(response.body());
+
+                int scheduleId = jsonNode.get("scheduleId").asInt();
+
                 System.out.println("Successfully created schedule.");
-                return 1;
+                return scheduleId;
             }
             case 400 -> {
                 System.out.println("400 Bad Request: Missing or invalid fields in the request body.");

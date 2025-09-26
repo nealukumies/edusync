@@ -11,9 +11,10 @@ import model.handlers.UserHandler;
 public class testMain {
     public static void main(String[] args) throws JsonProcessingException {
         System.out.println(UserHandler.loginUser("katti@matikainen.fi", "salasana"));
-        Account.getInstance().clearAccount();
+        System.out.println(AssignmentHandler.getAssignmentsForUser().body());
+        AssignmentHandler.updateAssignment(237, 174, "Homework 1", "Very important math homework","2024-09-15", "completed");
+        System.out.println(AssignmentHandler.getAssignmentsForUser().body());
 
-        System.out.println(UserHandler.getUser().body());
     }
 }
 
@@ -44,5 +45,5 @@ public class testMain {
 //AssignmentHandler.createAssignment(174, "Homework 1", "2024-09-15")
 //AssignmentHandler.getAssignment(237).body()
 //AssignmentHandler.getAssignmentsForUser().body()
-//AssignmentHandler.updateAssignment(237, "Homework 1", "Very important math homework","2024-09-15, Status.COMPLETED")
+//AssignmentHandler.updateAssignment(237, "Homework 1", "Very important math homework","2024-09-15", "completed")
 //AssignmentHandler.deleteAssignment(1)
