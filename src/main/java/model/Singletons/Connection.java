@@ -1,7 +1,6 @@
-package model;
+package model.Singletons;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import model.Authetication.Account;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -24,6 +23,27 @@ public class Connection {
             INSTANCE = new Connection();
         }
         return INSTANCE;
+    }
+
+    public HttpResponse<String> sendGetRequest(String endpoint) {
+        HttpResponse<String> response = null;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(dotenv.get("BACKEND_URL") + endpoint))
+                    .header("Content-Type", "application/json")
+                    .header("role", acc.getRole())
+                    .header("student_id", String.valueOf(acc.getStudentId()))
+                    .GET()
+                    .build();
+
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
     }
 
     public HttpResponse<String> sendPostRequest(String req, String endpoint) {

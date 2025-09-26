@@ -1,4 +1,4 @@
-package model;
+package model.DBObjects;
 
 public class Student {
     private int id;

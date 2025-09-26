@@ -1,4 +1,4 @@
-package model.Authetication;
+package model.Singletons;
 
 public class Account {
     private static Account INSTANCE;
