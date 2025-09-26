@@ -2,6 +2,7 @@ package model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import model.Enums.Status;
+import model.Singletons.Account;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
@@ -10,11 +11,9 @@ import model.handlers.UserHandler;
 public class testMain {
     public static void main(String[] args) throws JsonProcessingException {
         System.out.println(UserHandler.loginUser("katti@matikainen.fi", "salasana"));
+        Account.getInstance().clearAccount();
 
-        System.out.println(AssignmentHandler.getAssignment(237).body());
-        AssignmentHandler.updateAssignment(237, 174,"Homework 1", "Very important math homework","2024-09-15", "completed");
-        System.out.println(AssignmentHandler.getAssignment(237).body());
-        //AssignmentHandler.createAssignment(174, "Homework 1", "Very important math homework","2024-09-15");
+        System.out.println(UserHandler.getUser().body());
     }
 }
 

@@ -84,7 +84,7 @@ public class UserHandler {
         return null;
     }
 
-    static public int update(String inputName, String inputEmail) throws JsonProcessingException {
+    static public int updateUser(String inputName, String inputEmail) throws JsonProcessingException {
         Connection conn = Connection.getInstance();
 
         String inputString = String.format("""

@@ -22,7 +22,7 @@ public class Account {
     }
 
     public void clearAccount() {
-        this.studentId = -1;
+        this.studentId = 0;
         this.name = null;
         this.email = null;
         this.role = null;
