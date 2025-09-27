@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
-import model.Course;
+import model.DBObjects.Course;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

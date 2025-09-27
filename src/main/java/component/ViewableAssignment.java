@@ -1,6 +1,6 @@
 package component;
 
-import model.Status;
+import model.Enums.Status;
 
 import java.util.Date;
 

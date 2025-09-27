@@ -3,7 +3,7 @@ package component;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableView;
-import model.Assignment;
+import model.DBObjects.Assignment;
 
 import java.util.List;
 

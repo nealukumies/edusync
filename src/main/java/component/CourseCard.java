@@ -2,7 +2,7 @@ package component;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import model.Course;
+import model.DBObjects.Course;
 
 public class CourseCard {
     private Course course;

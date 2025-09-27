@@ -4,7 +4,7 @@ import component.ViewableAssignment;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Status;
+import model.Enums.Status;
 
 import java.util.Date;
 
