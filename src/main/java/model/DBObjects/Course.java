@@ -1,4 +1,4 @@
-package model;
+package model.DBObjects;
 
 import java.util.Date;
 

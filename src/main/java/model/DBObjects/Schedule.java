@@ -1,4 +1,6 @@
-package model;
+package model.DBObjects;
+
+import model.Enums.Weekday;
 
 import java.time.LocalTime;
 

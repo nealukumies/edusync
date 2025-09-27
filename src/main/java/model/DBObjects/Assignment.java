@@ -1,6 +1,8 @@
 // This class represents an assignment entity in the system.
 
-package model;
+package model.DBObjects;
+
+import model.Enums.Status;
 
 import java.util.Date;
 
