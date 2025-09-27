@@ -32,6 +32,10 @@
   -fx-underline: true;
 }
 
+.error {
+  -fx-text-fill: red;
+}
+
 * {
   -fx-text-fill: -fx-contrast-col;
   -fx-font-family: "Roboto Serif 28pt";

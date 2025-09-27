@@ -1,6 +1,5 @@
 package controller;
 
-import component.AssignmentList;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import model.DBObjects.Assignment;
-import model.Enums.Status;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class MainController {
     @FXML
@@ -28,8 +21,8 @@ public class MainController {
     private Page currentPage;
 
     public void initialize() throws IOException {
-        changePage(Page.ADD_ASSIGNMENT_PAGE);
-        mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
+        changePage(Page.FRONT_PAGE);
+        mainTitle.setOnAction(e -> changePage(Page.COURSE_LIST_PAGE));
     }
 
     public void generateHeader() {
@@ -60,25 +53,25 @@ public class MainController {
 
         switch (page) {
             case FRONT_PAGE:
-                loadPage("/FrontpageView.fxml");
+                loadPage("/view/FrontpageView.fxml");
                 break;
             case DASHBOARD_PAGE:
                 loadPage("/DashboardView.fxml");
                 break;
             case ADD_COURSE_PAGE:
-                loadPage("/AddCourseView.fxml");
+                loadPage("/view/AddCourseView.fxml");
                 break;
             case ADD_ASSIGNMENT_PAGE:
-                loadPage("/AddAssignmentView.fxml");
+                loadPage("/view/AddAssignmentView.fxml");
                 break;
             case LOGIN_PAGE:
-                loadPage("/LogInView.fxml");
+                loadPage("/view/LogInView.fxml");
                 break;
             case REGISTER_PAGE:
-                loadPage("/RegisterView.fxml");
+                loadPage("/view/RegisterView.fxml");
                 break;
             case COURSE_LIST_PAGE:
-                loadPage("/CourseListView.fxml");
+                loadPage("/view/CourseListView.fxml");
                 break;
         }
 
@@ -87,21 +80,25 @@ public class MainController {
 
     public void loadPage(String path) {
         try {
+            System.out.println("LINE 1");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            System.out.println("LINE 2");
             Parent root = fxmlLoader.load();
+            System.out.println("LINE 3");
             SubController subController = fxmlLoader.getController();
+            System.out.println("LINE 4");
             subController.setMainViewController(this);
+            System.out.println("LINE 5");
             subController.initializeFully();
-            Assignment test = new Assignment(0, 0, 0, "Test", "test", new Date(), Status.IN_PROGRESS);
-            List<Assignment> testList = new ArrayList<>();
-            testList.add(test);
+            System.out.println("LINE 6");
             content.getChildren().add(root);
-            content.getChildren().add(new AssignmentList(testList).createList());
+            //content.getChildren().add(new AssignmentList(testList).createList());
         }
         catch (IOException e) {
+            e.printStackTrace();
             Label  error = new Label();
             error.getStyleClass().add("error");
-            error.setText(e.getMessage());
+            error.setText("Error: " + e.getMessage());
             error.setWrapText(true);
             content.getChildren().add(error);
         }

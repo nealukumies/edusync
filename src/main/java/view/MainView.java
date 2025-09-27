@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class MainView extends Application {
 
@@ -24,7 +23,7 @@ public class MainView extends Application {
     //System.out.println(roboto.getFamily());
 
     FXMLLoader fxmlLoader = new FXMLLoader(
-      getClass().getResource("/MainLayout.fxml")
+      getClass().getResource("/view/MainLayout.fxml")
     );
     Parent root = fxmlLoader.load();
 

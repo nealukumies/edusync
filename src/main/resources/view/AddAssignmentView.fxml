@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="25.0" styleClass="app" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAssignmentController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAssignmentController">
    <children>
       <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Add assignment" />
       <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">

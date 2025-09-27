@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="10.0" styleClass="app" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="10.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
       <Label maxWidth="750.0" styleClass="large-title" text="Register" />
       <HBox maxWidth="750.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
