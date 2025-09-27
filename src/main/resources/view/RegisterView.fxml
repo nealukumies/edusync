@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="10.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
       <Label maxWidth="750.0" styleClass="large-title" text="Register" />
@@ -40,6 +39,16 @@
          <children>
             <PasswordField fx:id="confirmPassword" />
             <Label styleClass="medium-text" text="Confirm password" />
+         </children>
+      </HBox>
+      <HBox maxWidth="750.0" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label fx:id="errorMessage">
+               <styleClass>
+                  <String fx:value="medium-text" />
+                  <String fx:value="error" />
+               </styleClass>
+            </Label>
          </children>
       </HBox>
       <HBox maxWidth="750.0" prefHeight="100.0" prefWidth="200.0">
