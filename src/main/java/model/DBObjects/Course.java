@@ -1,15 +1,16 @@
 package model.DBObjects;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Course {
     private int courseId;
     private int studentId;
     private String courseName;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Course(int courseId, int studentId, String courseName, Date startDate, Date endDate) {
+    public Course(int courseId, int studentId, String courseName, LocalDate startDate, LocalDate endDate) {
         this.courseId = courseId;
         this.studentId = studentId;
         this.courseName = courseName;
@@ -37,10 +38,10 @@ public class Course {
     public String getCourseName() {
         return courseName;
     }
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 }

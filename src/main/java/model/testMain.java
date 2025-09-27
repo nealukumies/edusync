@@ -1,6 +1,10 @@
 package model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import model.DBObjects.Assignment;
+import model.DBObjects.Course;
+import model.DBObjects.DBObjectParser;
+import model.DBObjects.Schedule;
 import model.Enums.Status;
 import model.Singletons.Account;
 import model.handlers.AssignmentHandler;
@@ -8,22 +12,16 @@ import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
 import model.handlers.UserHandler;
 
+import java.util.ArrayList;
+
 public class testMain {
 
   public static void main(String[] args) throws JsonProcessingException {
     System.out.println(
-      UserHandler.loginUser("katti@matikainen.fi", "salasana")
-    );
-    System.out.println(AssignmentHandler.getAssignmentsForUser().body());
-    AssignmentHandler.updateAssignment(
-      237,
-      174,
-      "Homework 1",
-      "Very important math homework",
-      "2024-09-15",
-      "completed"
-    );
-    System.out.println(AssignmentHandler.getAssignmentsForUser().body());
+      UserHandler.loginUser("katti@matikainen.fi", "salasana"));
+      System.out.println(CourseHandler.getCourse(174).body());
+      Course course = DBObjectParser.parseCourse(CourseHandler.getCourse(174));
+      System.out.println(course);
   }
 }
 //USER HANDLER TESTS
@@ -51,3 +49,12 @@ public class testMain {
 //AssignmentHandler.getAssignmentsForUser().body()
 //AssignmentHandler.updateAssignment(237, "Homework 1", "Very important math homework","2024-09-15", "completed")
 //AssignmentHandler.deleteAssignment(1)
+//OBJECT PARSER TESTS
+//Student student = DBObjectParser.parseStudent(UserHandler.getUser())
+//ArrayList<Course> courseList = DBObjectParser.parseCourseList(CourseHandler.getCourses())
+//Course course = DBObjectParser.parseCourse(CourseHandler.getCourse(174))
+//Schedule schedule = DBObjectParser.parseSchedule(ScheduleHandler.getSchedule(145))
+//ArrayList<Schedule> scheduleList = DBObjectParser.parseScheduleList(ScheduleHandler.getSchedulesForUser())
+//ArrayList<Schedule> scheduleList = DBObjectParser.parseScheduleList(ScheduleHandler.getSchedulesForCourse(174))
+//Assignment assignment = DBObjectParser.parseAssignment(AssignmentHandler.getAssignment(237))
+//ArrayList<Assignment> assignmentList = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());

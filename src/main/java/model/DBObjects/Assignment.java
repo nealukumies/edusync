@@ -4,6 +4,7 @@ package model.DBObjects;
 
 import model.Enums.Status;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Assignment {
@@ -12,10 +13,10 @@ public class Assignment {
     private Integer courseId;
     private String title;
     private String description;
-    private Date deadline;
+    private LocalDate deadline;
     private Status status;
 
-    public Assignment(int assignmentId, int studentId, Integer courseId, String title, String description, Date deadline, Status status) {
+    public Assignment(int assignmentId, int studentId, Integer courseId, String title, String description, LocalDate deadline, Status status) {
         this.assignmentId = assignmentId;
         this.studentId = studentId;
         this.courseId = courseId; //note that courseId is nullable in the database
@@ -40,7 +41,7 @@ public class Assignment {
     public String getDescription() {
         return description;
     }
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
     public Status getStatus() {
