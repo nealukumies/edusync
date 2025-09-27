@@ -13,14 +13,8 @@
       <Label maxWidth="750.0" styleClass="large-title" text="Register" />
       <HBox maxWidth="750.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <TextField fx:id="firstname" />
-            <Label styleClass="medium-title" text="First name" />
-         </children>
-      </HBox>
-      <HBox maxWidth="750.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-         <children>
-            <TextField fx:id="surname" />
-            <Label styleClass="medium-title" text="Surname" />
+            <TextField fx:id="username" />
+            <Label styleClass="medium-title" text="Username" />
          </children>
       </HBox>
       <HBox maxWidth="750.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">

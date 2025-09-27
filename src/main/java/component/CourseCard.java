@@ -6,6 +6,7 @@ import model.DBObjects.Course;
 
 public class CourseCard {
     private Course course;
+
     public CourseCard(Course course) {
         this.course = course;
     }

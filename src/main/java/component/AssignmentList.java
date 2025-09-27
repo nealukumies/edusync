@@ -1,7 +1,6 @@
 package component;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TableView;
 import model.DBObjects.Assignment;
 
@@ -18,13 +17,12 @@ public class AssignmentList {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/AssignmentTable.fxml"));
             TableView<ViewableAssignment> table = fxmlLoader.load();
-            for (Assignment assignment : assignmentList){
+            for (Assignment assignment : assignmentList) {
                 ViewableAssignment viewableAssignment = new ViewableAssignment(assignment.getTitle(), assignment.getCourseId(), assignment.getDeadline(), assignment.getStatus());
                 table.getItems().add(viewableAssignment);
             }
             return table;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
