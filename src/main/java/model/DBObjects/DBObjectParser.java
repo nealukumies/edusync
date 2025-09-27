@@ -1,17 +1,17 @@
 package model.DBObjects;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Enums.Status;
+import model.Enums.Weekday;
+
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Enums.Status;
-import model.Enums.Weekday;
 
 public class DBObjectParser {
     public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
@@ -41,8 +41,8 @@ public class DBObjectParser {
                 jsonNode.get("courseId").asInt(),
                 jsonNode.get("studentId").asInt(),
                 jsonNode.get("courseName").asText(),
-                LocalDate.parse(jsonNode.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi"))),
-                LocalDate.parse(jsonNode.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi")))
+                LocalDate.parse(jsonNode.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
+                LocalDate.parse(jsonNode.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en")))
         );
     }
 
@@ -61,8 +61,8 @@ public class DBObjectParser {
                         node.get("courseId").asInt(),
                         node.get("studentId").asInt(),
                         node.get("courseName").asText(),
-                        LocalDate.parse(node.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi"))),
-                        LocalDate.parse(node.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi")))
+                        LocalDate.parse(node.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
+                        LocalDate.parse(node.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en")))
                 ));
             }
         }
@@ -123,7 +123,7 @@ public class DBObjectParser {
                 jsonNode.get("courseId").asInt(),
                 jsonNode.get("title").asText(),
                 jsonNode.get("description").asText(),
-                LocalDate.parse(jsonNode.get("deadline").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi"))),
+                LocalDate.parse(jsonNode.get("deadline").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
                 Status.valueOf(jsonNode.get("status").asText())
         );
     }
@@ -137,15 +137,20 @@ public class DBObjectParser {
         JsonNode jsonNode = mapper.readTree(data.body());
         ArrayList<Assignment> assignments = new ArrayList<>();
 
+
         if (jsonNode.isArray()) {
             for (JsonNode node : jsonNode) {
+                String dateText = node.get("deadline").asText();
+                if (dateText.contains("Sept")) {
+                    dateText = dateText.replace("Sept", "Sep");
+                }
                 assignments.add(new Assignment(
                         node.get("assignmentId").asInt(),
                         node.get("studentId").asInt(),
                         node.get("courseId").asInt(),
                         node.get("title").asText(),
                         node.get("description").asText(),
-                        LocalDate.parse(node.get("deadline").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("fi"))),
+                        LocalDate.parse(dateText, DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
                         Status.valueOf(node.get("status").asText())
                 ));
             }
