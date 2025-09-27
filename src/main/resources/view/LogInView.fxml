@@ -24,6 +24,16 @@
             <Label styleClass="medium-title" text="Password" />
          </children>
       </HBox>
+      <HBox maxWidth="650.0" prefHeight="45.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="errorMessage">
+               <styleClass>
+                  <String fx:value="error" />
+                  <String fx:value="medium-text" />
+               </styleClass>
+            </Label>
+         </children>
+      </HBox>
       <HBox maxWidth="650.0" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="loginButton" mnemonicParsing="false" text="Login">
