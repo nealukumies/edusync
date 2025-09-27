@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
+import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.handlers.CourseHandler;
 
@@ -43,13 +44,22 @@ public class CourseListController extends SubController {
     public void fetchCourseList() {
         try {
             HttpResponse<String> response = CourseHandler.getCourses();
-            System.out.println(response);
-            Label  label = new Label("Error: " );
-            label.setTextFill(Color.RED);
-            courseListContent.getChildren().add(label);
+            if (response == null) {
+                courseListContent.getChildren().clear();
+                Label emptyCourseList = new Label("No courses found");
+                courseListContent.getChildren().add(emptyCourseList);
+                return;
+            }
+            String _courses = response.body();
+            System.out.println("Courses: " + _courses);
+            courseListContent.getChildren().clear();
+            this.courses.clear();
+            System.out.println(response.body());
         }
         catch (Exception e) {
+            courseListContent.getChildren().clear();
             Label  label = new Label("Error: " + e.getMessage());
+            label.getStyleClass().add("error");
             label.setTextFill(Color.RED);
             courseListContent.getChildren().add(label);
         }

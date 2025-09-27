@@ -80,17 +80,11 @@ public class MainController {
 
     public void loadPage(String path) {
         try {
-            System.out.println("LINE 1");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-            System.out.println("LINE 2");
             Parent root = fxmlLoader.load();
-            System.out.println("LINE 3");
             SubController subController = fxmlLoader.getController();
-            System.out.println("LINE 4");
             subController.setMainViewController(this);
-            System.out.println("LINE 5");
             subController.initializeFully();
-            System.out.println("LINE 6");
             content.getChildren().add(root);
             //content.getChildren().add(new AssignmentList(testList).createList());
         }
