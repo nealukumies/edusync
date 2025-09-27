@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import model.Singletons.Account;
 
 import java.io.IOException;
 
@@ -19,21 +20,29 @@ public class MainController {
     private Hyperlink mainTitle;
 
     private Page currentPage;
+    private Account account = null;
 
     public void initialize() throws IOException {
+        this.account = Account.getInstance();
         changePage(Page.FRONT_PAGE);
         mainTitle.setOnAction(e -> changePage(Page.COURSE_LIST_PAGE));
     }
 
     public void generateHeader() {
-        // Once we have a user model, this method will determine whether to show personal header or generic
-        // But for now, just use the generic "log in" header
         headerContent.getChildren().clear();
 
         // Dynamically forces all content to the right edge of the container
         Region spacer = new Region();
         headerContent.setHgrow(spacer, Priority.ALWAYS);
 
+        if (account.isLoggedIn()) {
+            // For now, just add username
+            Label label = new Label(account.getName());
+            label.getStyleClass().add("medium-title");
+            headerContent.getChildren().addAll(spacer, label);
+        }
+
+        else {
         Hyperlink loginText = new Hyperlink("Log In");
         loginText.getStyleClass().add("medium-title");
         loginText.getStyleClass().add("link");
@@ -41,6 +50,8 @@ public class MainController {
             changePage(Page.LOGIN_PAGE);
         });
         headerContent.getChildren().addAll(spacer, loginText);
+        }
+
     }
 
     public void changePage(Page page) {
