@@ -6,7 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import model.Singletons.Account;
 
 import java.io.IOException;
@@ -40,16 +43,14 @@ public class MainController {
             Label label = new Label(account.getName());
             label.getStyleClass().add("medium-title");
             headerContent.getChildren().addAll(spacer, label);
-        }
-
-        else {
-        Hyperlink loginText = new Hyperlink("Log In");
-        loginText.getStyleClass().add("medium-title");
-        loginText.getStyleClass().add("link");
-        loginText.setOnAction(e -> {
-            changePage(Page.LOGIN_PAGE);
-        });
-        headerContent.getChildren().addAll(spacer, loginText);
+        } else {
+            Hyperlink loginText = new Hyperlink("Log In");
+            loginText.getStyleClass().add("medium-title");
+            loginText.getStyleClass().add("link");
+            loginText.setOnAction(e -> {
+                changePage(Page.LOGIN_PAGE);
+            });
+            headerContent.getChildren().addAll(spacer, loginText);
         }
 
     }
@@ -62,12 +63,16 @@ public class MainController {
 
         content.getChildren().clear();
 
+        if (page == Page.FRONT_PAGE && account.isLoggedIn()) {
+            page = Page.DASHBOARD_PAGE;
+        }
+
         switch (page) {
             case FRONT_PAGE:
                 loadPage("/view/FrontpageView.fxml");
                 break;
             case DASHBOARD_PAGE:
-                loadPage("/DashboardView.fxml");
+                loadPage("/view/DashboardView.fxml");
                 break;
             case ADD_COURSE_PAGE:
                 loadPage("/view/AddCourseView.fxml");
@@ -98,10 +103,9 @@ public class MainController {
             subController.initializeFully();
             content.getChildren().add(root);
             //content.getChildren().add(new AssignmentList(testList).createList());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            Label  error = new Label();
+            Label error = new Label();
             error.getStyleClass().add("error");
             error.setText("Error: " + e.getMessage());
             error.setWrapText(true);
