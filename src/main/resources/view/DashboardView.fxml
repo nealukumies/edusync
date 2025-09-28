@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <BorderPane prefHeight="864.0" prefWidth="1536.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <left>
@@ -18,6 +18,7 @@
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
             <Label styleClass="medium-title" text="Upcoming deadlines" />
+            <Hyperlink fx:id="addAssignmentLink" styleClass="medium-text" text="Add new assignment" />
             <VBox fx:id="assignments" prefHeight="200.0" prefWidth="100.0" />
          </children>
       </VBox>

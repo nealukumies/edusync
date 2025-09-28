@@ -3,7 +3,6 @@ package component;
 import model.Enums.Status;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ViewableAssignment {
     private String title;
@@ -18,8 +17,19 @@ public class ViewableAssignment {
         this.status = status;
     }
 
-    public String getTitle() { return title; }
-    public int getCourse() { return course; }
-    public LocalDate getDeadline() { return deadline; }
-    public Status getStatus() { return status; }
+    public String getTitle() {
+        return title;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
 }

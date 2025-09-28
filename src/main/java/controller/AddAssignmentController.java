@@ -3,8 +3,14 @@ package controller;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class AddAssignmentController extends SubController {
+    @FXML
+    private ChoiceBox courseSelect;
+    @FXML
+    private TextField title;
     @FXML
     private Button submit;
     private int[] time = new int[2];
@@ -28,8 +34,7 @@ public class AddAssignmentController extends SubController {
                 if (minutes > 59 || minutes < 0) {
                     time[1] = 0;
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
