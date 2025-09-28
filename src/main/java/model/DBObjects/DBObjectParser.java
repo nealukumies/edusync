@@ -7,6 +7,7 @@ import model.Enums.Status;
 import model.Enums.Weekday;
 
 import java.net.http.HttpResponse;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -122,7 +123,7 @@ public class DBObjectParser {
                 jsonNode.get("courseId").asInt(),
                 jsonNode.get("title").asText(),
                 jsonNode.get("description").asText(),
-                LocalDate.parse(jsonNode.get("deadline").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
+                Timestamp.valueOf(jsonNode.get("deadline").asText()),
                 Status.valueOf(jsonNode.get("status").asText())
         );
     }
@@ -139,17 +140,14 @@ public class DBObjectParser {
 
         if (jsonNode.isArray()) {
             for (JsonNode node : jsonNode) {
-                String dateText = node.get("deadline").asText();
-                if (dateText.contains("Sept")) {
-                    dateText = dateText.replace("Sept", "Sep");
-                }
+
                 assignments.add(new Assignment(
                         node.get("assignmentId").asInt(),
                         node.get("studentId").asInt(),
                         node.get("courseId").asInt(),
                         node.get("title").asText(),
                         node.get("description").asText(),
-                        LocalDate.parse(dateText, DateTimeFormatter.ISO_LOCAL_DATE),
+                        Timestamp.valueOf(node.get("deadline").asText()),
                         Status.valueOf(node.get("status").asText())
                 ));
             }

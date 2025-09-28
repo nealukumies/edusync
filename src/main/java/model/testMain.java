@@ -19,9 +19,10 @@ public class testMain {
   public static void main(String[] args) throws JsonProcessingException {
     System.out.println(
       UserHandler.loginUser("katti@matikainen.fi", "salasana"));
-      System.out.println(CourseHandler.getCourse(174).body());
-      Course course = DBObjectParser.parseCourse(CourseHandler.getCourse(174));
-      System.out.println(course);
+      AssignmentHandler.updateAssignment(307, 174, "Homework 1", "Very important math homework","2024-09-15 13:30:17", "completed");
+      //AssignmentHandler.createAssignment(174, "Homework 1", "Basics of C++", "2024-09-15 13:30:15");
+      ArrayList<Assignment> assignmentList = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
+      System.out.println(assignmentList);
   }
 }
 //USER HANDLER TESTS
@@ -44,10 +45,10 @@ public class testMain {
 //ScheduleHandler.updateSchedule(142, "Monday", "11:00", "13:00")
 //ScheduleHandler.deleteSchedule(142)
 //ASSIGNMENT HANDLER TESTS
-//AssignmentHandler.createAssignment(174, "Homework 1", "2024-09-15")
+//AssignmentHandler.createAssignment(174, "Homework 1", "2024-09-15 13:30:15")
 //AssignmentHandler.getAssignment(237).body()
 //AssignmentHandler.getAssignmentsForUser().body()
-//AssignmentHandler.updateAssignment(237, "Homework 1", "Very important math homework","2024-09-15", "completed")
+//AssignmentHandler.updateAssignment(237, "Homework 1", "Very important math homework","2024-09-15 13:30:16", "completed")
 //AssignmentHandler.deleteAssignment(1)
 //OBJECT PARSER TESTS
 //Student student = DBObjectParser.parseStudent(UserHandler.getUser())
