@@ -1,6 +1,8 @@
 package model.Singletons;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private static Account INSTANCE;
 
     private int studentId;

@@ -6,6 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Singletons.Account;
 import model.Singletons.Connection;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.http.HttpResponse;
 
 public class UserHandler {
@@ -38,6 +42,8 @@ public class UserHandler {
                     return -1;
                 }
 
+                saveAccount();
+
                 System.out.println("Successfully logged in to " + jsonNode.get("name"));
                 return studentId;
             }
@@ -54,6 +60,13 @@ public class UserHandler {
                 return -1;
             }
         }
+    }
+
+    public static void logoutUser() {
+        Account account = Account.getInstance();
+        account.clearAccount();
+        removeSavedAccount();
+        System.out.println("Successfully logged out.");
     }
 
     public static HttpResponse<String> getUser() {
@@ -220,6 +233,47 @@ public class UserHandler {
                 System.out.println("Error: Received status code " + status);
                 return -1;
             }
+        }
+    }
+
+    public static void saveAccount() {
+        Account account = Account.getInstance();
+        String filePath = "account.txt";
+
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(account);
+            oos.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the file: " + e.getMessage());
+        }
+    }
+
+    public static void loadAccount() {
+        String filePath = "account.txt";
+        Account account = Account.getInstance();
+
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
+             java.io.ObjectInputStream ois = new java.io.ObjectInputStream(fis)) {
+
+            Account loadedAccount = (Account) ois.readObject();
+            account.setAccountDetails(loadedAccount.getStudentId(), loadedAccount.getName(), loadedAccount.getEmail(), loadedAccount.getRole());
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved account found.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("An error occurred while loading the account: " + e.getMessage());
+        }
+    }
+
+    public static void removeSavedAccount() {
+        java.io.File file = new java.io.File("account.txt");
+        if (file.delete()) {
+            System.out.println("Saved account file deleted successfully.");
+        } else {
+            System.out.println("No saved account file to delete.");
         }
     }
 }
