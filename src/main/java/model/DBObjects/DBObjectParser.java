@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DBObjectParser {
     public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
@@ -41,8 +40,8 @@ public class DBObjectParser {
                 jsonNode.get("courseId").asInt(),
                 jsonNode.get("studentId").asInt(),
                 jsonNode.get("courseName").asText(),
-                LocalDate.parse(jsonNode.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
-                LocalDate.parse(jsonNode.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en")))
+                LocalDate.parse(jsonNode.get("startDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
+                LocalDate.parse(jsonNode.get("endDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE)
         );
     }
 
@@ -61,8 +60,8 @@ public class DBObjectParser {
                         node.get("courseId").asInt(),
                         node.get("studentId").asInt(),
                         node.get("courseName").asText(),
-                        LocalDate.parse(node.get("startDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
-                        LocalDate.parse(node.get("endDate").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en")))
+                        LocalDate.parse(node.get("startDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
+                        LocalDate.parse(node.get("endDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE)
                 ));
             }
         }
@@ -123,7 +122,7 @@ public class DBObjectParser {
                 jsonNode.get("courseId").asInt(),
                 jsonNode.get("title").asText(),
                 jsonNode.get("description").asText(),
-                LocalDate.parse(jsonNode.get("deadline").asText(), DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
+                LocalDate.parse(jsonNode.get("deadline").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
                 Status.valueOf(jsonNode.get("status").asText())
         );
     }
@@ -150,7 +149,7 @@ public class DBObjectParser {
                         node.get("courseId").asInt(),
                         node.get("title").asText(),
                         node.get("description").asText(),
-                        LocalDate.parse(dateText, DateTimeFormatter.ofPattern("MMM d, yyyy", new Locale("en"))),
+                        LocalDate.parse(dateText, DateTimeFormatter.ISO_LOCAL_DATE),
                         Status.valueOf(node.get("status").asText())
                 ));
             }
