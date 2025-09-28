@@ -1,25 +1,78 @@
 package controller;
 
-import enums.Page;
+import component.CourseOption;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import layout_model.ParseHandler;
+import model.DBObjects.Course;
+import model.handlers.AssignmentHandler;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class AddAssignmentController extends SubController {
     @FXML
-    private ChoiceBox courseSelect;
+    private ChoiceBox<CourseOption> courseSelect;
     @FXML
     private TextField title;
     @FXML
+    private TextArea desc;
+    @FXML
+    private DatePicker dateSelect;
+    @FXML
+    private TextField timeSelect;
+    @FXML
     private Button submit;
+    @FXML
+    private Button cancel;
+
     private int[] time = new int[2];
+    private List<Course> courses;
+
+    public void initialize() {
+        try {
+            courses = ParseHandler.getCourses();
+            populateCourseList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void populateCourseList() {
+        courseSelect.getItems().clear();
+        for (Course c : courses) {
+            CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
+            courseSelect.getItems().add(option);
+        }
+    }
 
     @Override
     public void initializeFully() {
         submit.setOnAction(event -> {
-            this.getMainController().changePage(Page.FRONT_PAGE);
+            createAssignment();
         });
+        cancel.setOnAction(event -> {
+            this.getMainController().changePage(this.getMainController().getPageHistory().get(0));
+        });
+    }
+
+    public void createAssignment() {
+        if (dateSelect.getValue() == null) {
+            return;
+        }
+
+        try {
+            parseTimeString(timeSelect.getText());
+            CourseOption _course = courseSelect.getValue();
+            String _title = title.getText();
+            String _desc = desc.getText();
+            LocalDate _date = dateSelect.getValue();
+            String _datetime = _date.toString();
+            AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
+            getMainController().changePage(getMainController().getPageHistory().get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void parseTimeString(String ts) {
@@ -36,6 +89,8 @@ public class AddAssignmentController extends SubController {
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                time[0] = 0;
+                time[1] = 0;
             }
         }
     }

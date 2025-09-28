@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import model.Singletons.Account;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController {
     @FXML
@@ -23,9 +25,11 @@ public class MainController {
     private Hyperlink mainTitle;
 
     private Page currentPage;
+    private List<Page> pageHistory; // TODO: Full history support, currently only acts as previous page
     private Account account = null;
 
     public void initialize() throws IOException {
+        this.pageHistory = new ArrayList<>();
         this.account = Account.getInstance();
         changePage(Page.FRONT_PAGE);
         mainTitle.setOnAction(e -> changePage(Page.COURSE_LIST_PAGE));
@@ -91,6 +95,8 @@ public class MainController {
                 break;
         }
 
+        this.pageHistory.clear();
+        this.pageHistory.add(this.currentPage);
         this.currentPage = page;
     }
 
@@ -111,5 +117,9 @@ public class MainController {
             error.setWrapText(true);
             content.getChildren().add(error);
         }
+    }
+
+    public List<Page> getPageHistory() {
+        return pageHistory;
     }
 }
