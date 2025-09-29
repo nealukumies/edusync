@@ -3,7 +3,6 @@ package model.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Enums.Status;
 import model.Singletons.Account;
 import model.Singletons.Connection;
 
@@ -69,12 +68,12 @@ public class AssignmentHandler {
         Connection conn = Connection.getInstance();
 
         String inputString = String.format("""
-            {
-                "course_id": "%s",
-                "title": "%s",
-                "description": "%s",
-                "deadline": "%s"
-            }""", courseId, title, description, deadline);
+                {
+                    "course_id": "%s",
+                    "title": "%s",
+                    "description": "%s",
+                    "deadline": "%s"
+                }""", courseId, title, description, deadline);
 
         HttpResponse<String> response = conn.sendPostRequest(inputString, "/assignments");
 
@@ -114,18 +113,19 @@ public class AssignmentHandler {
         Connection conn = Connection.getInstance();
 
         String inputString = String.format("""
-            {
-                "course_id": "%s",
-                "title": "%s",
-                "description": "%s",
-                "deadline": "%s",
-                "status": "%s"
-            }""", courseId, title, description, deadline, assignmentStatus);
+                {
+                    "course_id": "%s",
+                    "title": "%s",
+                    "description": "%s",
+                    "deadline": "%s",
+                    "status": "%s"
+                }""", courseId, title, description, deadline, assignmentStatus);
 
         String endpoint = "/assignments/" + assignmentId;
 
         HttpResponse<String> response = conn.sendPutRequest(inputString, endpoint);
 
+        System.out.println(response);
         int status = response.statusCode();
 
         switch (status) {
