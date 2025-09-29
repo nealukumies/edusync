@@ -1,37 +1,41 @@
 package component;
 
+import model.DBObjects.Assignment;
+import model.DBObjects.Course;
 import model.Enums.Status;
 
 import java.sql.Timestamp;
 
 public class ViewableAssignment {
-    private String title;
-    private int course;
-    private Timestamp deadline;
-    private Status status;
-    private String courseName;
+    private Assignment assignment;
+    private Course course;
 
-    public ViewableAssignment(String title, int course, Timestamp deadline, Status status, String courseName) {
-        this.title = title;
+    public ViewableAssignment(Assignment assignment, Course course) {
+        this.assignment = assignment;
         this.course = course;
-        this.deadline = deadline;
-        this.status = status;
-        this.courseName = courseName;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public Course getCourseObject() {
+        return course;
     }
 
     public String getTitle() {
-        return title;
+        return assignment.getTitle();
     }
 
     public String getCourse() {
-        return courseName;
+        return course.getCourseName();
     }
 
     public Timestamp getDeadline() {
-        return deadline;
+        return assignment.getDeadline();
     }
 
     public Status getStatus() {
-        return status;
+        return assignment.getStatus();
     }
 }

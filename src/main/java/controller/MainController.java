@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import model.DBObjects.Assignment;
+import model.DBObjects.Course;
 import model.Singletons.Account;
 import model.handlers.UserHandler;
 
@@ -28,6 +30,8 @@ public class MainController {
     private Page currentPage;
     private List<Page> pageHistory; // TODO: Full history support, currently only acts as previous page
     private Account account = null;
+    private Assignment assignment = null;
+    private Course course = null;
 
     public void initialize() throws IOException {
         this.pageHistory = new ArrayList<>();
@@ -105,6 +109,9 @@ public class MainController {
             case COURSE_LIST_PAGE:
                 loadPage("/view/CourseListView.fxml");
                 break;
+            case ASSIGNMENT_PAGE:
+                loadPage("/view/AssignmentView.fxml");
+                break;
         }
 
         this.pageHistory.clear();
@@ -120,7 +127,6 @@ public class MainController {
             subController.setMainViewController(this);
             subController.initializeFully();
             content.getChildren().add(root);
-            //content.getChildren().add(new AssignmentList(testList).createList());
         } catch (IOException e) {
             e.printStackTrace();
             Label error = new Label();
@@ -129,6 +135,22 @@ public class MainController {
             error.setWrapText(true);
             content.getChildren().add(error);
         }
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public List<Page> getPageHistory() {

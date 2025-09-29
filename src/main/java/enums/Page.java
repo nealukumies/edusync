@@ -8,4 +8,5 @@ public enum Page {
     ADD_COURSE_PAGE,
     ADD_ASSIGNMENT_PAGE,
     COURSE_LIST_PAGE,
+    ASSIGNMENT_PAGE,
 }

@@ -49,8 +49,6 @@ public class DashboardController extends SubController {
         newCourseLink.setOnAction(e -> {
             getMainController().changePage(Page.ADD_COURSE_PAGE);
         });
-        loadAssignments();
-        loadCourses();
     }
 
     public void loadAssignments() {
@@ -86,7 +84,8 @@ public class DashboardController extends SubController {
     public void generateAssignments() {
         assignments.getChildren().clear();
         if (!assignmentList.isEmpty()) {
-            TableView<ViewableAssignment> table = AssignmentList.createList(assignmentList, courses);
+            AssignmentList al = new AssignmentList(getMainController());
+            TableView<ViewableAssignment> table = al.createList(assignmentList, courses);
             assignments.getChildren().add(table);
             table.sort();
         }
@@ -94,6 +93,7 @@ public class DashboardController extends SubController {
 
     @Override
     public void initializeFully() {
-
+        loadAssignments();
+        loadCourses();
     }
 }
