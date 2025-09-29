@@ -67,7 +67,8 @@ public class AddAssignmentController extends SubController {
             String _title = title.getText();
             String _desc = desc.getText();
             LocalDate _date = dateSelect.getValue();
-            String _datetime = _date.toString();
+            String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
+            String _datetime = _date.toString() + " " + _time;
             AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
             getMainController().changePage(getMainController().getPageHistory().get(0));
         } catch (Exception e) {
@@ -81,6 +82,8 @@ public class AddAssignmentController extends SubController {
                 String[] chars = ts.split(":");
                 int hours = Integer.parseInt(chars[0]);
                 int minutes = Integer.parseInt(chars[1]);
+                time[0] = hours;
+                time[1] = minutes;
                 if (hours > 23 || hours < 0) {
                     time[0] = 0;
                 }

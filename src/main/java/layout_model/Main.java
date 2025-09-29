@@ -6,7 +6,7 @@ import view.MainView;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
-        UserHandler.loginUser("katti@matikainen.fi", "salasana");
+        UserHandler.loadAccount();
         MainView.launch(MainView.class);
     }
 }
