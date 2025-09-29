@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,12 +16,24 @@
       </VBox>
    </left>
    <center>
-      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
          <children>
             <Label styleClass="medium-title" text="Upcoming deadlines" />
             <Hyperlink fx:id="addAssignmentLink" styleClass="medium-text" text="Add new assignment" />
             <VBox fx:id="assignments" prefHeight="200.0" prefWidth="100.0" />
          </children>
+         <padding>
+            <Insets left="200.0" />
+         </padding>
       </VBox>
    </center>
+   <right>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="View all assignments" />
+            <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="View all courses" />
+            <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="Add new course" />
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

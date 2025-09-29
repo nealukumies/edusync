@@ -39,6 +39,7 @@ public class RegisterController extends SubController {
             String _password = password.getText();
             try {
                 UserHandler.registerUser(_name, _email, _password);
+                getMainController().goToPrevPage();
             } catch (Exception e) {
                 e.printStackTrace();
                 errorMessage.setText(e.getMessage());

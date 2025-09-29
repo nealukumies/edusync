@@ -52,7 +52,7 @@ public class AddAssignmentController extends SubController {
             createAssignment();
         });
         cancel.setOnAction(event -> {
-            this.getMainController().changePage(this.getMainController().getPageHistory().get(0));
+            this.getMainController().goToPrevPage();
         });
     }
 

@@ -32,7 +32,7 @@ public class MainController {
         this.pageHistory = new ArrayList<>();
         this.account = Account.getInstance();
         changePage(Page.FRONT_PAGE);
-        mainTitle.setOnAction(e -> changePage(Page.COURSE_LIST_PAGE));
+        mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
     }
 
     public void generateHeader() {
@@ -57,6 +57,10 @@ public class MainController {
             headerContent.getChildren().addAll(spacer, loginText);
         }
 
+    }
+
+    public void goToPrevPage() {
+        this.changePage(this.getPageHistory().get(0));
     }
 
     public void changePage(Page page) {

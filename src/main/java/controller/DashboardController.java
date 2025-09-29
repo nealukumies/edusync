@@ -22,11 +22,27 @@ public class DashboardController extends SubController {
     private List<Assignment> assignmentList;
     @FXML
     private Hyperlink addAssignmentLink;
+    @FXML
+    private Hyperlink assignmentsLink;
+    @FXML
+    private Hyperlink coursesLink;
+    @FXML
+    private Hyperlink newCourseLink;
+
 
     public void initialize() {
         this.assignmentList = new ArrayList<>();
         addAssignmentLink.setOnAction(e -> {
             getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
+        });
+        assignmentsLink.setOnAction(e -> {
+            getMainController().changePage(Page.DASHBOARD_PAGE);
+        });
+        coursesLink.setOnAction(e -> {
+            getMainController().changePage(Page.COURSE_LIST_PAGE);
+        });
+        newCourseLink.setOnAction(e -> {
+            getMainController().changePage(Page.ADD_COURSE_PAGE);
         });
         loadAssignments();
     }
