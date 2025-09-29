@@ -11,6 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import model.Singletons.Account;
+import model.handlers.UserHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +47,14 @@ public class MainController {
             // For now, just add username
             Label label = new Label(account.getName());
             label.getStyleClass().add("medium-title");
-            headerContent.getChildren().addAll(spacer, label);
+
+            Hyperlink logout = new Hyperlink("> Log out");
+            logout.setOnAction(actionEvent -> {
+                UserHandler.logoutUser();
+                changePage(Page.FRONT_PAGE);
+            });
+
+            headerContent.getChildren().addAll(spacer, label, logout);
         } else {
             Hyperlink loginText = new Hyperlink("Log In");
             loginText.getStyleClass().add("medium-title");

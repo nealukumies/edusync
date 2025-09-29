@@ -133,3 +133,8 @@
 .choice-box .menu-item:focused {
     -fx-background-color: -fx-lighter-col;
 }
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+}

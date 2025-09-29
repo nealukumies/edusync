@@ -3,27 +3,28 @@ package component;
 import model.Enums.Status;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 public class ViewableAssignment {
     private String title;
     private int course;
     private Timestamp deadline;
     private Status status;
+    private String courseName;
 
-    public ViewableAssignment(String title, int course, Timestamp deadline, Status status) {
+    public ViewableAssignment(String title, int course, Timestamp deadline, Status status, String courseName) {
         this.title = title;
         this.course = course;
         this.deadline = deadline;
         this.status = status;
+        this.courseName = courseName;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public int getCourse() {
-        return course;
+    public String getCourse() {
+        return courseName;
     }
 
     public Timestamp getDeadline() {

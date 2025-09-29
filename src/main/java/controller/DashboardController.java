@@ -9,17 +9,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import model.DBObjects.Assignment;
+import model.DBObjects.Course;
 import model.DBObjects.DBObjectParser;
 import model.handlers.AssignmentHandler;
+import model.handlers.CourseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardController extends SubController {
+    private List<Assignment> assignmentList;
+    private List<Course> courses;
+
     @FXML
     private VBox assignments;
-    @FXML
-    private List<Assignment> assignmentList;
     @FXML
     private Hyperlink addAssignmentLink;
     @FXML
@@ -32,6 +35,8 @@ public class DashboardController extends SubController {
 
     public void initialize() {
         this.assignmentList = new ArrayList<>();
+        this.courses = new ArrayList<>();
+
         addAssignmentLink.setOnAction(e -> {
             getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
         });
@@ -45,6 +50,7 @@ public class DashboardController extends SubController {
             getMainController().changePage(Page.ADD_COURSE_PAGE);
         });
         loadAssignments();
+        loadCourses();
     }
 
     public void loadAssignments() {
@@ -63,11 +69,26 @@ public class DashboardController extends SubController {
         }
     }
 
+    public void loadCourses() {
+        try {
+            List<Course> data = DBObjectParser.parseCourseList(CourseHandler.getCourses());
+            if (data != null) {
+                courses.addAll(data);
+                generateAssignments();
+            } else {
+                throw new Exception("Assignments not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void generateAssignments() {
         assignments.getChildren().clear();
         if (!assignmentList.isEmpty()) {
-            TableView<ViewableAssignment> table = AssignmentList.createList(assignmentList);
+            TableView<ViewableAssignment> table = AssignmentList.createList(assignmentList, courses);
             assignments.getChildren().add(table);
+            table.sort();
         }
     }
 
