@@ -46,8 +46,9 @@ public class AssignmentController extends SubController {
             int _courseId = course.getCourseId();
             String _title = assignment.getTitle();
             String _desc = assignment.getDescription();
+
             String _deadline = assignment.getDeadline().toString();
-            String _status = status.getSelectionModel().getSelectedItem().toString();
+            String _status = status.getSelectionModel().getSelectedItem().getDbValue();
 
             AssignmentHandler.updateAssignment(_id, _courseId, _title, _desc, _deadline, _status);
             getMainController().goToPrevPage();
