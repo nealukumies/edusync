@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="864.0" prefWidth="1536.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<BorderPane prefHeight="864.0" prefWidth="1536.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <left>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
@@ -33,6 +31,7 @@
             <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="View all assignments" />
             <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="View all courses" />
             <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="Add new course" />
+            <Hyperlink fx:id="calendar" styleClass="medium-text" text="Calendar" />
          </children>
       </VBox>
    </right>
