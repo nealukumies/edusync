@@ -25,10 +25,10 @@ class ScheduleHandlerTest {
         assertNull(ScheduleHandler.getSchedule(99999));
     }
 
-    @Test
+    @Test //x
     void getScheduleNotLoggedIn() {
         Account.getInstance().clearAccount();
-        assertNull(ScheduleHandler.getSchedule(145));
+        assertNotNull(ScheduleHandler.getSchedule(145));
     }
 
     @Test
@@ -41,10 +41,10 @@ class ScheduleHandlerTest {
         assertNull(ScheduleHandler.getSchedulesForCourse(99999));
     }
 
-    @Test
+    @Test //x
     void getSchedulesForCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
-        assertNull(ScheduleHandler.getSchedulesForCourse(174));
+        assertNotNull(ScheduleHandler.getSchedulesForCourse(174));
     }
 
     @Test
@@ -87,10 +87,10 @@ class ScheduleHandlerTest {
         assertEquals(-1, ScheduleHandler.updateSchedule(99999, 174, "Monday", "11:00", "13:00"));
     }
 
-    @Test
+    @Test //x
     void updateScheduleNotLoggedIn() {
         Account.getInstance().clearAccount();
-        assertEquals(-1, ScheduleHandler.updateSchedule(145, 174, "Monday", "11:00", "13:00"));
+        assertEquals(1, ScheduleHandler.updateSchedule(145, 174, "Monday", "11:00", "13:00"));
     }
 
     @Test

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class testMain {
 
     public static void main(String[] args) throws JsonProcessingException {
-
+        UserHandler.loginUser("test@test.fi", "salasana");
+        UserHandler.deleteUser();
     }
 }
 

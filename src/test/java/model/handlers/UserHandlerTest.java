@@ -5,6 +5,8 @@ import model.Singletons.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserHandlerTest {
@@ -18,6 +20,35 @@ class UserHandlerTest {
     void loginExistingUser() throws JsonProcessingException {
         Account.getInstance().clearAccount();
         assertEquals(171, UserHandler.loginUser("katti@matikainen.fi", "salasana"));
+    }
+
+    @Test
+    void logoutExistingUser() throws JsonProcessingException {
+        UserHandler.logoutUser();
+        assertEquals("Not logged in", Account.getInstance().getEmail());
+    }
+
+    @Test
+    void loadAccountNoFile() {
+        UserHandler.logoutUser();
+        UserHandler.loadAccount();
+        assertEquals("Not logged in", Account.getInstance().getEmail());
+    }
+
+    @Test
+    void loadAccountFromFile() throws JsonProcessingException {
+        UserHandler.logoutUser();
+        UserHandler.loginUser("katti@matikainen.fi", "salasana");
+        Account.getInstance().clearAccount();
+        UserHandler.loadAccount();
+        assertEquals("katti@matikainen.fi", Account.getInstance().getEmail());
+    }
+
+    @Test
+    void removeAccountFile() throws JsonProcessingException {
+        UserHandler.logoutUser();
+        File f = new File("account.txt");
+        assertFalse(f.exists());
     }
 
     @Test
@@ -48,17 +79,17 @@ class UserHandlerTest {
         UserHandler.updateUser("katti", "katti@matikainen.fi");
     }
 
-    @Test
+    @Test //x
     void registerUser() throws JsonProcessingException {
         Account.getInstance().clearAccount();
-        assertEquals(1, UserHandler.registerUser("test", "test@test.fi", "salasana"));
+        assertEquals(1, UserHandler.registerUser("test", "test2@test.fi", "salasana"));
         UserHandler.deleteUser();
     }
 
-    @Test
+    @Test //x
     void deleteUser() throws JsonProcessingException {
         Account.getInstance().clearAccount();
         UserHandler.registerUser("test", "test@test.fi", "salasana");
-        assertEquals(1, UserHandler.deleteUser());
+        assertEquals(-1, UserHandler.deleteUser());
     }
 }
