@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAssignmentController">
+   <children>
+      <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Add assignment" />
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <ChoiceBox fx:id="courseSelect" prefWidth="150.0" />
+            <Label styleClass="medium-title" text="Course" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <TextField fx:id="title" />
+            <Label styleClass="medium-title" text="Title" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="170.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <TextArea fx:id="desc" prefHeight="200.0" prefWidth="200.0" />
+            <Label styleClass="medium-title" text="Description" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <DatePicker fx:id="dateSelect" styleClass="small-field" />
+            <TextField fx:id="timeSelect" promptText="HH:mm" styleClass="tiny-field" />
+            <Label styleClass="medium-title" text="Deadline">
+               <tooltip>
+                  <Tooltip text="Set deadline time in format HH:mm (hours and minutes)" />
+               </tooltip></Label>
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <Button fx:id="submit" mnemonicParsing="false" text="Submit">
+               <styleClass>
+                  <String fx:value="medium-title" />
+                  <String fx:value="longer-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+               <styleClass>
+                  <String fx:value="medium-title" />
+                  <String fx:value="longer-button" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

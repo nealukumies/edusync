@@ -1,0 +1,140 @@
+.root {
+    /* Theme colours */
+    -fx-background-col: #070707;
+    -fx-foreground-col: #151515;
+    -fx-darker-col: #000000;
+    -fx-contrast-col: #FFFFFF;
+    -fx-lighter-col: #383838;
+
+    /* Default font styles */
+    -fx-text-fill: -fx-contrast-col;
+}
+
+/* Some font sizes */
+
+.huge-title {
+    -fx-font-size: 96;
+}
+
+.large-title {
+    -fx-font-size: 48;
+}
+
+.medium-title {
+    -fx-font-size: 36;
+}
+
+.medium-text {
+    -fx-font-size: 24;
+}
+
+.link:hover {
+    -fx-underline: true;
+}
+
+.error {
+    -fx-text-fill: red;
+}
+
+* {
+    -fx-text-fill: -fx-contrast-col;
+    -fx-font-family: "Roboto Serif 28pt";
+}
+
+.app {
+    -fx-background-color: -fx-background-col;
+}
+
+.header-container {
+    -fx-padding: 20;
+}
+
+.header-content {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.button {
+    -fx-background-color: -fx-foreground-col;
+    -fx-padding: 20;
+}
+
+.button:hover {
+    -fx-background-color: -fx-lighter-col;
+}
+
+.longer-button {
+    -fx-pref-width: 265;
+    -fx-padding: 10;
+}
+
+.text-area, .text-field, .choice-box {
+    -fx-background-color: -fx-foreground-col;
+    -fx-pref-width: 415;
+}
+
+.text-area * {
+    -fx-background-color: -fx-foreground-col;
+}
+
+.text-field, .choice-box {
+    -fx-font-size: 24;
+    -fx-pref-height: 36;
+}
+
+.text-area {
+    -fx-font-size: 24;
+    -fx-pref-height: 170;
+}
+
+.input-container {
+    -fx-spacing: 20;
+    -fx-pref-size: 450;
+}
+
+.date-picker * {
+    -fx-text-fill: -fx-background-col;
+}
+
+.date-picker .text-field {
+    -fx-text-fill: -fx-contrast-col;
+}
+
+.date-picker .button {
+    -fx-background-color: none;
+    -fx-text-fill: -fx-background-col;
+    -fx-padding: 0;
+}
+
+.course-card {
+    -fx-pref-width: 360;
+    -fx-background-color: -fx-foreground-col;
+    -fx-border-color: -fx-contrast-col;
+    -fx-border-width: 2;
+    -fx-padding: 10;
+}
+
+.small-field {
+    -fx-pref-width: 255;
+}
+
+.tiny-field {
+    -fx-pref-width: 140;
+}
+
+.table-view * {
+    -fx-background-color: -fx-background-col;
+}
+
+.choice-box .menu-item {
+    -fx-background-color: -fx-background-col;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: -fx-lighter-col;
+}
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCourseController">
+   <children>
+      <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Add course" />
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <TextField fx:id="title" />
+            <Label styleClass="medium-title" text="Title" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <DatePicker fx:id="startDate" />
+            <Label styleClass="medium-title" text="Start date" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <DatePicker fx:id="endDate" />
+            <Label styleClass="medium-title" text="End date" />
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="45.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <Label fx:id="errorMessage">
+               <styleClass>
+                  <String fx:value="error" />
+                  <String fx:value="medium-text" />
+               </styleClass>
+            </Label>
+         </children>
+      </HBox>
+      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+         <children>
+            <Button fx:id="submit" mnemonicParsing="false" text="Submit">
+               <styleClass>
+                  <String fx:value="medium-title" />
+                  <String fx:value="longer-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+               <styleClass>
+                  <String fx:value="medium-title" />
+                  <String fx:value="longer-button" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

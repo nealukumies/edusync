@@ -1,0 +1,12 @@
+package enums;
+
+public enum Page {
+    FRONT_PAGE,
+    LOGIN_PAGE,
+    REGISTER_PAGE,
+    DASHBOARD_PAGE,
+    ADD_COURSE_PAGE,
+    ADD_ASSIGNMENT_PAGE,
+    COURSE_LIST_PAGE,
+    ASSIGNMENT_PAGE,
+}
