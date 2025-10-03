@@ -1,28 +1,97 @@
 package model.calendar;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import model.DBObjects.Course;
+import model.DBObjects.DBObjectParser;
+import model.DBObjects.Schedule;
+import model.Enums.Weekday;
+import model.Singletons.Account;
+import model.Singletons.Connection;
+import model.handlers.CourseHandler;
+import model.handlers.ScheduleHandler;
 
+import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarModern extends VBox {
 
+    public List<Schedule> schedules = new ArrayList<>();
+    public List<Course> courses = new ArrayList<>();
+    Connection conn = Connection.getInstance();
+    Weekday[] weekdays = Weekday.values();
+    Weekday weekday;
+
+    List checkSchedule(int col, int row){
+        weekday = checkWeekday(col);
+        List<String> courseNames = new ArrayList<>();
+        for (Schedule schedule : schedules){
+            if(schedule.getWeekday() == weekday){
+                if(schedule.getStartTime().getHour() <= row && row < schedule.getEndTime().getHour()){
+                    for(Course course : courses){
+                        if(course.getCourseId() == schedule.getCourseId()){
+                            courseNames.add(course.getCourseName());
+                        }
+                    }
+                }
+            }
+        }
+        return courseNames;
+    }
+
+    Weekday checkWeekday(int col){
+        return switch ((LocalDate.now().getDayOfWeek().getValue() - 1 + col) % 7) {
+            case 0 -> Weekday.MONDAY;
+            case 1 -> Weekday.TUESDAY;
+            case 2 -> Weekday.WEDNESDAY;
+            case 3 -> Weekday.THURSDAY;
+            case 4 -> Weekday.FRIDAY;
+            case 5 -> Weekday.SATURDAY;
+            case 6 -> Weekday.SUNDAY;
+            default -> null;
+        };
+    }
+
+
     public CalendarModern() {
+        HttpResponse<String> scheduleResponse = ScheduleHandler.getSchedulesForUser();
+        if(scheduleResponse != null){
+            try {
+                schedules = DBObjectParser.parseScheduleList(scheduleResponse);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        HttpResponse<String> courseResponse = CourseHandler.getCourses();
+        if(courseResponse != null){
+            try{
+                courses = DBObjectParser.parseCourseList(courseResponse);
+            }catch(JsonProcessingException e){
+                throw new RuntimeException(e);
+            }
+        }
+
+
         this.setPrefSize(1200, 600);
-        CalendarSchedules calendarSchedules = new CalendarSchedules();
         LocalDate today = LocalDate.now();
 
         GridPane calendarGrid = new GridPane();
-        //calendarGrid.setStyle("-fx-background-color: #000000");
         calendarGrid.setPrefSize(1200, 600);
         calendarGrid.setHgap(0);
         calendarGrid.setVgap(0);
         int daysToShow = 7;
 
         for (int col = 0; col < daysToShow; col++) {
-            Label dateLabel = new Label(today.plusDays(col).toString());
+            Label dateLabel = new Label(
+                    today.plusDays(col).format(DateTimeFormatter.ofPattern("EEE d/M"))
+            );
+            dateLabel.setWrapText(true);
             dateLabel.setStyle("-fx-text-fill: #ffffff");
             calendarGrid.add(dateLabel, col+1, 0);
         }
@@ -37,18 +106,18 @@ public class CalendarModern extends VBox {
             int clock = 0;
             for (int row = 0; row < 24; row++) {
                 VBox cell = new VBox();
-                //List courseNames = schedules.hasSchedules(today.plusDays(col), clock);
-                if(calendarSchedules.getSchedules() != null){
-                    System.out.println(calendarSchedules.getSchedules());
-                    cell.setStyle("-fx-border-color: black; -fx-min-height: 30px; -fx-min-width: 80px; -fx-background-color: lightgray;");
-                    /*
-                    for (Object name : courseNames){
-                        Label label = new Label(name.toString());
-                        label.setStyle("-fx-text-fill: #000000");
-                        cell.getChildren().add(label);
+                if(scheduleResponse != null){
+                    List courseNames = checkSchedule(col, row);
+                    if(!courseNames.isEmpty()) {
+                        for(Object courseName: courseNames){
+                            Label label = new Label(courseName.toString());
+                            label.setStyle("-fx-text-fill: #000000");
+                            cell.getChildren().add(label);
+                        }
+                        cell.setStyle("-fx-border-color: black; -fx-min-height: 30px; -fx-min-width: 80px; -fx-background-color: lightgray;");
+                    }else{
+                        cell.setStyle("-fx-border-color: lightgray; -fx-min-height: 30px; -fx-min-width: 80px;");
                     }
-
-                     */
 
                 }else {
                     cell.setStyle("-fx-border-color: lightgray; -fx-min-height: 30px; -fx-min-width: 80px;");
