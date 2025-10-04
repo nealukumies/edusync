@@ -65,5 +65,32 @@ public class AssignmentTableController extends SubController {
                 setGraphic(link);
             }
         });
+
+        courseCol.setCellFactory(tc -> new TableCell<>() {
+            private final Hyperlink link = new Hyperlink();
+
+            {
+                link.setOnAction(event -> {
+                    ViewableAssignment viewableAssignment = getTableRow().getItem();
+                    if (viewableAssignment != null) {
+                        System.out.println(getMainController());
+                        getMainController().setCourse(viewableAssignment.getCourseObject());
+                        getMainController().changePage(Page.COURSE_PAGE);
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                ViewableAssignment viewableAssignment = getTableRow().getItem();
+                if (empty || viewableAssignment == null) {
+                    setGraphic(null);
+                    return;
+                }
+                link.setText(viewableAssignment.getCourseObject().getCourseName());
+                setGraphic(link);
+            }
+        });
     }
 }

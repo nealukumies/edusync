@@ -112,6 +112,9 @@ public class MainController {
             case ASSIGNMENT_PAGE:
                 loadPage("/view/AssignmentView.fxml");
                 break;
+            case COURSE_PAGE:
+                loadPage("/view/CourseView.fxml");
+                break;
         }
 
         this.pageHistory.clear();

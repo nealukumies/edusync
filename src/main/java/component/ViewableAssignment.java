@@ -27,8 +27,8 @@ public class ViewableAssignment {
         return assignment.getTitle();
     }
 
-    public String getCourse() {
-        return course.getCourseName();
+    public Integer getCourse() {
+        return course.getCourseId();
     }
 
     public Timestamp getDeadline() {
