@@ -4,13 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseController">
+
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseController">
     <children>
-        <Label fx:id="name" prefWidth="500.0" styleClass="large-title" text="Course name"/>
-        <Label fx:id="desc" prefWidth="500.0" styleClass="medium-text" text="desc"/>
-        <Hyperlink fx:id="addAssignment" text="Add new assignment"/>
-        <FlowPane fx:id="assignments" prefHeight="200.0" prefWidth="200.0"/>
+        <Label fx:id="name" styleClass="large-title" text="Course name" />
+        <Label fx:id="desc" styleClass="medium-text" text="desc" />
+        <Hyperlink fx:id="addAssignment" text="Add new assignment" />
+        <FlowPane fx:id="assignments" alignment="CENTER_LEFT" />
     </children>
 </VBox>

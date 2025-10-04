@@ -4,18 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseListController">
+
+<VBox fx:id="base" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseListController">
     <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="500.0" styleClass="large-title" text="Courses"/>
-        <FlowPane fx:id="courseListContent" hgap="40.0" prefHeight="200.0" prefWidth="1536.0" vgap="40.0">
+        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="large-title" text="Courses" />
+        <FlowPane fx:id="courseListContent" hgap="40.0" maxWidth="1.7976931348623157E308" vgap="40.0" VBox.vgrow="ALWAYS">
             <padding>
-                <Insets bottom="100.0" left="100.0" right="100.0" top="100.0"/>
+                <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
             </padding>
             <children>
-                <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefWidth="1536.0" styleClass="medium-title"
-                       text="Loading course data..."/>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" styleClass="medium-title" text="Loading course data..." />
             </children>
         </FlowPane>
     </children>

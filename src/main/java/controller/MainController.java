@@ -7,10 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.Singletons.Account;
@@ -31,6 +28,8 @@ public class MainController {
     private Button backButton;
     @FXML
     private Button forwardButton;
+    @FXML
+    private BorderPane root;
 
     private Page currentPage;
     private List<PageMemento> pageHistory; // TODO: Full history support, currently only acts as previous page
@@ -226,5 +225,9 @@ public class MainController {
 
     public List<PageMemento> getPageHistory() {
         return pageHistory;
+    }
+    
+    public BorderPane getRoot() {
+        return root;
     }
 }
