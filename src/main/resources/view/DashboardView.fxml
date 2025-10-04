@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
@@ -15,18 +15,6 @@
             </children>
         </VBox>
     </left>
-    <center>
-        <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
-            <children>
-                <Label styleClass="medium-title" text="Upcoming deadlines" />
-                <Hyperlink fx:id="addAssignmentLink" styleClass="medium-text" text="Add new assignment" />
-                <VBox fx:id="assignments" prefHeight="200.0" prefWidth="100.0" />
-            </children>
-            <padding>
-                <Insets left="200.0" />
-            </padding>
-        </VBox>
-    </center>
     <right>
         <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
             <children>
@@ -36,4 +24,17 @@
             </children>
         </VBox>
     </right>
+   <center>
+      <StackPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+              <VBox alignment="CENTER" StackPane.alignment="CENTER_LEFT">
+                  <children>
+                      <Label alignment="TOP_LEFT" styleClass="medium-title" text="Upcoming deadlines" />
+                      <Hyperlink fx:id="addAssignmentLink" alignment="TOP_LEFT" styleClass="medium-text" text="Add new assignment" />
+                      <VBox fx:id="assignments" alignment="CENTER" />
+                  </children>
+              </VBox>
+         </children>
+      </StackPane>
+   </center>
 </BorderPane>

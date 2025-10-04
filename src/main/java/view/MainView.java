@@ -20,7 +20,6 @@ public class MainView extends Application {
                         .toExternalForm(),
                 10
         );
-        //System.out.println(roboto.getFamily());
 
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("/view/MainLayout.fxml")
@@ -33,8 +32,18 @@ public class MainView extends Application {
             stage.setHeight(bounds.getHeight() * 0.9);
         }
 
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.doubleValue() < 1600) {
+                if (!root.getStyleClass().contains("small-scale")) {
+                    root.getStyleClass().add("small-scale");
+                }
+            } else {
+                root.getStyleClass().remove("small-scale");
+            }
+        });
+
         stage.setTitle("EduSync");
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
     }

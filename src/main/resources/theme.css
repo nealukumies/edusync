@@ -10,6 +10,50 @@
     -fx-text-fill: -fx-contrast-col;
 }
 
+/* Misc sizes */
+
+.small-field {
+    -fx-pref-width: 255;
+}
+
+.tiny-field {
+    -fx-pref-width: 140;
+}
+
+.longer-button {
+    -fx-pref-width: 265;
+    -fx-padding: 10;
+}
+
+.text-field, .choice-box {
+    -fx-font-size: 24;
+    -fx-pref-height: 36;
+}
+
+.text-area {
+    -fx-font-size: 24;
+    -fx-pref-height: 170;
+}
+
+.input-container {
+    -fx-spacing: 20;
+    -fx-pref-size: 450;
+}
+
+
+.text-area, .text-field, .choice-box {
+    -fx-background-color: -fx-foreground-col;
+    -fx-pref-width: 415;
+}
+
+.course-card {
+    -fx-pref-width: 360;
+    -fx-background-color: -fx-foreground-col;
+    -fx-border-color: -fx-contrast-col;
+    -fx-border-width: 2;
+    -fx-padding: 10;
+}
+
 /* Some font sizes */
 
 .huge-title {
@@ -63,33 +107,8 @@
     -fx-background-color: -fx-lighter-col;
 }
 
-.longer-button {
-    -fx-pref-width: 265;
-    -fx-padding: 10;
-}
-
-.text-area, .text-field, .choice-box {
-    -fx-background-color: -fx-foreground-col;
-    -fx-pref-width: 415;
-}
-
 .text-area * {
     -fx-background-color: -fx-foreground-col;
-}
-
-.text-field, .choice-box {
-    -fx-font-size: 24;
-    -fx-pref-height: 36;
-}
-
-.text-area {
-    -fx-font-size: 24;
-    -fx-pref-height: 170;
-}
-
-.input-container {
-    -fx-spacing: 20;
-    -fx-pref-size: 450;
 }
 
 .date-picker * {
@@ -104,22 +123,6 @@
     -fx-background-color: none;
     -fx-text-fill: -fx-background-col;
     -fx-padding: 0;
-}
-
-.course-card {
-    -fx-pref-width: 360;
-    -fx-background-color: -fx-foreground-col;
-    -fx-border-color: -fx-contrast-col;
-    -fx-border-width: 2;
-    -fx-padding: 10;
-}
-
-.small-field {
-    -fx-pref-width: 255;
-}
-
-.tiny-field {
-    -fx-pref-width: 140;
 }
 
 .table-view * {
@@ -137,4 +140,68 @@
 .hyperlink {
     -fx-border-color: transparent;
     -fx-padding: 4 0 4 0;
+}
+
+/* SMALL SCALING */
+
+/* Misc sizes */
+
+.small-scale .small-field {
+    -fx-pref-width: 170;
+}
+
+.small-scale .tiny-field {
+    -fx-pref-width: 90;
+}
+
+.small-scale .longer-button {
+    -fx-pref-width: 180;
+    -fx-padding: 10;
+}
+
+.small-scale .text-field, .choice-box {
+    -fx-font-size: 16;
+    -fx-pref-height: 24;
+}
+
+.small-scale .text-area {
+    -fx-font-size: 16;
+    -fx-pref-height: 110;
+}
+
+.small-scale .input-container {
+    -fx-spacing: 20;
+    -fx-pref-size: 300;
+}
+
+
+.small-scale .text-area, .text-field, .choice-box {
+    -fx-background-color: -fx-foreground-col;
+    -fx-pref-width: 275;
+}
+
+.small-scale .course-card {
+    -fx-pref-width: 275;
+    -fx-background-color: -fx-foreground-col;
+    -fx-border-color: -fx-contrast-col;
+    -fx-border-width: 2;
+    -fx-padding: 10;
+}
+
+/* Some font sizes */
+
+.small-scale .huge-title {
+    -fx-font-size: 64;
+}
+
+.small-scale .large-title {
+    -fx-font-size: 32;
+}
+
+.small-scale .medium-title {
+    -fx-font-size: 24;
+}
+
+.small-scale .medium-text {
+    -fx-font-size: 16;
 }
