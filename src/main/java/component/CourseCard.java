@@ -1,6 +1,9 @@
 package component;
 
 import controller.CourseListController;
+import controller.MainController;
+import enums.Page;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import model.DBObjects.Assignment;
@@ -11,10 +14,12 @@ import java.util.List;
 public class CourseCard {
     private Course course;
     private CourseListController courseListController;
+    private MainController mainController;
 
-    public CourseCard(Course course, CourseListController courseListController) {
+    public CourseCard(Course course, CourseListController courseListController, MainController mainController) {
         this.course = course;
         this.courseListController = courseListController;
+        this.mainController = mainController;
     }
 
     public VBox create() {
@@ -23,9 +28,14 @@ public class CourseCard {
         card.getStyleClass().add("course-card");
 
         // Start by adding title
-        Label courseName = new Label(course.getCourseName());
+        Hyperlink courseName = new Hyperlink(course.getCourseName());
         courseName.setWrapText(true);
         courseName.getStyleClass().add("medium-title");
+
+        courseName.setOnAction(e -> {
+            mainController.setCourse(course);
+            mainController.changePage(Page.COURSE_PAGE);
+        });
 
         // Add start and end dates
         Label courseDateTimeline = new Label("");

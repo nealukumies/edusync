@@ -70,7 +70,7 @@ public class AddAssignmentController extends SubController {
             String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
             String _datetime = _date.toString() + " " + _time;
             AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
-            getMainController().changePage(getMainController().getPageHistory().get(0));
+            getMainController().goToNextPage();
         } catch (Exception e) {
             e.printStackTrace();
         }

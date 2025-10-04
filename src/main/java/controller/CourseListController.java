@@ -23,12 +23,12 @@ public class CourseListController extends SubController {
 
     public void initialize() {
         courses = new ArrayList<>();
-        fetchAllAssignments();
-        fetchCourseList();
     }
 
     @Override
     public void initializeFully() {
+        fetchAllAssignments();
+        fetchCourseList();
     }
 
     public void fetchCourseList() {
@@ -59,7 +59,8 @@ public class CourseListController extends SubController {
         courseListContent.getChildren().clear();
 
         for (Course course : courses) {
-            CourseCard courseCard = new CourseCard(course, this);
+            System.out.println(this.getMainController());
+            CourseCard courseCard = new CourseCard(course, this, this.getMainController());
             courseListContent.getChildren().add(courseCard.create());
         }
     }
