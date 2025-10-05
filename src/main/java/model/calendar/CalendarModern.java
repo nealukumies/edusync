@@ -8,8 +8,6 @@ import model.DBObjects.Course;
 import model.DBObjects.DBObjectParser;
 import model.DBObjects.Schedule;
 import model.Enums.Weekday;
-import model.Singletons.Account;
-import model.Singletons.Connection;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
 
@@ -23,8 +21,6 @@ public class CalendarModern extends VBox {
 
     public List<Schedule> schedules = new ArrayList<>();
     public List<Course> courses = new ArrayList<>();
-    Connection conn = Connection.getInstance();
-    Weekday[] weekdays = Weekday.values();
     Weekday weekday;
 
     List checkSchedule(int col, int row){
@@ -79,17 +75,14 @@ public class CalendarModern extends VBox {
 
 
         this.setPrefSize(1200, 600);
-        LocalDate today = LocalDate.now();
-
         GridPane calendarGrid = new GridPane();
         calendarGrid.setPrefSize(1200, 600);
         calendarGrid.setHgap(0);
         calendarGrid.setVgap(0);
-        int daysToShow = 7;
 
-        for (int col = 0; col < daysToShow; col++) {
+        for (int col = 0; col < 7; col++) {
             Label dateLabel = new Label(
-                    today.plusDays(col).format(DateTimeFormatter.ofPattern("EEE d/M"))
+                    LocalDate.now().plusDays(col).format(DateTimeFormatter.ofPattern("EEE d/M"))
             );
             dateLabel.setWrapText(true);
             dateLabel.setStyle("-fx-text-fill: #ffffff");
@@ -102,8 +95,7 @@ public class CalendarModern extends VBox {
             calendarGrid.add(timeLabel, 0, row+1);
         }
 
-        for (int col = 0; col < daysToShow; col++) {
-            int clock = 0;
+        for (int col = 0; col < 7; col++) {
             for (int row = 0; row < 24; row++) {
                 VBox cell = new VBox();
                 if(scheduleResponse != null){
@@ -123,7 +115,6 @@ public class CalendarModern extends VBox {
                     cell.setStyle("-fx-border-color: lightgray; -fx-min-height: 30px; -fx-min-width: 80px;");
                 }
                 calendarGrid.add(cell, col+1, row+1);
-                clock++;
             }
         }
         this.getChildren().add(calendarGrid);
