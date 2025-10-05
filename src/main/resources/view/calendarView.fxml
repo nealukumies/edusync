@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import model.calendar.CalendarModern?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0"
+      spacing="30.0" styleClass="app" stylesheets="@../theme.css"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.CalendarController">
+
+    <children>
+        <!-- Title -->
+        <Label alignment="CENTER" contentDisplay="CENTER"
+               prefWidth="500.0" styleClass="large-title" text="Calendar" />
+
+        <!-- Your custom Calendar component -->
+        <CalendarModern fx:id="calendarModern" prefWidth="1200.0" prefHeight="600.0">
+            <VBox.margin>
+                <Insets top="50.0" bottom="50.0" />
+            </VBox.margin>
+        </CalendarModern>
+    </children>
+</VBox>

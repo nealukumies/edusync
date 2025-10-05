@@ -112,6 +112,8 @@ public class MainController {
             case ASSIGNMENT_PAGE:
                 loadPage("/view/AssignmentView.fxml");
                 break;
+            case CALENDAR_PAGE:
+                loadPage("/view/CalendarView.fxml");
         }
 
         this.pageHistory.clear();

@@ -31,6 +31,8 @@ public class DashboardController extends SubController {
     private Hyperlink coursesLink;
     @FXML
     private Hyperlink newCourseLink;
+    @FXML
+    private Hyperlink calendar;
 
 
     public void initialize() {
@@ -48,6 +50,9 @@ public class DashboardController extends SubController {
         });
         newCourseLink.setOnAction(e -> {
             getMainController().changePage(Page.ADD_COURSE_PAGE);
+        });
+        calendar.setOnAction(e -> {
+            getMainController().changePage(Page.CALENDAR_PAGE);
         });
     }
 
