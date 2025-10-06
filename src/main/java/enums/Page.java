@@ -9,6 +9,6 @@ public enum Page {
     ADD_ASSIGNMENT_PAGE,
     COURSE_LIST_PAGE,
     ASSIGNMENT_PAGE,
-    COURSE_PAGE
+    COURSE_PAGE,
     CALENDAR_PAGE,
 }
