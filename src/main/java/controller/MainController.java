@@ -186,6 +186,8 @@ public class MainController {
             case COURSE_PAGE:
                 loadPage("/view/CourseView.fxml");
                 break;
+            case CALENDAR_PAGE:
+                loadPage("/view/CalendarView.fxml");
         }
     }
 

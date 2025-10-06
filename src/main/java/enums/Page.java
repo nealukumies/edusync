@@ -10,4 +10,5 @@ public enum Page {
     COURSE_LIST_PAGE,
     ASSIGNMENT_PAGE,
     COURSE_PAGE
+    CALENDAR_PAGE,
 }
