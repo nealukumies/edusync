@@ -33,6 +33,8 @@ public class CourseController extends SubController {
     private VBox scheduleContainer;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private Button editBtn;
     private Course course = null;
     private List<Assignment> _assignments;
     private List<Schedule> schedules;
@@ -54,6 +56,9 @@ public class CourseController extends SubController {
             });
             deleteBtn.setOnMouseClicked(e -> {
                 deleteThisCourse();
+            });
+            editBtn.setOnMouseClicked(e -> {
+                editThisCourse();
             });
 
             try {
@@ -128,5 +133,9 @@ public class CourseController extends SubController {
             getMainController().clearPageBackHistory();
             getMainController().updateButtons();
         }
+    }
+    
+    public void editThisCourse() {
+        getMainController().changePage(Page.EDIT_COURSE_PAGE);
     }
 }

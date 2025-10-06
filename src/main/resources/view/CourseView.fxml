@@ -9,7 +9,12 @@
 
 <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseController">
     <children>
-        <Label fx:id="name" styleClass="large-title" text="Course name" />
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+              <Label fx:id="name" styleClass="large-title" text="Course name" />
+            <Button fx:id="editBtn" mnemonicParsing="false" text="Edit" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER_LEFT" spacing="20.0">
          <children>
               <Label fx:id="desc" styleClass="medium-text" text="desc" />

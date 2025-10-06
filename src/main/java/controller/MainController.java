@@ -176,6 +176,7 @@ public class MainController {
             case COURSE_PAGE -> loadPage("/view/CourseView.fxml");
             case CALENDAR_PAGE -> loadPage("/view/CalendarView.fxml");
             case ADD_SCHEDULE_PAGE -> loadPage("/view/AddScheduleView.fxml");
+            case EDIT_COURSE_PAGE -> loadPage("/view/EditCourseView.fxml");
         }
     }
 
