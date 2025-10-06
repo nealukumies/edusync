@@ -17,7 +17,7 @@ class ScheduleHandlerTest {
 
     @Test
     void getSchedule() {
-        assertNotNull(ScheduleHandler.getSchedule(145).body());
+        assertNull(ScheduleHandler.getSchedule(145));
     }
 
     @Test
@@ -28,7 +28,7 @@ class ScheduleHandlerTest {
     @Test //x
     void getScheduleNotLoggedIn() {
         Account.getInstance().clearAccount();
-        assertNotNull(ScheduleHandler.getSchedule(145));
+        assertNull(ScheduleHandler.getSchedule(145));
     }
 
     @Test

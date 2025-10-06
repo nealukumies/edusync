@@ -38,7 +38,7 @@ class AssignmentHandlerTest {
     @Test //x
     void getAssignmentsForUserNotLoggedIn() {
         model.Singletons.Account.getInstance().clearAccount();
-        assertNotNull(AssignmentHandler.getAssignmentsForUser());
+        assertNull(AssignmentHandler.getAssignmentsForUser());
     }
 
     @Test
@@ -52,36 +52,36 @@ class AssignmentHandlerTest {
     @Test
     void createAssignmentNotLoggedIn() throws JsonProcessingException {
         Account.getInstance().clearAccount();
-        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01");
+        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01 13:00:00");
         assertEquals(-1, assignmentId);
     }
 
     @Test
     void createAssignmentInvalidCourse() throws JsonProcessingException {
-        assertEquals(-1, AssignmentHandler.createAssignment(99999, "Test Assignment", "Test","2024-10-01"));
+        assertEquals(-1, AssignmentHandler.createAssignment(99999, "Test Assignment", "Test","2024-10-01 13:00:00"));
     }
 
     @Test
     void updateAssignment() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01");
+        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01 13:00:00");
 
-        assertEquals(1, AssignmentHandler.updateAssignment(assignmentId, 174, "Updated Assignment", "Updated Test","2024-11-01", "completed"));
+        assertEquals(1, AssignmentHandler.updateAssignment(assignmentId, 174, "Updated Assignment", "Updated Test","2024-11-01 13:00:00", "completed"));
 
         AssignmentHandler.deleteAssignment(assignmentId);
     }
 
     @Test
     void updateAssignmentNotFound() {
-        assertEquals(-1, AssignmentHandler.updateAssignment(99999, 174, "Updated Assignment", "Updated Test","2024-11-01", "completed"));
+        assertEquals(-1, AssignmentHandler.updateAssignment(99999, 174, "Updated Assignment", "Updated Test","2024-11-01 13:00:00", "completed"));
     }
 
     @Test //x
     void updateAssignmentNotLoggedIn() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01");
+        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01 13:00:00");
 
         Account.getInstance().clearAccount();
 
-        assertEquals(1, AssignmentHandler.updateAssignment(assignmentId, 174, "Updated Assignment", "Updated Test","2024-11-01", "completed"));
+        assertEquals(1, AssignmentHandler.updateAssignment(assignmentId, 174, "Updated Assignment", "Updated Test","2024-11-01 13:00:00", "completed"));
 
         UserHandler.loginUser("katti@matikainen.fi", "salasana");
         AssignmentHandler.deleteAssignment(assignmentId);
@@ -89,7 +89,7 @@ class AssignmentHandlerTest {
 
     @Test
     void deleteAssignment() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01");
+        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test","2024-10-01 13:00:00");
 
         assertEquals(1, AssignmentHandler.deleteAssignment(assignmentId));
     }
@@ -101,7 +101,7 @@ class AssignmentHandlerTest {
 
     @Test //x
     void deleteAssignmentNotLoggedIn() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test", "2024-10-01");
+        int assignmentId = AssignmentHandler.createAssignment(174, "Test Assignment", "Test", "2024-10-01 13:00:00");
         Account.getInstance().clearAccount();
 
         assertEquals(1, AssignmentHandler.deleteAssignment(assignmentId));
