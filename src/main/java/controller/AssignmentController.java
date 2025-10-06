@@ -1,5 +1,6 @@
 package controller;
 
+import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.DBObjects.Assignment;
@@ -66,6 +67,11 @@ public class AssignmentController extends SubController {
                 getMainController().setCourse(null);
                 getMainController().goToPrevPage();
             }
+        });
+        
+        courseName.setOnAction(e -> {
+            this.getMainController().setCourse(course);
+            this.getMainController().changePage(Page.COURSE_PAGE);
         });
     }
 

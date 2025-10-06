@@ -9,46 +9,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1536.0" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
-   <children>
-      <Label maxWidth="650.0" styleClass="large-title" text="Log In" />
-      <HBox maxWidth="650.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-         <children>
-            <TextField fx:id="email" />
-            <Label styleClass="medium-title" text="Email" />
-         </children>
-      </HBox>
-      <HBox maxWidth="650.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-         <children>
-            <PasswordField fx:id="password" />
-            <Label styleClass="medium-title" text="Password" />
-         </children>
-      </HBox>
-      <HBox maxWidth="650.0" prefHeight="45.0" prefWidth="200.0">
-         <children>
-            <Label fx:id="errorMessage">
-               <styleClass>
-                  <String fx:value="error" />
-                  <String fx:value="medium-text" />
-               </styleClass>
-            </Label>
-         </children>
-      </HBox>
-      <HBox maxWidth="650.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="loginButton" mnemonicParsing="false" text="Login">
-               <styleClass>
-                  <String fx:value="medium-title" />
-                  <String fx:value="longer-button" />
-               </styleClass>
-            </Button>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="650.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label styleClass="medium-text" text="Not a user yet?" />
-            <Hyperlink fx:id="registerLink" styleClass="medium-text" text="Register here" />
-         </children>
-      </HBox>
-   </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
+    <children>
+        <Label maxWidth="650.0" styleClass="large-title" text="Log In" />
+        <HBox spacing="20.0">
+            <children>
+                <TextField fx:id="email" />
+                <Label styleClass="medium-title" text="Email" />
+            </children>
+        </HBox>
+        <HBox spacing="20.0">
+            <children>
+                <PasswordField fx:id="password" />
+                <Label styleClass="medium-title" text="Password" />
+            </children>
+        </HBox>
+        <HBox>
+            <children>
+                <Label fx:id="errorMessage">
+                    <styleClass>
+                        <String fx:value="error" />
+                        <String fx:value="medium-text" />
+                    </styleClass>
+                </Label>
+            </children>
+        </HBox>
+        <HBox>
+            <children>
+                <Button fx:id="loginButton" mnemonicParsing="false" text="Login">
+                    <styleClass>
+                        <String fx:value="medium-title" />
+                        <String fx:value="longer-button" />
+                    </styleClass>
+                </Button>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <Label styleClass="medium-text" text="Not a user yet?" />
+                <Hyperlink fx:id="registerLink" styleClass="medium-text" text="Register here" />
+            </children>
+        </HBox>
+    </children>
 </VBox>

@@ -1,9 +1,11 @@
 package controller;
 
 import component.CourseCard;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
@@ -19,16 +21,21 @@ public class CourseListController extends SubController {
     private List<Course> courses;
     @FXML
     private FlowPane courseListContent;
+    @FXML
+    private VBox base;
     private List<Assignment> allAssignments;
 
     public void initialize() {
         courses = new ArrayList<>();
-        fetchAllAssignments();
-        fetchCourseList();
+        base.setFillWidth(true);
     }
 
     @Override
     public void initializeFully() {
+        ObservableValue<Double> limit = this.getMainController().getRoot().widthProperty().multiply(0.6).asObject();
+        courseListContent.prefWrapLengthProperty().bind(limit);
+        fetchAllAssignments();
+        fetchCourseList();
     }
 
     public void fetchCourseList() {
@@ -59,7 +66,8 @@ public class CourseListController extends SubController {
         courseListContent.getChildren().clear();
 
         for (Course course : courses) {
-            CourseCard courseCard = new CourseCard(course, this);
+            System.out.println(this.getMainController());
+            CourseCard courseCard = new CourseCard(course, this, this.getMainController());
             courseListContent.getChildren().add(courseCard.create());
         }
     }

@@ -4,12 +4,10 @@ import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.Singletons.Account;
@@ -26,18 +24,36 @@ public class MainController {
     private StackPane content;
     @FXML
     private Hyperlink mainTitle;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button forwardButton;
+    @FXML
+    private BorderPane root;
 
     private Page currentPage;
-    private List<Page> pageHistory; // TODO: Full history support, currently only acts as previous page
+    private List<PageMemento> pageHistory; // TODO: Full history support, currently only acts as previous page
+    private List<PageMemento> pageBackHistory;
     private Account account = null;
     private Assignment assignment = null;
     private Course course = null;
 
     public void initialize() throws IOException {
         this.pageHistory = new ArrayList<>();
+        this.pageBackHistory = new ArrayList<>();
         this.account = Account.getInstance();
-        changePage(Page.FRONT_PAGE);
-        mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
+        this.changePage(Page.FRONT_PAGE);
+        this.mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
+
+        this.backButton.setOnAction(e -> {
+            goToPrevPage();
+        });
+        this.forwardButton.setOnAction(e -> {
+            goToNextPage();
+        });
+
+        this.pageHistory.clear();
+        updateButtons();
     }
 
     public void generateHeader() {
@@ -71,8 +87,37 @@ public class MainController {
 
     }
 
+    public PageMemento createPageMemento() {
+        return new PageMemento(this.currentPage, this.course, this.assignment);
+    }
+
+    public void updateButtons() {
+        backButton.setDisable(this.pageHistory.isEmpty());
+        forwardButton.setDisable(this.pageBackHistory.isEmpty());
+    }
+
     public void goToPrevPage() {
-        this.changePage(this.getPageHistory().get(0));
+        if (!this.pageHistory.isEmpty()) {
+            PageMemento current = this.createPageMemento();
+            PageMemento prev = this.pageHistory.remove(this.pageHistory.size() - 1);
+            this.pageBackHistory.add(current);
+            this.restoreState(prev);
+        }
+    }
+
+    public void goToNextPage() {
+        if (!this.pageBackHistory.isEmpty()) {
+            PageMemento current = this.createPageMemento();
+            PageMemento prev = this.pageBackHistory.remove(this.pageBackHistory.size() - 1);
+            this.pageHistory.add(current);
+            this.restoreState(prev);
+        }
+    }
+
+    public void restoreState(PageMemento state) {
+        this.course = state.getCourse();
+        this.assignment = state.getAssignment();
+        this.changePageWithoutChangingHistory(state.getPage());
     }
 
     public void changePage(Page page) {
@@ -87,6 +132,32 @@ public class MainController {
             page = Page.DASHBOARD_PAGE;
         }
 
+        this.loadPageURL(page);
+
+        this.pageHistory.add(this.createPageMemento());
+        this.pageBackHistory.clear();
+        this.currentPage = page;
+        updateButtons();
+    }
+
+    public void changePageWithoutChangingHistory(Page page) {
+        if (page == currentPage) {
+            return;
+        }
+        generateHeader();
+
+        content.getChildren().clear();
+
+        if (page == Page.FRONT_PAGE && account.isLoggedIn()) {
+            page = Page.DASHBOARD_PAGE;
+        }
+
+        this.loadPageURL(page);
+        this.currentPage = page;
+        updateButtons();
+    }
+
+    public void loadPageURL(Page page) {
         switch (page) {
             case FRONT_PAGE:
                 loadPage("/view/FrontpageView.fxml");
@@ -112,13 +183,12 @@ public class MainController {
             case ASSIGNMENT_PAGE:
                 loadPage("/view/AssignmentView.fxml");
                 break;
+            case COURSE_PAGE:
+                loadPage("/view/CourseView.fxml");
+                break;
             case CALENDAR_PAGE:
                 loadPage("/view/CalendarView.fxml");
         }
-
-        this.pageHistory.clear();
-        this.pageHistory.add(this.currentPage);
-        this.currentPage = page;
     }
 
     public void loadPage(String path) {
@@ -155,7 +225,11 @@ public class MainController {
         this.course = course;
     }
 
-    public List<Page> getPageHistory() {
+    public List<PageMemento> getPageHistory() {
         return pageHistory;
+    }
+    
+    public BorderPane getRoot() {
+        return root;
     }
 }
