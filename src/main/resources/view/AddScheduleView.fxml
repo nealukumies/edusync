@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAssignmentController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddScheduleController">
     <children>
-        <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Add Schedule" />
-        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+        <Label alignment="TOP_LEFT" maxWidth="-Infinity" styleClass="large-title" text="Add Schedule" />
+        <HBox maxWidth="-Infinity" styleClass="input-container">
             <children>
                 <ChoiceBox fx:id="courseSelect" prefWidth="150.0" />
                 <Label styleClass="medium-title" text="Course" />
             </children>
         </HBox>
-        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+        <HBox maxWidth="-Infinity" styleClass="input-container">
             <children>
             <ChoiceBox fx:id="weekDaySelect" prefWidth="150.0" />
                 <Label styleClass="medium-title" text="Weekday">
@@ -28,7 +28,7 @@
                 </Label>
             </children>
         </HBox>
-      <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+      <HBox maxWidth="-Infinity" styleClass="input-container">
          <children>
                 <TextField fx:id="startTime" promptText="HH:mm (start)" styleClass="tiny-field" />
             <TextField fx:id="endTime" promptText="HH:mm (end)" styleClass="tiny-field" />
@@ -39,7 +39,7 @@
             </Label>
          </children>
       </HBox>
-        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
+        <HBox maxWidth="-Infinity" styleClass="input-container">
             <children>
                 <Button fx:id="submit" mnemonicParsing="false" text="Submit">
                     <styleClass>

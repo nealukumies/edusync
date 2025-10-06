@@ -159,35 +159,17 @@ public class MainController {
 
     public void loadPageURL(Page page) {
         switch (page) {
-            case FRONT_PAGE:
-                loadPage("/view/FrontpageView.fxml");
-                break;
-            case DASHBOARD_PAGE:
-                loadPage("/view/DashboardView.fxml");
-                break;
-            case ADD_COURSE_PAGE:
-                loadPage("/view/AddCourseView.fxml");
-                break;
-            case ADD_ASSIGNMENT_PAGE:
-                loadPage("/view/AddAssignmentView.fxml");
-                break;
-            case LOGIN_PAGE:
-                loadPage("/view/LogInView.fxml");
-                break;
-            case REGISTER_PAGE:
-                loadPage("/view/RegisterView.fxml");
-                break;
-            case COURSE_LIST_PAGE:
-                loadPage("/view/CourseListView.fxml");
-                break;
-            case ASSIGNMENT_PAGE:
-                loadPage("/view/AssignmentView.fxml");
-                break;
-            case COURSE_PAGE:
-                loadPage("/view/CourseView.fxml");
-                break;
-            case CALENDAR_PAGE:
-                loadPage("/view/CalendarView.fxml");
+            case FRONT_PAGE -> loadPage("/view/FrontpageView.fxml");
+            case DASHBOARD_PAGE -> loadPage("/view/DashboardView.fxml");
+            case ADD_COURSE_PAGE -> loadPage("/view/AddCourseView.fxml");
+            case ADD_ASSIGNMENT_PAGE -> loadPage("/view/AddAssignmentView.fxml");
+            case LOGIN_PAGE -> loadPage("/view/LogInView.fxml");
+            case REGISTER_PAGE -> loadPage("/view/RegisterView.fxml");
+            case COURSE_LIST_PAGE -> loadPage("/view/CourseListView.fxml");
+            case ASSIGNMENT_PAGE -> loadPage("/view/AssignmentView.fxml");
+            case COURSE_PAGE -> loadPage("/view/CourseView.fxml");
+            case CALENDAR_PAGE -> loadPage("/view/CalendarView.fxml");
+            case ADD_SCHEDULE_PAGE -> loadPage("/view/AddScheduleView.fxml");
         }
     }
 
@@ -228,7 +210,7 @@ public class MainController {
     public List<PageMemento> getPageHistory() {
         return pageHistory;
     }
-    
+
     public BorderPane getRoot() {
         return root;
     }

@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<BorderPane styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
     <left>
-        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" spacing="40.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label alignment="TOP_CENTER" styleClass="huge-title" text="EduSync"/>
-                <Label alignment="TOP_CENTER" maxWidth="320.0" prefWidth="320.0" styleClass="medium-text"
-                       text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                       wrapText="true"/>
-            </children>
-        </VBox>
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="40.0" BorderPane.alignment="CENTER" />
     </left>
     <right>
         <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
             <children>
-                <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="View all assignments"/>
-                <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="View all courses"/>
-                <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="Add new course"/>
-                <Hyperlink fx:id="calendar" styleClass="medium-text" text="Calendar"/>
+                <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="View all assignments" />
+                <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="View all courses" />
+                <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="Add new course" />
+                <Hyperlink fx:id="calendar" styleClass="medium-text" text="Calendar" />
             </children>
         </VBox>
     </right>
@@ -30,10 +25,9 @@
             <children>
                 <VBox alignment="CENTER" StackPane.alignment="CENTER_LEFT">
                     <children>
-                        <Label alignment="TOP_LEFT" styleClass="medium-title" text="Upcoming deadlines"/>
-                        <Hyperlink fx:id="addAssignmentLink" alignment="TOP_LEFT" styleClass="medium-text"
-                                   text="Add new assignment"/>
-                        <VBox fx:id="assignments" alignment="CENTER"/>
+                        <Label alignment="TOP_LEFT" styleClass="medium-title" text="Upcoming deadlines" />
+                        <Hyperlink fx:id="addAssignmentLink" alignment="TOP_LEFT" styleClass="medium-text" text="Add new assignment" />
+                        <VBox fx:id="assignments" alignment="CENTER" />
                     </children>
                 </VBox>
             </children>

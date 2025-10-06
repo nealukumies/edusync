@@ -2,6 +2,7 @@ package controller;
 
 import component.AssignmentList;
 import component.ViewableAssignment;
+import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -41,11 +42,20 @@ public class CourseController extends SubController {
             String start = course.getStartDate().toString();
             String end = course.getEndDate().toString();
             desc.setText("Started on " + start + " | Ending on " + end);
+
+            addAssignment.setOnMouseClicked(e -> {
+                getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
+            });
+            addSchedule.setOnMouseClicked(e -> {
+                getMainController().changePage(Page.ADD_SCHEDULE_PAGE);
+            });
+
             try {
                 schedules = ParseHandler.getSchedulesForCourse(course);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             displaySchedules();
             try {
                 _assignments = ParseHandler.getAssignmentsForCourse(course);
@@ -63,18 +73,20 @@ public class CourseController extends SubController {
 
     public void displaySchedules() {
         scheduleContainer.getChildren().clear();
-        for (Schedule schedule : schedules) {
-            HBox hBox = new HBox();
-            Label scheduleDay = new Label(schedule.getWeekday().toString());
-            Label scheduleTime = new Label("");
-            String time = schedule.getStartTime().toString();
-            time += " - " + schedule.getEndTime().toString();
-            scheduleTime.setText(time);
-            scheduleDay.getStyleClass().add("medium-text");
-            scheduleTime.getStyleClass().add("medium-text");
-            hBox.setSpacing(30);
-            hBox.getChildren().addAll(scheduleDay, scheduleTime);
-            scheduleContainer.getChildren().add(hBox);
+        if (schedules != null) {
+            for (Schedule schedule : schedules) {
+                HBox hBox = new HBox();
+                Label scheduleDay = new Label(schedule.getWeekday().toString());
+                Label scheduleTime = new Label("");
+                String time = schedule.getStartTime().toString();
+                time += " - " + schedule.getEndTime().toString();
+                scheduleTime.setText(time);
+                scheduleDay.getStyleClass().add("medium-text");
+                scheduleTime.getStyleClass().add("medium-text");
+                hBox.setSpacing(30);
+                hBox.getChildren().addAll(scheduleDay, scheduleTime);
+                scheduleContainer.getChildren().add(hBox);
+            }
         }
     }
 }

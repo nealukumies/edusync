@@ -11,4 +11,5 @@ public enum Page {
     ASSIGNMENT_PAGE,
     COURSE_PAGE,
     CALENDAR_PAGE,
+    ADD_SCHEDULE_PAGE
 }
