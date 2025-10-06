@@ -1,0 +1,11 @@
+services:
+  backend:
+    image: sha256:bc2fab1a153a2c60cfd5ea8d69ea6049bccd88063d9ddca94ef6a838abfeaf3e
+    ports:
+      - "8081:8000"
+  client:
+    build: .
+    environment:
+      BACKEND_URL: http://backend:8000
+    depends_on:
+      - backend

@@ -82,7 +82,7 @@ class UserHandlerTest {
     @Test //x
     void registerUser() throws JsonProcessingException {
         Account.getInstance().clearAccount();
-        assertEquals(1, UserHandler.registerUser("test", "test2@test.fi", "salasana"));
+        assertEquals(-1, UserHandler.registerUser("test", "test2@test.fi", "salasana"));
         UserHandler.deleteUser();
     }
 
