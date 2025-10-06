@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.DBObjects.DBObjectParser;
+import model.DBObjects.Schedule;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
+import model.handlers.ScheduleHandler;
 
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
@@ -38,5 +40,14 @@ public class ParseHandler {
             }
         }
         return assignments;
+    }
+
+    public static List<Schedule> getSchedulesForCourse(Course course) throws JsonProcessingException {
+        List<Schedule> schedules = new ArrayList<>();
+        HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
+        if (res != null) {
+            return DBObjectParser.parseScheduleList(res);
+        }
+        return null;
     }
 }

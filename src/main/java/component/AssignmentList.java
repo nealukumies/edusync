@@ -17,6 +17,9 @@ public class AssignmentList {
     }
 
     public TableView<ViewableAssignment> createList(List<Assignment> assignmentList, List<Course> courses) {
+        if (assignmentList.isEmpty()) {
+            return null;
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(AssignmentList.class.getResource("/components/AssignmentTable.fxml"));
             TableView<ViewableAssignment> table = fxmlLoader.load();
