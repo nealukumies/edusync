@@ -32,7 +32,6 @@ public class AddAssignmentController extends SubController {
     public void initialize() {
         try {
             courses = ParseHandler.getCourses();
-            populateCourseList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,10 +43,15 @@ public class AddAssignmentController extends SubController {
             CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
             courseSelect.getItems().add(option);
         }
+        if (getMainController().getCourse() != null) {
+            CourseOption selected = new CourseOption(getMainController().getCourse().getCourseId(), getMainController().getCourse().getCourseName());
+            courseSelect.setValue(selected);
+        }
     }
 
     @Override
     public void initializeFully() {
+        populateCourseList();
         submit.setOnAction(event -> {
             createAssignment();
         });
@@ -70,7 +74,7 @@ public class AddAssignmentController extends SubController {
             String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
             String _datetime = _date.toString() + " " + _time;
             AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
-            getMainController().goToNextPage();
+            getMainController().goToPrevPage();
         } catch (Exception e) {
             e.printStackTrace();
         }

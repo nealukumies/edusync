@@ -32,7 +32,7 @@ public class MainController {
     private BorderPane root;
 
     private Page currentPage;
-    private List<PageMemento> pageHistory; // TODO: Full history support, currently only acts as previous page
+    private List<PageMemento> pageHistory;
     private List<PageMemento> pageBackHistory;
     private Account account = null;
     private Assignment assignment = null;
@@ -72,6 +72,8 @@ public class MainController {
             logout.setOnAction(actionEvent -> {
                 UserHandler.logoutUser();
                 changePage(Page.FRONT_PAGE);
+                pageHistory.clear();
+                updateButtons();
             });
 
             headerContent.getChildren().addAll(spacer, label, logout);
@@ -112,6 +114,10 @@ public class MainController {
             this.pageHistory.add(current);
             this.restoreState(prev);
         }
+    }
+
+    public void clearPageBackHistory() {
+        this.pageBackHistory.clear();
     }
 
     public void restoreState(PageMemento state) {
