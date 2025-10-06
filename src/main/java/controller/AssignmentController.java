@@ -24,6 +24,8 @@ public class AssignmentController extends SubController {
     @FXML
     private Button saveButton;
     @FXML
+    private Button editButton;
+    @FXML
     private Button deleteButton;
 
     private Assignment assignment;
@@ -68,7 +70,13 @@ public class AssignmentController extends SubController {
                 getMainController().goToPrevPage();
             }
         });
-        
+
+        editButton.setOnAction(e -> {
+            getMainController().setAssignment(assignment);
+            getMainController().setCourse(course);
+            getMainController().changePage(Page.EDIT_ASSIGNMENT_PAGE);
+        });
+
         courseName.setOnAction(e -> {
             this.getMainController().setCourse(course);
             this.getMainController().changePage(Page.COURSE_PAGE);

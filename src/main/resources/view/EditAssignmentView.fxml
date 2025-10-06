@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAssignmentView">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAssignmentController">
     <children>
-        <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title" text="Edit assignment" />
+        <Label alignment="TOP_LEFT" maxWidth="-Infinity" styleClass="large-title" text="Add assignment" />
         <HBox maxWidth="-Infinity" styleClass="input-container">
             <children>
                 <ChoiceBox fx:id="courseSelect" prefWidth="150.0" />

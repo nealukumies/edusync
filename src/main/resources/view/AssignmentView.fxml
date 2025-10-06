@@ -39,6 +39,7 @@
         <HBox alignment="CENTER_LEFT" minWidth="600.0" spacing="50.0">
             <children>
                 <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
+            <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
                 <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
             </children>
         </HBox>
