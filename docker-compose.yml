@@ -1,6 +1,6 @@
 services:
   backend:
-    image: sha256:bc2fab1a153a2c60cfd5ea8d69ea6049bccd88063d9ddca94ef6a838abfeaf3e
+    image: oonnea/otp1_edusync_backend:latest
     ports:
       - "8081:8000"
   client:
