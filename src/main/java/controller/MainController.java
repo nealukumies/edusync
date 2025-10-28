@@ -12,6 +12,7 @@ import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.Singletons.Account;
 import model.handlers.UserHandler;
+import view.MainView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -184,6 +185,7 @@ public class MainController {
     public void loadPage(String path) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            fxmlLoader.setResources(MainView.getBundle());
             Parent root = fxmlLoader.load();
             SubController subController = fxmlLoader.getController();
             subController.setMainViewController(this);
