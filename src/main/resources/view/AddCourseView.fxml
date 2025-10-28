@@ -8,23 +8,23 @@
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCourseController">
     <children>
         <Label alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="70.0" prefWidth="650.0" styleClass="large-title"
-               text="Add course"/>
+               text="%add_course"/>
         <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
             <children>
                 <TextField fx:id="title"/>
-                <Label styleClass="medium-title" text="Title"/>
+                <Label styleClass="medium-title" text="%title"/>
             </children>
         </HBox>
         <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
             <children>
                 <DatePicker fx:id="startDate"/>
-                <Label styleClass="medium-title" text="Start date"/>
+                <Label styleClass="medium-title" text="%start_date"/>
             </children>
         </HBox>
         <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
             <children>
                 <DatePicker fx:id="endDate"/>
-                <Label styleClass="medium-title" text="End date"/>
+                <Label styleClass="medium-title" text="%end_date"/>
             </children>
         </HBox>
         <HBox maxWidth="-Infinity" prefHeight="45.0" prefWidth="650.0" styleClass="input-container">
@@ -39,13 +39,13 @@
         </HBox>
         <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="650.0" styleClass="input-container">
             <children>
-                <Button fx:id="submit" mnemonicParsing="false" text="Submit">
+                <Button fx:id="submit" mnemonicParsing="false" text="%submit">
                     <styleClass>
                         <String fx:value="medium-title"/>
                         <String fx:value="longer-button"/>
                     </styleClass>
                 </Button>
-                <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+                <Button fx:id="cancel" mnemonicParsing="false" text="%cancel">
                     <styleClass>
                         <String fx:value="medium-title"/>
                         <String fx:value="longer-button"/>

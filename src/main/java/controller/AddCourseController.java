@@ -7,6 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.handlers.CourseHandler;
+import view.MainView;
 
 public class AddCourseController extends SubController {
     @FXML
@@ -57,7 +58,8 @@ public class AddCourseController extends SubController {
                 errorMessage.setText(e.getMessage());
             }
         } else {
-            errorMessage.setText("Title or Start/End Date is empty");
+            String errormessage = MainView.getBundle().getString("course_errortext");
+            errorMessage.setText(errormessage);
         }
     }
 }
