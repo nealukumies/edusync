@@ -19,8 +19,8 @@ public class MainView extends Application {
     public void start(Stage stage) throws Exception {
 
         //Locale locale = new Locale("en", "US");
-        //Locale locale = new Locale("uk", "UA");
-        Locale locale = new Locale("ar", "DZ");
+        Locale locale = new Locale("uk", "UA");
+        //Locale locale = new Locale("ar", "DZ");
         bundle = ResourceBundle.getBundle("Messages", locale);
 
         // Load fonts

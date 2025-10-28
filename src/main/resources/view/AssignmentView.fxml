@@ -11,36 +11,36 @@
     <children>
       <HBox>
          <children>
-              <Label fx:id="title" alignment="TOP_LEFT" prefWidth="500.0" styleClass="large-title" text="Assignment title" />
+              <Label fx:id="title" alignment="TOP_LEFT" prefWidth="500.0" styleClass="large-title" text="%assignment_title" />
          </children>
       </HBox>
         <HBox alignment="CENTER_LEFT">
             <children>
-                <Label prefWidth="200.0" styleClass="medium-text" text="Part of course: " />
-                <Hyperlink fx:id="courseName" styleClass="medium-text" text="courseId" />
+                <Label prefWidth="200.0" styleClass="medium-text" text="%partofcourse_text" />
+                <Hyperlink fx:id="courseName" styleClass="medium-text" text="%course_id" />
             </children>
         </HBox>
       <HBox>
          <children>
-              <Label fx:id="desc" alignment="TOP_LEFT" styleClass="medium-text" text="Assignment description" />
+              <Label fx:id="desc" alignment="TOP_LEFT" styleClass="medium-text" text="%assignment_description"/>
          </children>
       </HBox>
       <HBox>
          <children>
-              <Label fx:id="deadline" alignment="TOP_LEFT" styleClass="medium-text" text="Assignment deadline" />
+              <Label fx:id="deadline" alignment="TOP_LEFT" styleClass="medium-text" text="%assignment_deadline" />
          </children>
       </HBox>
         <HBox alignment="CENTER_LEFT" minWidth="950.0" spacing="20.0">
             <children>
-                <Label styleClass="medium-title" text="Current status" />
+                <Label styleClass="medium-title" text="%current_status" />
                 <ChoiceBox fx:id="status" prefWidth="150.0" />
             </children>
         </HBox>
         <HBox alignment="CENTER_LEFT" minWidth="600.0" spacing="50.0">
             <children>
-                <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
-            <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
-                <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
+                <Button fx:id="saveButton" mnemonicParsing="false" text="%save" />
+            <Button fx:id="editButton" mnemonicParsing="false" text="%edit" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" text="%delete" />
             </children>
         </HBox>
     </children>
