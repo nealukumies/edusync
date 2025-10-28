@@ -18,10 +18,10 @@ public class MainView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //Locale locale = new Locale("en", "US");
-        Locale locale = new Locale("uk", "UA");
-        //Locale locale = new Locale("ar", "DZ");
-        bundle = ResourceBundle.getBundle("Messages", locale);
+        Locale enLocale = new Locale("en", "US");
+        Locale ukrLocale = new Locale("uk", "UA");
+        Locale arLocale = new Locale("ar", "DZ");
+        bundle = ResourceBundle.getBundle("Messages", arLocale);
 
         // Load fonts
         Font roboto = Font.loadFont(
