@@ -7,6 +7,7 @@ import model.DBObjects.Assignment;
 import model.DBObjects.Course;
 import model.Enums.Status;
 import model.handlers.AssignmentHandler;
+import view.MainView;
 
 import java.util.Optional;
 
@@ -59,9 +60,12 @@ public class AssignmentController extends SubController {
 
         deleteButton.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Assignment");
-            alert.setHeaderText("Delete Assignment?");
-            alert.setContentText("Are you sure you want to delete this assignment?");
+            String title = MainView.getBundle().getString("delete_alert_title");
+            String header = MainView.getBundle().getString("delete_alert_header");
+            String content = MainView.getBundle().getString("delete_alert_content");
+            alert.setTitle(title);
+            alert.setHeaderText(header);
+            alert.setContentText(content);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 AssignmentHandler.deleteAssignment(assignment.getAssignmentId());

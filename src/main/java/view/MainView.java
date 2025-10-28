@@ -9,10 +9,20 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class MainView extends Application {
+    private static ResourceBundle bundle;
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        Locale enLocale = new Locale("en", "US");
+        Locale ukrLocale = new Locale("uk", "UA");
+        Locale arLocale = new Locale("ar", "DZ");
+        bundle = ResourceBundle.getBundle("Messages", arLocale);
+
         // Load fonts
         Font roboto = Font.loadFont(
                 getClass()
@@ -22,7 +32,7 @@ public class MainView extends Application {
         );
 
         FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/view/MainLayout.fxml")
+                getClass().getResource("/view/MainLayout.fxml"), bundle
         );
         Parent root = fxmlLoader.load();
 
@@ -46,6 +56,10 @@ public class MainView extends Application {
         //stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public static ResourceBundle getBundle() {
+        return bundle;
     }
 
     public static void main(String[] args) {
