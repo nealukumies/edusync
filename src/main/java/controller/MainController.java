@@ -5,10 +5,9 @@ import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
@@ -49,8 +48,27 @@ public class MainController {
         this.account = Account.getInstance();
         this.changePage(Page.FRONT_PAGE);
         this.mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
-        
+
+        this.languageSelect.setCellFactory(cb -> new ListCell<>() {
+            private final ImageView flagView = new ImageView();
+
+            @Override
+            protected void updateItem(Language item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    flagView.setImage(new Image(getClass().getResourceAsStream("/flags/" + item.getCountry().toLowerCase() + ".png")));
+                    flagView.setFitHeight(16);
+                    flagView.setPreserveRatio(true);
+                    setText(item.getDisplayName());
+                    setGraphic(flagView);
+                }
+            }
+        });
         this.languageSelect.getItems().addAll(Language.values());
+        this.languageSelect.setButtonCell(this.languageSelect.getCellFactory().call(null));
 
         this.backButton.setOnAction(e -> {
             goToPrevPage();
