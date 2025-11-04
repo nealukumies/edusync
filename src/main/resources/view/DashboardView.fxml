@@ -13,10 +13,10 @@
     <right>
         <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
             <children>
-                <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="View all assignments" />
-                <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="View all courses" />
-                <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="Add new course" />
-                <Hyperlink fx:id="calendar" styleClass="medium-text" text="Calendar" />
+                <Hyperlink fx:id="assignmentsLink" styleClass="medium-text" text="%view_all_assignments" />
+                <Hyperlink fx:id="coursesLink" styleClass="medium-text" text="%view_all_courses" />
+                <Hyperlink fx:id="newCourseLink" styleClass="medium-text" text="%add_new_course" />
+                <Hyperlink fx:id="calendar" styleClass="medium-text" text="%calendar" />
             </children>
         </VBox>
     </right>
@@ -25,8 +25,8 @@
             <children>
                 <VBox alignment="CENTER" StackPane.alignment="CENTER_LEFT">
                     <children>
-                        <Label alignment="TOP_LEFT" styleClass="medium-title" text="Upcoming deadlines" />
-                        <Hyperlink fx:id="addAssignmentLink" alignment="TOP_LEFT" styleClass="medium-text" text="Add new assignment" />
+                        <Label alignment="TOP_LEFT" styleClass="medium-title" text="%upcoming_deadlines" />
+                        <Hyperlink fx:id="addAssignmentLink" alignment="TOP_LEFT" styleClass="medium-text" text="%add_new_assignment" />
                         <VBox fx:id="assignments" alignment="CENTER" />
                     </children>
                 </VBox>

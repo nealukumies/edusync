@@ -10,6 +10,7 @@ import model.DBObjects.Schedule;
 import model.Enums.Weekday;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
+import view.MainView;
 
 import java.net.http.HttpResponse;
 import java.time.LocalDate;

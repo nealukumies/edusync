@@ -12,6 +12,7 @@ import model.DBObjects.Course;
 import model.DBObjects.DBObjectParser;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
+import view.MainView;
 
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
@@ -44,7 +45,8 @@ public class CourseListController extends SubController {
 
             if (response == null) {
                 courseListContent.getChildren().clear();
-                Label emptyCourseList = new Label("No courses found");
+                String noCoursesFound = MainView.getBundle().getString("no_courses_found");
+                Label emptyCourseList = new Label(noCoursesFound);
                 courseListContent.getChildren().add(emptyCourseList);
                 return;
             }
@@ -55,7 +57,8 @@ public class CourseListController extends SubController {
         } catch (Exception e) {
             e.printStackTrace();
             courseListContent.getChildren().clear();
-            Label label = new Label("Error: " + e.getMessage());
+            String error = MainView.getBundle().getString("error");
+            Label label = new Label(error + " " + e.getMessage());
             label.getStyleClass().add("error");
             label.setTextFill(Color.RED);
             courseListContent.getChildren().add(label);
