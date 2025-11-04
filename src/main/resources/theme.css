@@ -25,7 +25,7 @@
     -fx-padding: 10;
 }
 
-.text-field, .choice-box {
+.text-field, .choice-box, .combo-box {
     -fx-font-size: 24;
     -fx-pref-height: 36;
 }
@@ -41,7 +41,7 @@
 }
 
 
-.text-area, .text-field, .choice-box {
+.text-area, .text-field, .choice-box, .combo-box {
     -fx-background-color: -fx-foreground-col;
     -fx-pref-width: 415;
 }
@@ -129,11 +129,19 @@
     -fx-background-color: -fx-background-col;
 }
 
-.choice-box .menu-item {
+.choice-box .menu-item, .combo-box .list-cell {
     -fx-background-color: -fx-background-col;
 }
 
-.choice-box .menu-item:focused {
+.choice-box .menu-item:focused, .combo-box .list-cell:focused {
+    -fx-background-color: -fx-lighter-col;
+}
+
+.combo-box .list-cell:focused {
+    -fx-background-color: -fx-foreground-col;
+}
+
+.combo-box .list-cell:hover {
     -fx-background-color: -fx-lighter-col;
 }
 
@@ -159,7 +167,7 @@
     -fx-padding: 10;
 }
 
-.small-scale .text-field, .choice-box {
+.small-scale .text-field, .choice-box, .combo-box {
     -fx-font-size: 16;
     -fx-pref-height: 24;
 }
@@ -186,6 +194,11 @@
     -fx-border-color: -fx-contrast-col;
     -fx-border-width: 2;
     -fx-padding: 10;
+}
+
+.combo-box {
+    -fx-background-color: -fx-darker-col;
+    -fx-pref-width: 200;
 }
 
 /* Some font sizes */

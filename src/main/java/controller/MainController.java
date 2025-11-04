@@ -1,10 +1,12 @@
 package controller;
 
+import enums.Language;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -31,6 +33,8 @@ public class MainController {
     private Button forwardButton;
     @FXML
     private BorderPane root;
+    @FXML
+    private ComboBox<Language> languageSelect;
 
     private Page currentPage;
     private List<PageMemento> pageHistory;
@@ -45,6 +49,8 @@ public class MainController {
         this.account = Account.getInstance();
         this.changePage(Page.FRONT_PAGE);
         this.mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
+        
+        this.languageSelect.getItems().addAll(Language.values());
 
         this.backButton.setOnAction(e -> {
             goToPrevPage();
