@@ -1,5 +1,6 @@
 package view;
 
+import enums.Language;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -18,10 +19,7 @@ public class MainView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Locale enLocale = new Locale("en", "US");
-        Locale ukrLocale = new Locale("uk", "UA");
-        Locale arLocale = new Locale("ar", "DZ");
-        bundle = ResourceBundle.getBundle("Messages", arLocale);
+        this.setLanguage(Language.ENGLISH);
 
         // Load fonts
         Font roboto = Font.loadFont(
@@ -56,6 +54,14 @@ public class MainView extends Application {
         //stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public static void setLanguage(Language lang) {
+        System.out.println("Happened");
+        String code = lang.getCode();
+        String country = lang.getCountry();
+        Locale currentLocale = new Locale(code, country);
+        bundle = ResourceBundle.getBundle("Messages", currentLocale);
     }
 
     public static ResourceBundle getBundle() {

@@ -2,6 +2,7 @@
     /* Theme colours */
     -fx-background-col: #070707;
     -fx-foreground-col: #151515;
+    -fx-selector-col: #0e0e0e;
     -fx-darker-col: #000000;
     -fx-contrast-col: #FFFFFF;
     -fx-lighter-col: #383838;
@@ -138,7 +139,7 @@
 }
 
 .combo-box .list-cell:focused {
-    -fx-background-color: -fx-foreground-col;
+    -fx-background-color: -fx-selector-col;
 }
 
 .combo-box .list-cell:hover {
@@ -198,7 +199,7 @@
 
 .combo-box {
     -fx-background-color: -fx-darker-col;
-    -fx-pref-width: 200;
+    -fx-pref-width: 180;
 }
 
 /* Some font sizes */

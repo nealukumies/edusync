@@ -70,6 +70,12 @@ public class MainController {
         this.languageSelect.getItems().addAll(Language.values());
         this.languageSelect.setButtonCell(this.languageSelect.getCellFactory().call(null));
 
+        this.languageSelect.setValue(Language.ENGLISH);
+        this.languageSelect.setOnAction(e -> {
+            MainView.setLanguage(this.languageSelect.getValue());
+            this.refreshCurrentPage();
+        });
+
         this.backButton.setOnAction(e -> {
             goToPrevPage();
         });
@@ -149,6 +155,13 @@ public class MainController {
         this.course = state.getCourse();
         this.assignment = state.getAssignment();
         this.changePageWithoutChangingHistory(state.getPage());
+    }
+
+    public void refreshCurrentPage() {
+        generateHeader();
+        content.getChildren().clear();
+        this.loadPageURL(currentPage);
+        updateButtons();
     }
 
     public void changePage(Page page) {
