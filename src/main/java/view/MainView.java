@@ -3,6 +3,7 @@ package view;
 import enums.Language;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import java.util.ResourceBundle;
 public class MainView extends Application {
     private static ResourceBundle bundle;
     private static Language currentLanguage;
+    private static Parent root;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,7 +30,9 @@ public class MainView extends Application {
         Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
-        Parent root = fxmlLoader.load();
+        root = fxmlLoader.load();
+
+        updateOrientation();
 
         if (Screen.getPrimary().getBounds() != null) {
             Rectangle2D bounds = Screen.getPrimary().getBounds();
@@ -89,6 +93,17 @@ public class MainView extends Application {
         Locale currentLocale = new Locale(code, country);
         bundle = ResourceBundle.getBundle("Messages", currentLocale);
         saveLanguage();
+        if (root != null) {
+            updateOrientation();
+        }
+    }
+
+    public static void updateOrientation() {
+        if (currentLanguage.isReverseOrientation()) {
+            root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        } else {
+            root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        }
     }
 
     public static ResourceBundle getBundle() {

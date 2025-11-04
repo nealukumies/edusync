@@ -46,7 +46,6 @@ public class MainController {
         this.pageHistory = new ArrayList<>();
         this.pageBackHistory = new ArrayList<>();
         this.account = Account.getInstance();
-        this.changePage(Page.FRONT_PAGE);
         this.mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
 
         // Custom cell factory to display images of flags
@@ -85,6 +84,7 @@ public class MainController {
             goToNextPage();
         });
 
+        this.changePage(Page.FRONT_PAGE);
         this.pageHistory.clear();
         updateButtons();
     }

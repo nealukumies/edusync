@@ -1,18 +1,20 @@
 package enums;
 
 public enum Language {
-    ARABIC("ar", "DZ", "Arabic"),
-    ENGLISH("en", "US", "English"),
-    UKRAINIAN("uk", "UA", "Ukrainian");
+    ARABIC("ar", "DZ", "Arabic", true),
+    ENGLISH("en", "US", "English", false),
+    UKRAINIAN("uk", "UA", "Ukrainian", false);
 
     private final String code;
     private final String country;
     private final String displayName;
+    private final boolean reverseOrientation;
 
-    Language(String code, String country, String displayName) {
+    Language(String code, String country, String displayName, boolean reverseOrientation) {
         this.code = code;
         this.country = country;
         this.displayName = displayName;
+        this.reverseOrientation = reverseOrientation;
     }
 
     public String getCode() {
@@ -25,6 +27,10 @@ public enum Language {
 
     public String getDisplayName() {
         return displayName;
+    }
+    
+    public boolean isReverseOrientation() {
+        return reverseOrientation;
     }
 
     public static Language getLanguage(String fullcode) {
