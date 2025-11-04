@@ -9,8 +9,8 @@
     <children>
         <Label styleClass="huge-title" text="EduSync"/>
         <Label maxWidth="320.0" prefWidth="320.0" styleClass="medium-text"
-               text="EduSync helps students plan, organize, and track their studies efficiently. Log in to manage your courses, assignments, and schedule in one place."
+               text="%Edusync_desc"
                wrapText="true"/>
-        <Button fx:id="startButton" mnemonicParsing="false" styleClass="medium-title" text="START HERE"/>
+        <Button fx:id="startButton" mnemonicParsing="false" styleClass="medium-title" text="%START_HERE"/>
     </children>
 </VBox>

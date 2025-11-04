@@ -15,7 +15,7 @@
     <children>
         <!-- Title -->
         <Label alignment="CENTER" contentDisplay="CENTER"
-               prefWidth="500.0" styleClass="large-title" text="Calendar" />
+               prefWidth="500.0" styleClass="large-title" text="%Calendar" />
 
         <!-- Your custom Calendar component -->
         <CalendarModern fx:id="calendarModern" prefWidth="1200.0" prefHeight="600.0">

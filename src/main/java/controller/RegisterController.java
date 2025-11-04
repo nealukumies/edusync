@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.handlers.UserHandler;
+import view.MainView;
 
 public class RegisterController extends SubController {
     @FXML
@@ -49,7 +50,8 @@ public class RegisterController extends SubController {
 
     public boolean isUsernameValid() {
         if (username.getText().isEmpty()) {
-            errorMessage.setText("Username is empty");
+            String errorText = MainView.getBundle().getString("username_empty_error");
+            errorMessage.setText(errorText);
             return false;
         }
         return true;
@@ -57,11 +59,13 @@ public class RegisterController extends SubController {
 
     public boolean isPasswordValid() {
         if (password.getText().length() < 3) {
-            errorMessage.setText("Password must be at least 3 characters long");
+            String errorText = MainView.getBundle().getString("password_length_error");
+            errorMessage.setText(errorText);
             return false;
         }
         if (!password.getText().equals(confirmPassword.getText())) {
-            errorMessage.setText("Passwords don't match");
+            String errorText = MainView.getBundle().getString("password_mismatch_error");
+            errorMessage.setText(errorText);
             return false;
         }
         return true;
@@ -69,7 +73,8 @@ public class RegisterController extends SubController {
 
     public boolean isEmailValid() {
         if (!email.getText().contains("@") || !email.getText().contains(".")) {
-            errorMessage.setText("Invalid email address");
+            String errorText = MainView.getBundle().getString("invalid_email_error");
+            errorMessage.setText(errorText);
             return false;
         }
         return true;

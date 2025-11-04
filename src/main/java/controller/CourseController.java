@@ -14,6 +14,7 @@ import model.DBObjects.Course;
 import model.DBObjects.Schedule;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
+import view.MainView;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +47,9 @@ public class CourseController extends SubController {
             name.setText(course.getCourseName());
             String start = course.getStartDate().toString();
             String end = course.getEndDate().toString();
-            desc.setText("Started on " + start + " | Ending on " + end);
+            String courseStarted = MainView.getBundle().getString("course_started");
+            String courseEnding = MainView.getBundle().getString("course_ending");
+            desc.setText(courseStarted + " " + start + " | " + courseEnding + " " + end);
 
             addAssignment.setOnMouseClicked(e -> {
                 getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
@@ -89,7 +92,8 @@ public class CourseController extends SubController {
                 HBox hBox = new HBox();
                 Label scheduleDay = new Label(schedule.getWeekday().toString());
                 Label scheduleTime = new Label("");
-                Hyperlink del = new Hyperlink("Delete");
+                String deleteText = MainView.getBundle().getString("delete");
+                Hyperlink del = new Hyperlink(deleteText);
                 String time = schedule.getStartTime().toString();
                 time += " - " + schedule.getEndTime().toString();
                 scheduleTime.setText(time);
@@ -108,9 +112,13 @@ public class CourseController extends SubController {
 
     public void deleteSchedule(int scheduleId) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Schedule");
-        alert.setHeaderText("Delete Schedule?");
-        alert.setContentText("Are you sure you want to delete this schedule?");
+        String deleteScheduleText = MainView.getBundle().getString("delete_schedule_text");
+        String deleteScheduleHeader = MainView.getBundle().getString("delete_schedule_header");
+        String deleteScheduleContent = MainView.getBundle().getString("delete_schedule_content");
+
+        alert.setTitle(deleteScheduleText);
+        alert.setHeaderText(deleteScheduleHeader);
+        alert.setContentText(deleteScheduleContent);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             ScheduleHandler.deleteSchedule(scheduleId);
@@ -122,9 +130,13 @@ public class CourseController extends SubController {
 
     public void deleteThisCourse() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Course");
-        alert.setHeaderText("Really Delete Course?");
-        alert.setContentText("ARE YOU CERTAIN YOU WANT TO DELETE THIS COURSE?");
+        String deleteCourseText = MainView.getBundle().getString("delete_course_text");
+        String deleteCourseHeader = MainView.getBundle().getString("delete_course_header");
+        String deleteCourseContent = MainView.getBundle().getString("delete_course_content");
+
+        alert.setTitle(deleteCourseText);
+        alert.setHeaderText(deleteCourseHeader);
+        alert.setContentText(deleteCourseContent);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             CourseHandler.deleteCourse(course.getCourseId());
