@@ -4,6 +4,7 @@ import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.handlers.UserHandler;
+import view.MainView;
 
 public class LogInController extends SubController {
     @FXML
@@ -36,7 +37,8 @@ public class LogInController extends SubController {
                 getMainController().changePage(Page.FRONT_PAGE);
             }
             else {
-                errorMessage.setText("Invalid email or password");
+                String errorText = MainView.getBundle().getString("invalid_login_error");
+                errorMessage.setText(errorText);
             }
         }
         catch (Exception e) {

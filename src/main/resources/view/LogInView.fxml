@@ -11,17 +11,17 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
     <children>
-        <Label maxWidth="650.0" styleClass="large-title" text="Log In" />
+        <Label maxWidth="650.0" styleClass="large-title" text="%Log_In" />
         <HBox spacing="20.0">
             <children>
                 <TextField fx:id="email" />
-                <Label styleClass="medium-title" text="Email" />
+                <Label styleClass="medium-title" text="%Email" />
             </children>
         </HBox>
         <HBox spacing="20.0">
             <children>
                 <PasswordField fx:id="password" />
-                <Label styleClass="medium-title" text="Password" />
+                <Label styleClass="medium-title" text="%Password" />
             </children>
         </HBox>
         <HBox>
@@ -36,7 +36,7 @@
         </HBox>
         <HBox>
             <children>
-                <Button fx:id="loginButton" mnemonicParsing="false" text="Login">
+                <Button fx:id="loginButton" mnemonicParsing="false" text="%Login">
                     <styleClass>
                         <String fx:value="medium-title" />
                         <String fx:value="longer-button" />
@@ -46,8 +46,8 @@
         </HBox>
         <HBox alignment="CENTER_LEFT">
             <children>
-                <Label styleClass="medium-text" text="Not a user yet?" />
-                <Hyperlink fx:id="registerLink" styleClass="medium-text" text="Register here" />
+                <Label styleClass="medium-text" text="%Not_a_user_yet" />
+                <Hyperlink fx:id="registerLink" styleClass="medium-text" text="%Register_here" />
             </children>
         </HBox>
     </children>

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
+import view.MainView;
 
 import java.util.List;
 
@@ -46,12 +47,14 @@ public class CourseCard {
         courseDateTimeline.setText(start + " - " + end);
 
         // Add assignments
-        Label assignmentsTitle = new Label("No Assignments");
+        String assignmentText = MainView.getBundle().getString("No_Assignments");
+        Label assignmentsTitle = new Label(assignmentText);
         assignmentsTitle.getStyleClass().add("medium-text");
         assignmentsTitle.setWrapText(true);
         List<Assignment> assignments = courseListController.getAssignmentsByCourse(this.course.getCourseId());
         if (assignments != null) {
-            assignmentsTitle.setText("Assignments (" + assignments.size() + ")");
+            String assignmentsLabelText = MainView.getBundle().getString("Assignments");
+            assignmentsTitle.setText(assignmentsLabelText + " \u200E(" + assignments.size() + ")");
         }
 
         card.getChildren().addAll(courseName, courseDateTimeline, assignmentsTitle);

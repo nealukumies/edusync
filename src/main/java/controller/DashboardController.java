@@ -13,6 +13,7 @@ import model.DBObjects.Course;
 import model.DBObjects.DBObjectParser;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
+import view.MainView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +64,13 @@ public class DashboardController extends SubController {
                 assignmentList.addAll(data);
                 generateAssignments();
             } else {
-                throw new Exception("Assignments not found");
+                String errorText = MainView.getBundle().getString("Assignments_not_found_error");
+                throw new Exception(errorText);
             }
         } catch (Exception e) {
             assignments.getChildren().clear();
-            Label label = new Label("You have no assignments");
+            String labelText = MainView.getBundle().getString("no_assignments_label");
+            Label label = new Label(labelText);
             assignments.getChildren().add(label);
         }
     }
@@ -79,7 +82,8 @@ public class DashboardController extends SubController {
                 courses.addAll(data);
                 generateAssignments();
             } else {
-                throw new Exception("Assignments not found");
+                String errorText = MainView.getBundle().getString("Assignments_not_found_error");
+                throw new Exception(errorText);
             }
         } catch (Exception e) {
             e.printStackTrace();

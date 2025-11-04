@@ -11,23 +11,23 @@
     <children>
       <HBox alignment="CENTER_LEFT" spacing="20.0">
          <children>
-              <Label fx:id="name" styleClass="large-title" text="Course name" />
-            <Button fx:id="editBtn" mnemonicParsing="false" text="Edit" />
+              <Label fx:id="name" styleClass="large-title" text="%Course_name" />
+            <Button fx:id="editBtn" mnemonicParsing="false" text="%Edit" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="20.0">
          <children>
-              <Label fx:id="desc" styleClass="medium-text" text="desc" />
-            <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
+              <Label fx:id="desc" styleClass="medium-text" text="%desc" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" text="%Delete" />
          </children>
       </HBox>
       <VBox>
          <children>
             <VBox fx:id="scheduleContainer" />
-            <Hyperlink fx:id="addSchedule" text="Add new schedule" />
+            <Hyperlink fx:id="addSchedule" text="%Add_new_schedule" />
          </children>
       </VBox>
-        <Hyperlink fx:id="addAssignment" text="Add new assignment" />
+        <Hyperlink fx:id="addAssignment" text="%Add_new_assignment" />
         <FlowPane fx:id="assignments" alignment="CENTER_LEFT" />
     </children>
 </VBox>

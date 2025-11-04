@@ -99,7 +99,8 @@ public class MainController {
             Label label = new Label(account.getName());
             label.getStyleClass().add("medium-title");
 
-            Hyperlink logout = new Hyperlink("> Log out");
+            String logOutText = MainView.getBundle().getString("Header_Log_out");
+            Hyperlink logout = new Hyperlink(logOutText);
             logout.setOnAction(actionEvent -> {
                 UserHandler.logoutUser();
                 changePage(Page.FRONT_PAGE);
@@ -109,7 +110,8 @@ public class MainController {
 
             headerContent.getChildren().addAll(spacer, label, logout);
         } else {
-            Hyperlink loginText = new Hyperlink("Log In");
+            String logOutText = MainView.getBundle().getString("Header_Log_In");
+            Hyperlink loginText = new Hyperlink(logOutText);
             loginText.getStyleClass().add("medium-title");
             loginText.getStyleClass().add("link");
             loginText.setOnAction(e -> {

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.DBObjects.Course;
 import model.handlers.CourseHandler;
+import view.MainView;
 
 public class EditCourseController extends SubController {
     @FXML
@@ -67,7 +68,8 @@ public class EditCourseController extends SubController {
                 errorMessage.setText(e.getMessage());
             }
         } else {
-            errorMessage.setText("Title or Start/End Date is empty");
+            String errorText = MainView.getBundle().getString("course_errortext");
+            errorMessage.setText(errorText);
         }
     }
 }

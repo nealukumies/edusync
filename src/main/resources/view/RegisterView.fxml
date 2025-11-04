@@ -10,29 +10,29 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
-      <Label styleClass="large-title" text="Register" />
+      <Label styleClass="large-title" text="%Register" />
       <HBox spacing="20.0">
          <children>
             <TextField fx:id="username" />
-            <Label styleClass="medium-title" text="Username" />
+            <Label styleClass="medium-title" text="%Username" />
          </children>
       </HBox>
       <HBox spacing="20.0">
          <children>
             <TextField fx:id="email" />
-            <Label styleClass="medium-title" text="Email" />
+            <Label styleClass="medium-title" text="%Email" />
          </children>
       </HBox>
       <HBox spacing="20.0">
          <children>
             <PasswordField fx:id="password" />
-            <Label styleClass="medium-title" text="Password" />
+            <Label styleClass="medium-title" text="%Password" />
          </children>
       </HBox>
       <HBox spacing="20.0">
          <children>
             <PasswordField fx:id="confirmPassword" />
-            <Label styleClass="medium-title" text="Confirm password" />
+            <Label styleClass="medium-title" text="%Confirm_Password" />
          </children>
       </HBox>
       <HBox spacing="20.0">
@@ -47,7 +47,7 @@
       </HBox>
       <HBox>
          <children>
-            <Button fx:id="registerButton" mnemonicParsing="false" text="Register">
+            <Button fx:id="registerButton" mnemonicParsing="false" text="%Register">
                <styleClass>
                   <String fx:value="medium-title" />
                   <String fx:value="longer-button" />
