@@ -49,6 +49,7 @@ public class MainController {
         this.changePage(Page.FRONT_PAGE);
         this.mainTitle.setOnAction(e -> changePage(Page.FRONT_PAGE));
 
+        // Custom cell factory to display images of flags
         this.languageSelect.setCellFactory(cb -> new ListCell<>() {
             private final ImageView flagView = new ImageView();
 
@@ -70,7 +71,8 @@ public class MainController {
         this.languageSelect.getItems().addAll(Language.values());
         this.languageSelect.setButtonCell(this.languageSelect.getCellFactory().call(null));
 
-        this.languageSelect.setValue(Language.ENGLISH);
+        // Set currently displayed language to default
+        this.languageSelect.setValue(MainView.getCurrentLanguage());
         this.languageSelect.setOnAction(e -> {
             MainView.setLanguage(this.languageSelect.getValue());
             this.refreshCurrentPage();

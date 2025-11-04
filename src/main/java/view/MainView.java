@@ -10,28 +10,24 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainView extends Application {
     private static ResourceBundle bundle;
+    private static Language currentLanguage;
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        this.setLanguage(Language.ENGLISH);
+        if (!getSavedLanguage()) {
+            setLanguage(Language.ENGLISH);
+        }
 
         // Load fonts
-        Font roboto = Font.loadFont(
-                getClass()
-                        .getResource("/font/RobotoSerif_28pt-Regular.ttf")
-                        .toExternalForm(),
-                10
-        );
+        Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/view/MainLayout.fxml"), bundle
-        );
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
         Parent root = fxmlLoader.load();
 
         if (Screen.getPrimary().getBounds() != null) {
@@ -56,16 +52,51 @@ public class MainView extends Application {
         stage.show();
     }
 
+    public static boolean getSavedLanguage() {
+        String filePath = "language.txt";
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            String fullcode = br.readLine();
+            setLanguage(Language.getLanguage(fullcode));
+            return true;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    public static void saveLanguage() {
+        String filePath = "language.txt";
+
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
+            fos.write((currentLanguage.getCode() + "-" + currentLanguage.getCountry()).getBytes());
+            fos.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the file: " + e.getMessage());
+        }
+
+    }
+
     public static void setLanguage(Language lang) {
-        System.out.println("Happened");
+        currentLanguage = lang;
         String code = lang.getCode();
         String country = lang.getCountry();
         Locale currentLocale = new Locale(code, country);
         bundle = ResourceBundle.getBundle("Messages", currentLocale);
+        saveLanguage();
     }
 
     public static ResourceBundle getBundle() {
         return bundle;
+    }
+
+    public static Language getCurrentLanguage() {
+        return currentLanguage;
     }
 
     public static void main(String[] args) {

@@ -27,6 +27,17 @@ public enum Language {
         return displayName;
     }
 
+    public static Language getLanguage(String fullcode) {
+        String code = fullcode.split("-")[0];
+        String country = fullcode.split("-")[1];
+        for (Language language : Language.values()) {
+            if (language.code.equals(code) && language.country.equals(country)) {
+                return language;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return displayName;
