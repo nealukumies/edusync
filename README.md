@@ -5,6 +5,7 @@ agile software development methods to create a software product for study planni
 - Assignment deadlines
 - Class schedules
 - Reminders
+- Three languages: English, Arabic, Ukrainian
 
 ---
 
@@ -23,6 +24,7 @@ for building, managing and deploying the application:
 - Docker
 - Kubernetes
 - Github
+- Resource bundles for localisation
 
 ---
 
@@ -43,6 +45,31 @@ The pipeline includes stages for building, testing, and deploying the applicatio
 It also generates code coverage reports using JaCoCo.
 
 ---
+
+## Localisation
+The application supports three languages: English, Arabic, and Ukrainian. Default language is set to English. 
+To change the language, select your preferred language from the combobox in the header of the application. 
+The application will update the UI text accordingly as well as RTL/LTR layout based on the selected language.
+
+The application is localized using Java Resource Bundles for each supported language. Translations were done with Google Translate and may not be perfect 
+as it is suggested to have a native speaker review them for accuracy. Localisation files are located in the `resources/Resource Bundle 'Messages'` directory as
+separate properties files for each language:
+- Messages_en_US.properties (English)
+- Messages_ar_DZ.properties (Arabic)
+- Messages_uk_UA.properties (Ukrainian)
+
+The acceptance criteria for localization includes:
+- The default language is English.
+- Users can select Arabic and Ukrainian from the language selection combobox.
+- All UI text is translated into the supported languages immediately after selecting the language.
+- The layout adjusts correctly for RTL languages.
+- Users can switch languages seamlessly without restarting the application.
+
+These criteria were tested manually by switching languages and verifying the translations and layout adjustments. 
+
+Yet to be implemented:
+- Database localization
+
 
 ## How to Run Locally
 Before running the application, start the backend service. Follow the instructions in the backend repository: [EduSync Backend](https://github.com/nealukumies/edusync-backend/)
