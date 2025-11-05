@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
+import view.MainView;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class AssignmentList {
         }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(AssignmentList.class.getResource("/components/AssignmentTable.fxml"));
+            fxmlLoader.setResources(MainView.getBundle());
             TableView<ViewableAssignment> table = fxmlLoader.load();
             SubController subController = fxmlLoader.getController();
             subController.setMainViewController(mainController);

@@ -5,9 +5,9 @@
 
 <TableView fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssignmentTableController">
   <columns>
-    <TableColumn fx:id="titleCol" editable="false" prefWidth="160.0" text="Title" />
-    <TableColumn fx:id="courseCol" editable="false" prefWidth="155.0" text="Course" />
-      <TableColumn fx:id="deadlineCol" editable="false" prefWidth="160.0" text="Deadline" />
-      <TableColumn fx:id="statusCol" editable="false" prefWidth="120.0" text="Status" />
+    <TableColumn fx:id="titleCol" editable="false" prefWidth="160.0" text="%title" />
+    <TableColumn fx:id="courseCol" editable="false" prefWidth="155.0" text="%course" />
+      <TableColumn fx:id="deadlineCol" editable="false" prefWidth="160.0" text="%deadline" />
+      <TableColumn fx:id="statusCol" editable="false" prefWidth="120.0" text="%status" />
   </columns>
 </TableView>
