@@ -67,9 +67,18 @@ The acceptance criteria for localization includes:
 
 These criteria were tested manually by switching languages and verifying the translations and layout adjustments. 
 
-Yet to be implemented:
-- Database localization
+Database localisation:
 
+The system is primarily driven by user input and therefore static content translations are handled at the frontend.
+
+- The database is configured to use UTF-8 encoding, which allows storage of text in multiple languages (including English, Arabic and Ukrainian).
+- All tables and columns that store user input support UTF-8 characters.
+- Users can enter content in the available languages and it is stored in the database correctly.
+- The application does not have static content that requires localization.
+- To avoid unnecessary duplication of static content, all UI enums (Weekday, Status) that represent fixed options are translated in the frontend using Resource Bundles.
+- The application was tested by saving and retrieving Arabic and Ukrainian text.
+
+---
 
 ## How to Run Locally
 Before running the application, start the backend service. Follow the instructions in the backend repository: [EduSync Backend](https://github.com/nealukumies/edusync-backend/)
