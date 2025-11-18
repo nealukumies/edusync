@@ -10,7 +10,10 @@ public class Account implements Serializable {
     private String email;
     private String role;
 
-    private Account() {}
+    private final String NOT_LOGGED_IN_TEXT = "Not logged in";
+
+    private Account() {
+    }
 
     public static Account getInstance() {
         if (INSTANCE == null) {
@@ -38,8 +41,7 @@ public class Account implements Serializable {
             this.role = role;
 
             return true;
-        }
-        else {
+        } else {
             System.out.println("Account already logged in! Logout first!");
 
             return false;
@@ -52,21 +54,21 @@ public class Account implements Serializable {
 
     public String getName() {
         if (name == null) {
-            return "Not logged in";
+            return NOT_LOGGED_IN_TEXT;
         }
         return name;
     }
 
     public String getEmail() {
         if (email == null) {
-            return "Not logged in";
+            return NOT_LOGGED_IN_TEXT;
         }
         return email;
     }
 
     public String getRole() {
         if (role == null) {
-            return "Not logged in";
+            return NOT_LOGGED_IN_TEXT;
         }
         return role;
     }

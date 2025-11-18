@@ -13,6 +13,15 @@ public class Connection {
     private static Connection INSTANCE;
     private static Dotenv dotenv = Dotenv.load();
 
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String CONTENT_TYPE_JSON = "application/json";
+    private final String ROLE = "role";
+    private final String STUDENT_ID = "student_id";
+
+    public String getBackendUrl() {
+        return dotenv.get("BACKEND_URL");
+    }
+
     private Connection() {
     }
 
@@ -30,10 +39,10 @@ public class Connection {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(dotenv.get("BACKEND_URL") + endpoint))
-                    .header("Content-Type", "application/json")
-                    .header("role", acc.getRole())
-                    .header("student_id", String.valueOf(acc.getStudentId()))
+                    .uri(URI.create(getBackendUrl() + endpoint))
+                    .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
+                    .header(ROLE, acc.getRole())
+                    .header(STUDENT_ID, String.valueOf(acc.getStudentId()))
                     .GET()
                     .build();
 
@@ -51,10 +60,10 @@ public class Connection {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(dotenv.get("BACKEND_URL") + endpoint))
-                    .header("Content-Type", "application/json")
-                    .header("role", acc.getRole())
-                    .header("student_id", String.valueOf(acc.getStudentId()))
+                    .uri(URI.create(getBackendUrl() + endpoint))
+                    .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
+                    .header(ROLE, acc.getRole())
+                    .header(STUDENT_ID, String.valueOf(acc.getStudentId()))
                     .POST(HttpRequest.BodyPublishers.ofString(req))
                     .build();
 
@@ -67,15 +76,15 @@ public class Connection {
         return response;
     }
 
-    public  HttpResponse<String> sendPutRequest(String req, String endpoint) {
+    public HttpResponse<String> sendPutRequest(String req, String endpoint) {
         HttpResponse<String> response = null;
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(dotenv.get("BACKEND_URL") + endpoint))
-                    .header("Content-Type", "application/json")
-                    .header("role", acc.getRole())
-                    .header("student_id", String.valueOf(acc.getStudentId()))
+                    .uri(URI.create(getBackendUrl() + endpoint))
+                    .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
+                    .header(ROLE, acc.getRole())
+                    .header(STUDENT_ID, String.valueOf(acc.getStudentId()))
                     .PUT(HttpRequest.BodyPublishers.ofString(req))
                     .build();
 
@@ -93,10 +102,10 @@ public class Connection {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(dotenv.get("BACKEND_URL") + endpoint))
-                    .header("Content-Type", "application/json")
-                    .header("role", acc.getRole())
-                    .header("student_id", String.valueOf(acc.getStudentId()))
+                    .uri(URI.create(getBackendUrl() + endpoint))
+                    .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
+                    .header(ROLE, acc.getRole())
+                    .header(STUDENT_ID, String.valueOf(acc.getStudentId()))
                     .DELETE()
                     .build();
 
