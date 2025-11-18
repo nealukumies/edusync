@@ -26,11 +26,13 @@ public class MainView extends Application {
             setLanguage(Language.ENGLISH);
         }
 
+        final String SMALL_SCALE = "small_scale";
+
         // Load fonts
         Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
-        root = fxmlLoader.load();
+        MainView.root = fxmlLoader.load();
 
         updateOrientation();
 
@@ -42,17 +44,17 @@ public class MainView extends Application {
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.doubleValue() < 1600) {
-                if (!root.getStyleClass().contains("small-scale")) {
-                    root.getStyleClass().add("small-scale");
+                if (!MainView.root.getStyleClass().contains(SMALL_SCALE)) {
+                    MainView.root.getStyleClass().add(SMALL_SCALE);
                 }
             } else {
-                root.getStyleClass().remove("small-scale");
+                MainView.root.getStyleClass().remove(SMALL_SCALE);
             }
         });
 
         stage.setTitle("EduSync");
         //stage.setResizable(false);
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(MainView.root));
         stage.show();
     }
 

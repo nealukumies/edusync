@@ -9,6 +9,8 @@ import model.Singletons.Connection;
 import java.net.http.HttpResponse;
 
 public class AssignmentHandler {
+    public static final String ERROR_MESSAGE = "Error: Received status code ";
+
     public static HttpResponse<String> getAssignment(int assignmentId) {
         Connection conn = Connection.getInstance();
 
@@ -30,7 +32,7 @@ public class AssignmentHandler {
                 System.out.println("404 Not Found: Assignment with the specified ID does not exist.");
             }
             default -> {
-                System.out.println("Error: Received status code " + status);
+                System.out.println(ERROR_MESSAGE + status);
             }
         }
         return null;
@@ -58,7 +60,7 @@ public class AssignmentHandler {
                 System.out.println("404 Not Found: Student with the specified ID does not exist or no assignments found for this student.");
             }
             default -> {
-                System.out.println("Error: Received status code " + status);
+                System.out.println(ERROR_MESSAGE + status);
             }
         }
         return null;
@@ -103,7 +105,7 @@ public class AssignmentHandler {
                 System.out.println("404 Not Found: Course with the specified ID does not exist.");
             }
             default -> {
-                System.out.println("Error: Received status code " + status);
+                System.out.println(ERROR_MESSAGE + status);
             }
         }
         return -1;
@@ -146,7 +148,7 @@ public class AssignmentHandler {
                 System.out.println("500 Internal Server Error: Failed to update the assignment.");
             }
             default -> {
-                System.out.println("Error: Received status code " + status);
+                System.out.println(ERROR_MESSAGE + status);
             }
         }
         return -1;
@@ -173,7 +175,7 @@ public class AssignmentHandler {
                 System.out.println("404 Not Found: Assignment with the specified ID does not exist.");
             }
             default -> {
-                System.out.println("Error: Received status code " + status);
+                System.out.println(ERROR_MESSAGE + status);
             }
         }
         return -1;

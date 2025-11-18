@@ -43,3 +43,7 @@ build/
 ### Sonar ###
 sonar-project.properties
 .scannerwork
+
+### Local files ###
+account.txt
+language.txt
