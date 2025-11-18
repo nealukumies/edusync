@@ -97,9 +97,10 @@ public class CourseController extends SubController {
                 String time = schedule.getStartTime().toString();
                 time += " - " + schedule.getEndTime().toString();
                 scheduleTime.setText(time);
-                scheduleDay.getStyleClass().add("medium-text");
-                scheduleTime.getStyleClass().add("medium-text");
-                del.getStyleClass().add("medium-text");
+                String textClass = "medium-text";
+                scheduleDay.getStyleClass().add(textClass);
+                scheduleTime.getStyleClass().add(textClass);
+                del.getStyleClass().add(textClass);
                 del.setOnAction(e -> {
                     deleteSchedule(schedule.getScheduleId());
                 });
@@ -146,7 +147,7 @@ public class CourseController extends SubController {
             getMainController().updateButtons();
         }
     }
-    
+
     public void editThisCourse() {
         getMainController().changePage(Page.EDIT_COURSE_PAGE);
     }

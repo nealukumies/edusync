@@ -30,7 +30,7 @@ public class RegisterController extends SubController {
 
     @Override
     public void initializeFully() {
-
+        // Required due to inheritance, but not needed for this page.
     }
 
     public void register() {
