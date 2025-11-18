@@ -15,9 +15,22 @@ import java.io.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Main application
+ */
 public class MainView extends Application {
+    /**
+     * ResourceBundle that holds localization strings
+     * Updated according to current language
+     */
     private static ResourceBundle bundle;
+    /**
+     * Enum reference representing the current language
+     */
     private static Language currentLanguage;
+    /**
+     * Reference to the root element of the JavaFX application
+     */
     private static Parent root;
 
     @Override
@@ -36,14 +49,17 @@ public class MainView extends Application {
 
         updateOrientation();
 
+
         if (Screen.getPrimary().getBounds() != null) {
+            final double SCREEN_SCALE = 0.9;
             Rectangle2D bounds = Screen.getPrimary().getBounds();
-            stage.setWidth(bounds.getWidth() * 0.9);
-            stage.setHeight(bounds.getHeight() * 0.9);
+            stage.setWidth(bounds.getWidth() * SCREEN_SCALE);
+            stage.setHeight(bounds.getHeight() * SCREEN_SCALE);
         }
 
+        final int SCREEN_WIDTH_BREAKPOINT = 1600;
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() < 1600) {
+            if (newVal.doubleValue() < SCREEN_WIDTH_BREAKPOINT) {
                 if (!MainView.root.getStyleClass().contains(SMALL_SCALE)) {
                     MainView.root.getStyleClass().add(SMALL_SCALE);
                 }
@@ -58,6 +74,14 @@ public class MainView extends Application {
         stage.show();
     }
 
+    /**
+     * Loads saved language from file
+     * <p>
+     * If no saved language is found, defaults to English
+     * Returns true if language was loaded successfully, false otherwise
+     *
+     * @return
+     */
     public static boolean getSavedLanguage() {
         String filePath = "language.txt";
 
@@ -65,6 +89,7 @@ public class MainView extends Application {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String fullcode = br.readLine();
             setLanguage(Language.getLanguage(fullcode));
+            br.close();
             return true;
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filePath);
@@ -74,6 +99,9 @@ public class MainView extends Application {
         return false;
     }
 
+    /**
+     * Saves current language select to file
+     */
     public static void saveLanguage() {
         String filePath = "language.txt";
 
@@ -88,6 +116,11 @@ public class MainView extends Application {
 
     }
 
+    /**
+     * Changes current language to new selection
+     *
+     * @param lang New language enum reference
+     */
     public static void setLanguage(Language lang) {
         currentLanguage = lang;
         String code = lang.getCode();
@@ -100,8 +133,11 @@ public class MainView extends Application {
         }
     }
 
+    /**
+     * Swaps the app from left-to-right to right-to-left or vice versa
+     */
     public static void updateOrientation() {
-        if (currentLanguage.isReverseOrientation()) {
+        if (currentLanguage.getIsRTL()) {
             root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         } else {
             root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
@@ -116,6 +152,11 @@ public class MainView extends Application {
         return currentLanguage;
     }
 
+    /**
+     * Launches the app
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

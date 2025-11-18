@@ -258,10 +258,6 @@ public class MainController {
         this.course = course;
     }
 
-    public List<PageMemento> getPageHistory() {
-        return pageHistory;
-    }
-
     public BorderPane getRoot() {
         return root;
     }
