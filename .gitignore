@@ -39,3 +39,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Sonar ###
+sonar-project.properties
+.scannerwork
+
+### Local files ###
+account.txt
+language.txt

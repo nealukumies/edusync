@@ -35,9 +35,7 @@ public class AssignmentTableController extends SubController {
         table.sort();
     }
 
-    @Override
-    public void initializeFully() {
-
+    public void initializeTitleColumn() {
         titleCol.setCellFactory(tc -> new TableCell<>() {
             private final Hyperlink link = new Hyperlink();
 
@@ -65,7 +63,9 @@ public class AssignmentTableController extends SubController {
                 setGraphic(link);
             }
         });
+    }
 
+    public void initializeCourseColumn() {
         courseCol.setCellFactory(tc -> new TableCell<>() {
             private final Hyperlink link = new Hyperlink();
 
@@ -92,5 +92,11 @@ public class AssignmentTableController extends SubController {
                 setGraphic(link);
             }
         });
+    }
+
+    @Override
+    public void initializeFully() {
+        initializeTitleColumn();
+        initializeCourseColumn();
     }
 }

@@ -51,7 +51,7 @@ public class AddScheduleController extends SubController {
             ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, _start, _end);
             getMainController().goToPrevPage();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to add schedule", e);
         }
     }
 
@@ -71,7 +71,6 @@ public class AddScheduleController extends SubController {
                     time[1] = 0;
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 time[0] = 0;
                 time[1] = 0;
             }

@@ -15,9 +15,22 @@ import java.io.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Main application
+ */
 public class MainView extends Application {
+    /**
+     * ResourceBundle that holds localization strings
+     * Updated according to current language
+     */
     private static ResourceBundle bundle;
+    /**
+     * Enum reference representing the current language
+     */
     private static Language currentLanguage;
+    /**
+     * Reference to the root element of the JavaFX application
+     */
     private static Parent root;
 
     @Override
@@ -26,66 +39,83 @@ public class MainView extends Application {
             setLanguage(Language.ENGLISH);
         }
 
+        final String SMALL_SCALE = "small_scale";
+
         // Load fonts
         Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
-        root = fxmlLoader.load();
+        MainView.root = fxmlLoader.load();
 
         updateOrientation();
 
+
         if (Screen.getPrimary().getBounds() != null) {
+            final double SCREEN_SCALE = 0.9;
             Rectangle2D bounds = Screen.getPrimary().getBounds();
-            stage.setWidth(bounds.getWidth() * 0.9);
-            stage.setHeight(bounds.getHeight() * 0.9);
+            stage.setWidth(bounds.getWidth() * SCREEN_SCALE);
+            stage.setHeight(bounds.getHeight() * SCREEN_SCALE);
         }
 
+        final int SCREEN_WIDTH_BREAKPOINT = 1600;
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() < 1600) {
-                if (!root.getStyleClass().contains("small-scale")) {
-                    root.getStyleClass().add("small-scale");
+            if (newVal.doubleValue() < SCREEN_WIDTH_BREAKPOINT) {
+                if (!MainView.root.getStyleClass().contains(SMALL_SCALE)) {
+                    MainView.root.getStyleClass().add(SMALL_SCALE);
                 }
             } else {
-                root.getStyleClass().remove("small-scale");
+                MainView.root.getStyleClass().remove(SMALL_SCALE);
             }
         });
 
         stage.setTitle("EduSync");
         //stage.setResizable(false);
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(MainView.root));
         stage.show();
     }
 
+    /**
+     * Loads saved language from file
+     * <p>
+     * If no saved language is found, defaults to English
+     * Returns true if language was loaded successfully, false otherwise
+     *
+     * @return
+     */
     public static boolean getSavedLanguage() {
         String filePath = "language.txt";
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String fullcode = br.readLine();
             setLanguage(Language.getLanguage(fullcode));
             return true;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
+            throw new IllegalStateException("Failed to get saved language", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return false;
     }
 
+    /**
+     * Saves current language select to file
+     */
     public static void saveLanguage() {
         String filePath = "language.txt";
+        byte[] data = (currentLanguage.getCode() + "-" + currentLanguage.getCountry())
+                .getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
-        try {
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write((currentLanguage.getCode() + "-" + currentLanguage.getCountry()).getBytes());
-            fos.close();
-
-        } catch (IOException e) {
-            System.out.println("An error occurred while creating the file: " + e.getMessage());
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(data);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to save language", e);
         }
-
     }
 
+    /**
+     * Changes current language to new selection
+     *
+     * @param lang New language enum reference
+     */
     public static void setLanguage(Language lang) {
         currentLanguage = lang;
         String code = lang.getCode();
@@ -98,8 +128,11 @@ public class MainView extends Application {
         }
     }
 
+    /**
+     * Swaps the app from left-to-right to right-to-left or vice versa
+     */
     public static void updateOrientation() {
-        if (currentLanguage.isReverseOrientation()) {
+        if (currentLanguage.getIsRTL()) {
             root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         } else {
             root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
@@ -114,6 +147,11 @@ public class MainView extends Application {
         return currentLanguage;
     }
 
+    /**
+     * Launches the app
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

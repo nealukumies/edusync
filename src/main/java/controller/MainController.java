@@ -233,7 +233,6 @@ public class MainController {
             subController.initializeFully();
             content.getChildren().add(root);
         } catch (IOException e) {
-            e.printStackTrace();
             Label error = new Label();
             error.getStyleClass().add("error");
             error.setText("Error: " + e.getMessage());
@@ -256,10 +255,6 @@ public class MainController {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public List<PageMemento> getPageHistory() {
-        return pageHistory;
     }
 
     public BorderPane getRoot() {

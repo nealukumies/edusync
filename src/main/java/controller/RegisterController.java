@@ -30,7 +30,7 @@ public class RegisterController extends SubController {
 
     @Override
     public void initializeFully() {
-
+        // Required due to inheritance, but not needed for this page.
     }
 
     public void register() {
@@ -42,7 +42,6 @@ public class RegisterController extends SubController {
                 UserHandler.registerUser(_name, _email, _password);
                 getMainController().goToPrevPage();
             } catch (Exception e) {
-                e.printStackTrace();
                 errorMessage.setText(e.getMessage());
             }
         }

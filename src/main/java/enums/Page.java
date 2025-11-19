@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Enum that stores all pages of the app
+ */
 public enum Page {
     FRONT_PAGE,
     LOGIN_PAGE,

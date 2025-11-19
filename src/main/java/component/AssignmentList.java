@@ -10,6 +10,9 @@ import view.MainView;
 
 import java.util.List;
 
+/**
+ * TableView component to display a list of assignments.
+ */
 public class AssignmentList {
     MainController mainController;
 
@@ -17,6 +20,13 @@ public class AssignmentList {
         this.mainController = mainController;
     }
 
+    /**
+     * Creates new TableView element with list of assignments.
+     *
+     * @param assignmentList List of assignments
+     * @param courses        List of courses
+     * @return
+     */
     public TableView<ViewableAssignment> createList(List<Assignment> assignmentList, List<Course> courses) {
         if (assignmentList.isEmpty()) {
             return null;
@@ -37,12 +47,17 @@ public class AssignmentList {
             }
             table.sort();
             return table;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
         return null;
     }
 
+    /**
+     * Returns a course from the course list
+     *
+     * @param courses  List of courses
+     * @param courseId ID of the course being searched
+     * @return
+     */
     public Course getCourse(List<Course> courses, int courseId) {
         for (Course c : courses) {
             if (c.getCourseId() == courseId) {

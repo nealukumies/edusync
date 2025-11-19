@@ -12,6 +12,9 @@ import view.MainView;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class CourseCard {
     private Course course;
     private CourseListController courseListController;

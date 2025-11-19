@@ -14,6 +14,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DBObjectParser {
+    private static final String COURSE_ID = "courseId";
+    private static final String STUDENT_ID = "studentId";
+    private static final String TIME_STRING = "HH:mm";
+
     public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
         if (data.body() == null || data.body().isEmpty()) {
             return null;
@@ -38,8 +42,8 @@ public class DBObjectParser {
         JsonNode jsonNode = mapper.readTree(data.body());
 
         return new Course(
-                jsonNode.get("courseId").asInt(),
-                jsonNode.get("studentId").asInt(),
+                jsonNode.get(COURSE_ID).asInt(),
+                jsonNode.get(STUDENT_ID).asInt(),
                 jsonNode.get("courseName").asText(),
                 LocalDate.parse(jsonNode.get("startDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
                 LocalDate.parse(jsonNode.get("endDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE)
@@ -58,8 +62,8 @@ public class DBObjectParser {
         if (jsonNode.isArray()) {
             for (JsonNode node : jsonNode) {
                 courses.add(new Course(
-                        node.get("courseId").asInt(),
-                        node.get("studentId").asInt(),
+                        node.get(COURSE_ID).asInt(),
+                        node.get(STUDENT_ID).asInt(),
                         node.get("courseName").asText(),
                         LocalDate.parse(node.get("startDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE),
                         LocalDate.parse(node.get("endDate").asText(), DateTimeFormatter.ISO_LOCAL_DATE)
@@ -79,10 +83,10 @@ public class DBObjectParser {
 
         return new Schedule(
                 jsonNode.get("scheduleId").asInt(),
-                jsonNode.get("courseId").asInt(),
+                jsonNode.get(COURSE_ID).asInt(),
                 Weekday.valueOf(jsonNode.get("weekday").asText()),
-                LocalTime.parse(jsonNode.get("startTime").asText(), DateTimeFormatter.ofPattern("HH:mm")),
-                LocalTime.parse(jsonNode.get("endTime").asText(), DateTimeFormatter.ofPattern("HH:mm"))
+                LocalTime.parse(jsonNode.get("startTime").asText(), DateTimeFormatter.ofPattern(TIME_STRING)),
+                LocalTime.parse(jsonNode.get("endTime").asText(), DateTimeFormatter.ofPattern(TIME_STRING))
         );
     }
 
@@ -99,10 +103,10 @@ public class DBObjectParser {
             for (JsonNode node : jsonNode) {
                 schedules.add(new Schedule(
                         node.get("scheduleId").asInt(),
-                        node.get("courseId").asInt(),
+                        node.get(COURSE_ID).asInt(),
                         Weekday.valueOf(node.get("weekday").asText()),
-                        LocalTime.parse(node.get("startTime").asText(), DateTimeFormatter.ofPattern("HH:mm")),
-                        LocalTime.parse(node.get("endTime").asText(), DateTimeFormatter.ofPattern("HH:mm"))
+                        LocalTime.parse(node.get("startTime").asText(), DateTimeFormatter.ofPattern(TIME_STRING)),
+                        LocalTime.parse(node.get("endTime").asText(), DateTimeFormatter.ofPattern(TIME_STRING))
                 ));
             }
         }
@@ -119,8 +123,8 @@ public class DBObjectParser {
 
         return new Assignment(
                 jsonNode.get("assignmentId").asInt(),
-                jsonNode.get("studentId").asInt(),
-                jsonNode.get("courseId").asInt(),
+                jsonNode.get(STUDENT_ID).asInt(),
+                jsonNode.get(COURSE_ID).asInt(),
                 jsonNode.get("title").asText(),
                 jsonNode.get("description").asText(),
                 Timestamp.valueOf(jsonNode.get("deadline").asText()),
@@ -143,8 +147,8 @@ public class DBObjectParser {
 
                 assignments.add(new Assignment(
                         node.get("assignmentId").asInt(),
-                        node.get("studentId").asInt(),
-                        node.get("courseId").asInt(),
+                        node.get(STUDENT_ID).asInt(),
+                        node.get(COURSE_ID).asInt(),
                         node.get("title").asText(),
                         node.get("description").asText(),
                         Timestamp.valueOf(node.get("deadline").asText()),
