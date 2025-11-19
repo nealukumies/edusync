@@ -33,7 +33,7 @@ public class EditAssignmentController extends SubController {
         try {
             courses = ParseHandler.getCourses();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to initialize", e);
         }
     }
 
@@ -92,7 +92,7 @@ public class EditAssignmentController extends SubController {
             AssignmentHandler.updateAssignment(getMainController().getAssignment().getAssignmentId(), _course.getId(), _title, _desc, _datetime, getMainController().getAssignment().getStatus().getDbValue());
             getMainController().goToPrevPage();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to create assigment", e);
         }
     }
 
@@ -111,7 +111,6 @@ public class EditAssignmentController extends SubController {
                     time[1] = 0;
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 time[0] = 0;
                 time[1] = 0;
             }

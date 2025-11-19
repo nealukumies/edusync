@@ -3,23 +3,23 @@ package model.Singletons;
 import java.io.Serializable;
 
 public class Account implements Serializable {
-    private static Account INSTANCE;
+    private static Account instance;
 
     private int studentId;
     private String name;
     private String email;
     private String role;
 
-    private final String NOT_LOGGED_IN_TEXT = "Not logged in";
+    private final static String notLoggedInTxt = "Not logged in";
 
     private Account() {
     }
 
     public static Account getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Account();
+        if (instance == null) {
+            instance = new Account();
         }
-        return INSTANCE;
+        return instance;
     }
 
     public boolean isLoggedIn() {
@@ -42,8 +42,6 @@ public class Account implements Serializable {
 
             return true;
         } else {
-            System.out.println("Account already logged in! Logout first!");
-
             return false;
         }
     }
@@ -54,21 +52,21 @@ public class Account implements Serializable {
 
     public String getName() {
         if (name == null) {
-            return NOT_LOGGED_IN_TEXT;
+            return notLoggedInTxt;
         }
         return name;
     }
 
     public String getEmail() {
         if (email == null) {
-            return NOT_LOGGED_IN_TEXT;
+            return notLoggedInTxt;
         }
         return email;
     }
 
     public String getRole() {
         if (role == null) {
-            return NOT_LOGGED_IN_TEXT;
+            return notLoggedInTxt;
         }
         return role;
     }

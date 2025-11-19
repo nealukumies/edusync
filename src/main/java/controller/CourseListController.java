@@ -55,7 +55,6 @@ public class CourseListController extends SubController {
             courseListContent.getChildren().clear();
             generateCourseList();
         } catch (Exception e) {
-            e.printStackTrace();
             courseListContent.getChildren().clear();
             String errorLabel = MainView.getBundle().getString("error_title");
             Label label = new Label(errorLabel + ": " + e.getMessage());
@@ -79,7 +78,7 @@ public class CourseListController extends SubController {
         try {
             this.allAssignments = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to fetch assignments", e);
         }
     }
 

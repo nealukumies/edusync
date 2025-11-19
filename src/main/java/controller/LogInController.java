@@ -42,7 +42,6 @@ public class LogInController extends SubController {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
             errorMessage.setText(e.getMessage());
         }
     }

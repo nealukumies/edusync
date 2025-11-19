@@ -67,7 +67,7 @@ public class CourseController extends SubController {
             try {
                 schedules = ParseHandler.getSchedulesForCourse(course);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new IllegalStateException("Failed to add initialize", e);
             }
 
             displaySchedules();
@@ -80,7 +80,7 @@ public class CourseController extends SubController {
                     assignments.getChildren().add(tableView);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new IllegalStateException("Failed to initialize fully", e);
             }
         }
     }

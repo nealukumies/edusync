@@ -33,7 +33,7 @@ public class AddAssignmentController extends SubController {
         try {
             courses = ParseHandler.getCourses();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to initialize fully", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class AddAssignmentController extends SubController {
             AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
             getMainController().goToPrevPage();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to create assigment", e);
         }
     }
 
@@ -95,7 +95,6 @@ public class AddAssignmentController extends SubController {
                     time[1] = 0;
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 time[0] = 0;
                 time[1] = 0;
             }

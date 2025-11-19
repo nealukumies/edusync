@@ -233,7 +233,6 @@ public class MainController {
             subController.initializeFully();
             content.getChildren().add(root);
         } catch (IOException e) {
-            e.printStackTrace();
             Label error = new Label();
             error.getStyleClass().add("error");
             error.setText("Error: " + e.getMessage());

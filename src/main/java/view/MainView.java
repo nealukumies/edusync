@@ -85,18 +85,15 @@ public class MainView extends Application {
     public static boolean getSavedLanguage() {
         String filePath = "language.txt";
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String fullcode = br.readLine();
             setLanguage(Language.getLanguage(fullcode));
-            br.close();
             return true;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
+            throw new IllegalStateException("Failed to get saved language", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return false;
     }
 
     /**
@@ -104,16 +101,14 @@ public class MainView extends Application {
      */
     public static void saveLanguage() {
         String filePath = "language.txt";
+        byte[] data = (currentLanguage.getCode() + "-" + currentLanguage.getCountry())
+                .getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
-        try {
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write((currentLanguage.getCode() + "-" + currentLanguage.getCountry()).getBytes());
-            fos.close();
-
-        } catch (IOException e) {
-            System.out.println("An error occurred while creating the file: " + e.getMessage());
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(data);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to save language", e);
         }
-
     }
 
     /**

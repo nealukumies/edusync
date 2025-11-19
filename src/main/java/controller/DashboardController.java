@@ -86,7 +86,7 @@ public class DashboardController extends SubController {
                 throw new Exception(errorText);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Failed to load courses", e);
         }
     }
 

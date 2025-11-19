@@ -47,9 +47,7 @@ public class AssignmentList {
             }
             table.sort();
             return table;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
         return null;
     }
 
