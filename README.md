@@ -143,7 +143,7 @@ The project team conducted code review of both frontend and backend code using C
 of this assessment was to evaluate code quality, maintainability and adherence to best practices. A Code Review Report was written
 to document the findings and recommendations for improvement. The report can be found in the `doc` folder as `CodeReviewReport.pdf`.
 
-# Sonar Qube Analysis
+### Sonar Qube Analysis
 The following image shows the SonarQube analysis results for backend code quality.
 
 ![SonarQube Analysis](doc/SonarQube_backend.png)
