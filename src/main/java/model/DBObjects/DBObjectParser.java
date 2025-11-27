@@ -19,7 +19,7 @@ public class DBObjectParser {
     private static final String TIME_STRING = "HH:mm";
 
     public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
 
@@ -34,7 +34,7 @@ public class DBObjectParser {
     }
 
     public static Course parseCourse(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
 
@@ -51,8 +51,8 @@ public class DBObjectParser {
     }
 
     public static ArrayList<Course> parseCourseList(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
-            return null;
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
+            return new ArrayList<>();
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -74,7 +74,7 @@ public class DBObjectParser {
     }
 
     public static Schedule parseSchedule(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
 
@@ -91,8 +91,8 @@ public class DBObjectParser {
     }
 
     public static ArrayList<Schedule> parseScheduleList(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
-            return null;
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
+            return new ArrayList<>();
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -114,7 +114,7 @@ public class DBObjectParser {
     }
 
     public static Assignment parseAssignment(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
 
@@ -133,8 +133,8 @@ public class DBObjectParser {
     }
 
     public static ArrayList<Assignment> parseAssignmentList(HttpResponse<String> data) throws JsonProcessingException {
-        if (data.body() == null || data.body().isEmpty()) {
-            return null;
+        if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
+            return new ArrayList<>();
         }
 
         ObjectMapper mapper = new ObjectMapper();
