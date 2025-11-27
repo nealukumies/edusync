@@ -46,37 +46,14 @@ It also generates code coverage reports using JaCoCo.
 
 ---
 
-## Localisation
-The application supports three languages: English, Arabic, and Ukrainian. Default language is set to English. 
-To change the language, select your preferred language from the combobox in the header of the application. 
-The application will update the UI text accordingly as well as RTL/LTR layout based on the selected language.
+## Use Case Diagram
+![Use Case Diagram](doc/diagrams/UseCaseDiagram.jpg)
 
-The application is localized using Java Resource Bundles for each supported language. Translations were done with Google Translate and may not be perfect 
-as it is suggested to have a native speaker review them for accuracy. Localisation files are located in the `resources/Resource Bundle 'Messages'` directory as
-separate properties files for each language:
-- Messages_en_US.properties (English)
-- Messages_ar_DZ.properties (Arabic)
-- Messages_uk_UA.properties (Ukrainian)
-
-The acceptance criteria for localization includes:
-- The default language is English.
-- Users can select Arabic and Ukrainian from the language selection combobox.
-- All UI text is translated into the supported languages immediately after selecting the language.
-- The layout adjusts correctly for RTL languages.
-- Users can switch languages seamlessly without restarting the application.
-
-These criteria were tested manually by switching languages and verifying the translations and layout adjustments. 
-
-Database localisation:
-
-The system is primarily driven by user input and therefore static content translations are handled at the frontend.
-
-- The database is configured to use UTF-8 encoding, which allows storage of text in multiple languages (including English, Arabic and Ukrainian).
-- All tables and columns that store user input support UTF-8 characters.
-- Users can enter content in the available languages and it is stored in the database correctly.
-- The application does not have static content that requires localization.
-- To avoid unnecessary duplication of static content, all UI enums (Weekday, Status) that represent fixed options are translated in the frontend using Resource Bundles.
-- The application was tested by saving and retrieving Arabic and Ukrainian text.
+This use case diagram illustrates the main functionalities available to students using the EduSync application. 
+A student can register, log in and out as needed. Once logged in, the student can add courses to their course list,
+assign schedules to those courses and create assignments for those courses. They can also modify their courses, tasks
+and schedules. Student can view their schedule through the calendar view. The language of the application can be changed
+at any time.
 
 ---
 
@@ -126,3 +103,51 @@ The application window will open, and you can start using the app.
    ```
 
 ---
+
+## Localisation
+The application supports three languages: English, Arabic, and Ukrainian. Default language is set to English.
+To change the language, select your preferred language from the combobox in the header of the application.
+The application will update the UI text accordingly as well as RTL/LTR layout based on the selected language.
+
+The application is localized using Java Resource Bundles for each supported language. Translations were done with Google Translate and may not be perfect
+as it is suggested to have a native speaker review them for accuracy. Localisation files are located in the `resources/Resource Bundle 'Messages'` directory as
+separate properties files for each language:
+- Messages_en_US.properties (English)
+- Messages_ar_DZ.properties (Arabic)
+- Messages_uk_UA.properties (Ukrainian)
+
+The acceptance criteria for localization includes:
+- The default language is English.
+- Users can select Arabic and Ukrainian from the language selection combobox.
+- All UI text is translated into the supported languages immediately after selecting the language.
+- The layout adjusts correctly for RTL languages.
+- Users can switch languages seamlessly without restarting the application.
+
+These criteria were tested manually by switching languages and verifying the translations and layout adjustments.
+
+Database localisation:
+
+The system is primarily driven by user input and therefore static content translations are handled at the frontend.
+
+- The database is configured to use UTF-8 encoding, which allows storage of text in multiple languages (including English, Arabic and Ukrainian).
+- All tables and columns that store user input support UTF-8 characters.
+- Users can enter content in the available languages and it is stored in the database correctly.
+- The application does not have static content that requires localization.
+- To avoid unnecessary duplication of static content, all UI enums (Weekday, Status) that represent fixed options are translated in the frontend using Resource Bundles.
+- The application was tested by saving and retrieving Arabic and Ukrainian text.
+
+---
+
+## Code Quality
+The project team conducted code review of both frontend and backend code using CheckStyle, PMD, Spotbugs and SonarQube. The objective
+of this assessment was to evaluate code quality, maintainability and adherence to best practices. A Code Review Report was written
+to document the findings and recommendations for improvement. The report can be found in the `doc` folder as `CodeReviewReport.pdf`.
+
+# Sonar Qube Analysis
+The following image shows the SonarQube analysis results for backend code quality.
+
+![SonarQube Analysis](doc/SonarQube_backend.png)
+
+The following image shows the SonarQube analysis results for frontend code quality.
+
+![SonarQube Analysis](doc/SonarQube_frontend.png)
