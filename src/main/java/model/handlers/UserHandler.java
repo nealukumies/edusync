@@ -37,11 +37,6 @@ public class UserHandler {
                 final String email = jsonNode.get("email").asText();
                 final String role = jsonNode.get("role").asText();
 
-                System.out.println(jsonNode.get("studentId").asInt());
-                System.out.println(jsonNode.get("name").asText());
-                System.out.println(jsonNode.get("email").asText());
-                System.out.println(jsonNode.get("role").asText());
-
                 final Account account = Account.getInstance();
                 if (!account.setAccountDetails(studentId, name, email, role)) {
                     return -1;
