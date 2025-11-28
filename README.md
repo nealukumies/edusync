@@ -151,3 +151,13 @@ The following image shows the SonarQube analysis results for backend code qualit
 The following image shows the SonarQube analysis results for frontend code quality.
 
 ![SonarQube Analysis](doc/SonarQube_frontend.png)
+
+---
+
+## Testing
+The application underwent both functional and non-functional testing.
+- Functional testing: Manual tests, user acceptance test and heuristic evaluation
+- Error handling: NullPointerExceptions were detected and fixed
+- Integration testing: Manual and non-functional tests confirmed smooth integration between frontend and backend services
+- Unit testing: Backend unit tests achieved 83% code coverage, necessary frontend features were unit-tested and JavaFX components were tested manually
+  
