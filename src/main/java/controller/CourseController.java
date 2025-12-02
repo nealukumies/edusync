@@ -37,7 +37,7 @@ public class CourseController extends SubController {
     @FXML
     private Button editBtn;
     private Course course = null;
-    private List<Assignment> _assignments;
+    private List<Assignment> assignmentsList;
     private List<Schedule> schedules;
 
     @Override
@@ -51,18 +51,10 @@ public class CourseController extends SubController {
             String courseEnding = MainView.getBundle().getString("course_ending");
             desc.setText(courseStarted + " " + start + " | " + courseEnding + " " + end);
 
-            addAssignment.setOnMouseClicked(e -> {
-                getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
-            });
-            addSchedule.setOnMouseClicked(e -> {
-                getMainController().changePage(Page.ADD_SCHEDULE_PAGE);
-            });
-            deleteBtn.setOnMouseClicked(e -> {
-                deleteThisCourse();
-            });
-            editBtn.setOnMouseClicked(e -> {
-                editThisCourse();
-            });
+            addAssignment.setOnMouseClicked(e -> getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE));
+            addSchedule.setOnMouseClicked(e -> getMainController().changePage(Page.ADD_SCHEDULE_PAGE));
+            deleteBtn.setOnMouseClicked(e -> deleteThisCourse());
+            editBtn.setOnMouseClicked(e -> editThisCourse());
 
             try {
                 schedules = ParseHandler.getSchedulesForCourse(course);
@@ -72,10 +64,10 @@ public class CourseController extends SubController {
 
             displaySchedules();
             try {
-                _assignments = ParseHandler.getAssignmentsForCourse(course);
+                assignmentsList = ParseHandler.getAssignmentsForCourse(course);
                 AssignmentList assignmentList = new AssignmentList(this.getMainController());
                 assignments.getChildren().clear();
-                TableView<ViewableAssignment> tableView = assignmentList.createList(_assignments, List.of(course));
+                TableView<ViewableAssignment> tableView = assignmentList.createList(assignmentsList, List.of(course));
                 if (tableView != null) {
                     assignments.getChildren().add(tableView);
                 }
@@ -101,9 +93,7 @@ public class CourseController extends SubController {
                 scheduleDay.getStyleClass().add(textClass);
                 scheduleTime.getStyleClass().add(textClass);
                 del.getStyleClass().add(textClass);
-                del.setOnAction(e -> {
-                    deleteSchedule(schedule.getScheduleId());
-                });
+                del.setOnAction(e -> deleteSchedule(schedule.getScheduleId()));
                 hBox.setSpacing(30);
                 hBox.getChildren().addAll(scheduleDay, scheduleTime, del);
                 scheduleContainer.getChildren().add(hBox);
@@ -121,7 +111,7 @@ public class CourseController extends SubController {
         alert.setHeaderText(deleteScheduleHeader);
         alert.setContentText(deleteScheduleContent);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             ScheduleHandler.deleteSchedule(scheduleId);
             // Refresh current page
             getMainController().goToPrevPage();
@@ -139,7 +129,7 @@ public class CourseController extends SubController {
         alert.setHeaderText(deleteCourseHeader);
         alert.setContentText(deleteCourseContent);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             CourseHandler.deleteCourse(course.getCourseId());
             getMainController().setCourse(null);
             getMainController().goToPrevPage();

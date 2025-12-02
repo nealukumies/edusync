@@ -27,15 +27,14 @@ public class CalendarModern extends VBox {
         weekday = checkWeekday(col);
         List<String> courseNames = new ArrayList<>();
         for (Schedule schedule : schedules){
-            if(schedule.getWeekday() == weekday){
-                if(schedule.getStartTime().getHour() <= row && row < schedule.getEndTime().getHour()){
+            if(schedule.getWeekday() == weekday && schedule.getStartTime().getHour() <= row && row < schedule.getEndTime().getHour()){
                     for(Course course : courses){
                         if(course.getCourseId() == schedule.getCourseId()){
                             courseNames.add(course.getCourseName());
                         }
                     }
                 }
-            }
+
         }
         return courseNames;
     }

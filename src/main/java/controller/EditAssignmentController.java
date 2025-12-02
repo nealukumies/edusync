@@ -53,12 +53,8 @@ public class EditAssignmentController extends SubController {
     public void initializeFully() {
         populateCourseList();
         setStartingValues();
-        submit.setOnAction(event -> {
-            createAssignment();
-        });
-        cancel.setOnAction(event -> {
-            this.getMainController().goToPrevPage();
-        });
+        submit.setOnAction(event -> createAssignment());
+        cancel.setOnAction(event -> this.getMainController().goToPrevPage());
     }
 
     public void setStartingValues() {
@@ -67,13 +63,13 @@ public class EditAssignmentController extends SubController {
         title.setText(getMainController().getAssignment().getTitle());
         desc.setText(getMainController().getAssignment().getDescription());
         dateSelect.setValue(getMainController().getAssignment().getDeadline().toLocalDateTime().toLocalDate());
-        int[] time = new int[2];
-        int hours = getMainController().getAssignment().getDeadline().getHours();
-        int minutes = getMainController().getAssignment().getDeadline().getMinutes();
-        time[0] = hours;
-        time[1] = minutes;
-        String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
-        timeSelect.setText(_time);
+        int[] timeInt = new int[2];
+        int hours = getMainController().getAssignment().getDeadline().toLocalDateTime().getHour();
+        int minutes = getMainController().getAssignment().getDeadline().toLocalDateTime().getMinute();
+        timeInt[0] = hours;
+        timeInt[1] = minutes;
+        String timeString = String.format("%02d", timeInt[0]) + ":" + String.format("%02d", timeInt[1]) + ":" + String.format("%02d", 0);
+        timeSelect.setText(timeString);
     }
 
     public void createAssignment() {
@@ -83,13 +79,13 @@ public class EditAssignmentController extends SubController {
 
         try {
             parseTimeString(timeSelect.getText());
-            CourseOption _course = courseSelect.getValue();
-            String _title = title.getText();
-            String _desc = desc.getText();
-            LocalDate _date = dateSelect.getValue();
-            String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
-            String _datetime = _date.toString() + " " + _time;
-            AssignmentHandler.updateAssignment(getMainController().getAssignment().getAssignmentId(), _course.getId(), _title, _desc, _datetime, getMainController().getAssignment().getStatus().getDbValue());
+            CourseOption courseOption = courseSelect.getValue();
+            String titleString = title.getText();
+            String descString = desc.getText();
+            LocalDate dateLocalDate = dateSelect.getValue();
+            String timeString = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
+            String dateTimeString = dateLocalDate.toString() + " " + timeString;
+            AssignmentHandler.updateAssignment(getMainController().getAssignment().getAssignmentId(), courseOption.getId(), titleString, descString, dateTimeString, getMainController().getAssignment().getStatus().getDbValue());
             getMainController().goToPrevPage();
         } catch (Exception e) {
             throw new IllegalStateException("Failed to create assigment", e);

@@ -68,7 +68,6 @@ public class CourseListController extends SubController {
         courseListContent.getChildren().clear();
 
         for (Course course : courses) {
-            System.out.println(this.getMainController());
             CourseCard courseCard = new CourseCard(course, this, this.getMainController());
             courseListContent.getChildren().add(courseCard.create());
         }

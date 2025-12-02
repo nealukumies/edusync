@@ -43,7 +43,6 @@ public class AssignmentTableController extends SubController {
                 link.setOnAction(event -> {
                     ViewableAssignment viewableAssignment = getTableRow().getItem();
                     if (viewableAssignment != null) {
-                        System.out.println(getMainController());
                         getMainController().setAssignment(viewableAssignment.getAssignment());
                         getMainController().setCourse(viewableAssignment.getCourseObject());
                         getMainController().changePage(Page.ASSIGNMENT_PAGE);
@@ -73,7 +72,6 @@ public class AssignmentTableController extends SubController {
                 link.setOnAction(event -> {
                     ViewableAssignment viewableAssignment = getTableRow().getItem();
                     if (viewableAssignment != null) {
-                        System.out.println(getMainController());
                         getMainController().setCourse(viewableAssignment.getCourseObject());
                         getMainController().changePage(Page.COURSE_PAGE);
                     }

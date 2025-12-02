@@ -46,15 +46,15 @@ public class AssignmentController extends SubController {
         initializeStatus();
 
         saveButton.setOnAction(e -> {
-            int _id = assignment.getAssignmentId();
-            int _courseId = course.getCourseId();
-            String _title = assignment.getTitle();
-            String _desc = assignment.getDescription();
+            int idInt = assignment.getAssignmentId();
+            int courseIdInt = course.getCourseId();
+            String titleString = assignment.getTitle();
+            String descString = assignment.getDescription();
 
-            String _deadline = assignment.getDeadline().toString();
-            String _status = status.getSelectionModel().getSelectedItem().getDbValue();
+            String deadlineString = assignment.getDeadline().toString();
+            String statusString = status.getSelectionModel().getSelectedItem().getDbValue();
 
-            AssignmentHandler.updateAssignment(_id, _courseId, _title, _desc, _deadline, _status);
+            AssignmentHandler.updateAssignment(idInt, courseIdInt, titleString, descString, deadlineString, statusString);
             getMainController().goToPrevPage();
         });
 

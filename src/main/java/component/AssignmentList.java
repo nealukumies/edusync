@@ -47,7 +47,9 @@ public class AssignmentList {
             }
             table.sort();
             return table;
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            //empty catch block to ignore error
+        }
         return null;
     }
 

@@ -9,7 +9,6 @@ import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
 
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class ParseHandler {
         if (res != null) {
             return DBObjectParser.parseCourseList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<Assignment> getAssignments() throws JsonProcessingException {
@@ -31,7 +30,7 @@ public class ParseHandler {
         if (res != null) {
             return DBObjectParser.parseAssignmentList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<Assignment> getAssignmentsForCourse(Course course) throws JsonProcessingException {
@@ -50,6 +49,6 @@ public class ParseHandler {
         if (res != null) {
             return DBObjectParser.parseScheduleList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 }
