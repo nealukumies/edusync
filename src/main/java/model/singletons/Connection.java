@@ -39,7 +39,7 @@ public class Connection {
         HttpResponse<String> response = null;
 
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            final HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(getBackendUrl() + endpoint))
                     .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
                     .header(ROLE, acc.getRole())
@@ -62,7 +62,7 @@ public class Connection {
         HttpResponse<String> response = null;
 
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            final HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(getBackendUrl() + endpoint))
                     .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
                     .header(ROLE, acc.getRole())
@@ -85,7 +85,7 @@ public class Connection {
         HttpResponse<String> response = null;
 
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            final HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(getBackendUrl() + endpoint))
                     .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
                     .header(ROLE, acc.getRole())
@@ -108,7 +108,7 @@ public class Connection {
         HttpResponse<String> response = null;
 
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            final HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(getBackendUrl() + endpoint))
                     .header(CONTENT_TYPE, CONTENT_TYPE_JSON)
                     .header(ROLE, acc.getRole())

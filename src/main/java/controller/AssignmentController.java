@@ -45,27 +45,27 @@ public class AssignmentController extends SubController {
         initializeStatus();
 
         saveButton.setOnAction(e -> {
-            int idInt = assignment.getAssignmentId();
-            int courseIdInt = course.getCourseId();
-            String titleString = assignment.getTitle();
-            String descString = assignment.getDescription();
+            final int idInt = assignment.getAssignmentId();
+            final int courseIdInt = course.getCourseId();
+            final String titleString = assignment.getTitle();
+            final String descString = assignment.getDescription();
 
-            String deadlineString = assignment.getDeadline().toString();
-            String statusString = status.getSelectionModel().getSelectedItem().getDbValue();
+            final String deadlineString = assignment.getDeadline().toString();
+            final String statusString = status.getSelectionModel().getSelectedItem().getDbValue();
 
             AssignmentHandler.updateAssignment(idInt, courseIdInt, titleString, descString, deadlineString, statusString);
             getMainController().goToPrevPage();
         });
 
         deleteButton.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            String titleOnAction = MainView.getBundle().getString("delete_alert_title");
-            String header = MainView.getBundle().getString("delete_alert_header");
-            String content = MainView.getBundle().getString("delete_alert_content");
+            final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            final String titleOnAction = MainView.getBundle().getString("delete_alert_title");
+            final String header = MainView.getBundle().getString("delete_alert_header");
+            final String content = MainView.getBundle().getString("delete_alert_content");
             alert.setTitle(titleOnAction);
             alert.setHeaderText(header);
             alert.setContentText(content);
-            Optional<ButtonType> result = alert.showAndWait();
+            final Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 AssignmentHandler.deleteAssignment(assignment.getAssignmentId());
                 getMainController().setAssignment(null);

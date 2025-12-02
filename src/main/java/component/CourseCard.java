@@ -27,12 +27,12 @@ public class CourseCard {
     }
 
     public VBox create() {
-        VBox card = new VBox();
+        final VBox card = new VBox();
         card.setSpacing(10);
         card.getStyleClass().add("course-card");
 
         // Start by adding title
-        Hyperlink courseName = new Hyperlink(course.getCourseName());
+        final Hyperlink courseName = new Hyperlink(course.getCourseName());
         courseName.setWrapText(true);
         courseName.getStyleClass().add("medium-title");
 
@@ -42,21 +42,21 @@ public class CourseCard {
         });
 
         // Add start and end dates
-        Label courseDateTimeline = new Label("");
+        final Label courseDateTimeline = new Label("");
         courseDateTimeline.setWrapText(true);
         courseDateTimeline.getStyleClass().add("medium-text");
-        String start = course.getStartDate().toString();
-        String end = course.getEndDate().toString();
+        final String start = course.getStartDate().toString();
+        final String end = course.getEndDate().toString();
         courseDateTimeline.setText(start + " - " + end);
 
         // Add assignments
-        String assignmentText = MainView.getBundle().getString("No_Assignments");
-        Label assignmentsTitle = new Label(assignmentText);
+        final String assignmentText = MainView.getBundle().getString("No_Assignments");
+        final Label assignmentsTitle = new Label(assignmentText);
         assignmentsTitle.getStyleClass().add("medium-text");
         assignmentsTitle.setWrapText(true);
-        List<Assignment> assignments = courseListController.getAssignmentsByCourse(this.course.getCourseId());
+        final List<Assignment> assignments = courseListController.getAssignmentsByCourse(this.course.getCourseId());
         if (assignments != null) {
-            String assignmentsLabelText = MainView.getBundle().getString("Assignments");
+            final String assignmentsLabelText = MainView.getBundle().getString("Assignments");
             assignmentsTitle.setText(assignmentsLabelText + " \u200E(" + assignments.size() + ")");
         }
 

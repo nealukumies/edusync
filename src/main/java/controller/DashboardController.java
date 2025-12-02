@@ -49,30 +49,30 @@ public class DashboardController extends SubController {
 
     public void loadAssignments() {
         try {
-            List<Assignment> data = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
+            final List<Assignment> data = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
             if (data != null) {
                 assignmentList.addAll(data);
                 generateAssignments();
             } else {
-                String errorText = MainView.getBundle().getString("Assignments_not_found_error");
+                final String errorText = MainView.getBundle().getString("Assignments_not_found_error");
                 throw new DataLoadException(errorText);
             }
         } catch (Exception e) {
             assignments.getChildren().clear();
-            String labelText = MainView.getBundle().getString("no_assignments_label");
-            Label label = new Label(labelText);
+            final String labelText = MainView.getBundle().getString("no_assignments_label");
+            final Label label = new Label(labelText);
             assignments.getChildren().add(label);
         }
     }
 
     public void loadCourses() {
         try {
-            List<Course> data = DBObjectParser.parseCourseList(CourseHandler.getCourses());
+            final List<Course> data = DBObjectParser.parseCourseList(CourseHandler.getCourses());
             if (data != null) {
                 courses.addAll(data);
                 generateAssignments();
             } else {
-                String errorText = MainView.getBundle().getString("Assignments_not_found_error");
+                final String errorText = MainView.getBundle().getString("Assignments_not_found_error");
                 throw new DataLoadException(errorText);
             }
         } catch (Exception e) {
@@ -83,8 +83,8 @@ public class DashboardController extends SubController {
     public void generateAssignments() {
         assignments.getChildren().clear();
         if (!assignmentList.isEmpty()) {
-            AssignmentList al = new AssignmentList(getMainController());
-            TableView<ViewableAssignment> table = al.createList(assignmentList, courses);
+            final AssignmentList al = new AssignmentList(getMainController());
+            final TableView<ViewableAssignment> table = al.createList(assignmentList, courses);
             assignments.getChildren().add(table);
             table.sort();
         }

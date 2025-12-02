@@ -50,7 +50,7 @@ class UserHandlerTest {
     @Test
     void removeAccountFile() {
         UserHandler.logoutUser();
-        File f = new File("account.txt");
+        final File f = new File("account.txt");
         assertFalse(f.exists());
     }
 

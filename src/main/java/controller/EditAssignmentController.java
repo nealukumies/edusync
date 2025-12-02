@@ -48,17 +48,17 @@ public class EditAssignmentController extends SubController {
     }
 
     public void setStartingValues() {
-        CourseOption opt = new CourseOption(getMainController().getCourse().getCourseId(), getMainController().getCourse().getCourseName());
+        final CourseOption opt = new CourseOption(getMainController().getCourse().getCourseId(), getMainController().getCourse().getCourseName());
         courseSelect.setValue(opt);
         title.setText(getMainController().getAssignment().getTitle());
         desc.setText(getMainController().getAssignment().getDescription());
         dateSelect.setValue(getMainController().getAssignment().getDeadline().toLocalDateTime().toLocalDate());
-        int[] timeInt = new int[2];
-        int hours = getMainController().getAssignment().getDeadline().toLocalDateTime().getHour();
-        int minutes = getMainController().getAssignment().getDeadline().toLocalDateTime().getMinute();
+        final int[] timeInt = new int[2];
+        final int hours = getMainController().getAssignment().getDeadline().toLocalDateTime().getHour();
+        final int minutes = getMainController().getAssignment().getDeadline().toLocalDateTime().getMinute();
         timeInt[0] = hours;
         timeInt[1] = minutes;
-        String timeString = String.format("%02d", timeInt[0]) + ":" + String.format("%02d", timeInt[1]) + ":" + String.format("%02d", 0);
+        final String timeString = String.format("%02d", timeInt[0]) + ":" + String.format("%02d", timeInt[1]) + ":" + String.format("%02d", 0);
         timeSelect.setText(timeString);
     }
 

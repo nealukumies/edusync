@@ -20,7 +20,7 @@ class CourseHandlerTest {
 
     @Test
     void createCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
+        final int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertNotEquals(-1, courseId);
 
@@ -31,14 +31,14 @@ class CourseHandlerTest {
     void createCourseNotLoggedIn() throws JsonProcessingException {
         Account.getInstance().clearAccount();
 
-        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
+        final int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertEquals(-1, courseId);
     }
 
     @Test
     void updateCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse(test102String, startDateString, endDateString);
+        final int courseId = CourseHandler.createCourse(test102String, startDateString, endDateString);
 
         assertEquals(1, CourseHandler.updateCourse(courseId, test102String, startDateString, endDateString));
 
@@ -49,14 +49,14 @@ class CourseHandlerTest {
     void updateCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
 
-        int result = CourseHandler.updateCourse(1, test101String, startDateString, endDateString);
+        final int result = CourseHandler.updateCourse(1, test101String, startDateString, endDateString);
 
         assertEquals(1, result);
     }
 
     @Test
     void deleteCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
+        final int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertEquals(1, CourseHandler.deleteCourse(courseId));
     }
@@ -65,7 +65,7 @@ class CourseHandlerTest {
     void deleteCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
 
-        int result = CourseHandler.deleteCourse(1);
+        final int result = CourseHandler.deleteCourse(1);
 
         assertEquals(-1, result);
     }

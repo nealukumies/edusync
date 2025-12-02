@@ -28,10 +28,10 @@ public class CalendarModern extends VBox {
 
     List<String> checkSchedule(int col, int row){
         weekday = checkWeekday(col);
-        List<String> courseNames = new ArrayList<>();
-        for (Schedule schedule : schedules){
+        final List<String> courseNames = new ArrayList<>();
+        for (final Schedule schedule : schedules){
             if(schedule.getWeekday() == weekday && schedule.getStartTime().getHour() <= row && row < schedule.getEndTime().getHour()){
-                    for(Course course : courses){
+                    for(final Course course : courses){
                         if(course.getCourseId() == schedule.getCourseId()){
                             courseNames.add(course.getCourseName());
                         }
@@ -57,12 +57,12 @@ public class CalendarModern extends VBox {
 
 
     public CalendarModern() {
-        HttpResponse<String> scheduleResponse = ScheduleHandler.getSchedulesForUser();
+        final HttpResponse<String> scheduleResponse = ScheduleHandler.getSchedulesForUser();
         if (scheduleResponse != null) {
             loadSchedules(scheduleResponse);
         }
 
-        HttpResponse<String> courseResponse = CourseHandler.getCourses();
+        final HttpResponse<String> courseResponse = CourseHandler.getCourses();
         if (courseResponse != null) {
             loadCourses(courseResponse);
         }
@@ -89,34 +89,34 @@ public class CalendarModern extends VBox {
 
     private void populateCourseMap() {
         courseNameById.clear();
-        for (Course c : courses) {
+        for (final Course c : courses) {
             courseNameById.put(c.getCourseId(), c.getCourseName());
         }
     }
 
     private void buildCalendarGrid(boolean hasScheduleResponse) {
         this.setPrefSize(1200, 600);
-        GridPane calendarGrid = new GridPane();
+        final GridPane calendarGrid = new GridPane();
         calendarGrid.setPrefSize(1200, 600);
         calendarGrid.setHgap(0);
         calendarGrid.setVgap(0);
 
         for (int col = 0; col < 7; col++) {
-            Label dateLabel = new Label(LocalDate.now().plusDays(col).format(DateTimeFormatter.ofPattern("EEE d/M")));
+            final Label dateLabel = new Label(LocalDate.now().plusDays(col).format(DateTimeFormatter.ofPattern("EEE d/M")));
             dateLabel.setWrapText(true);
             dateLabel.setStyle("-fx-text-fill: #ffffff");
             calendarGrid.add(dateLabel, col + 1, 0);
         }
 
         for (int row = 0; row < 24; row++) {
-            Label timeLabel = new Label(String.format("%02d:00", row));
+            final Label timeLabel = new Label(String.format("%02d:00", row));
             timeLabel.setStyle("-fx-text-fill: #ffffff");
             calendarGrid.add(timeLabel, 0, row + 1);
         }
 
         for (int col = 0; col < 7; col++) {
             for (int row = 0; row < 24; row++) {
-                VBox cell = createCell(hasScheduleResponse, col, row);
+                final VBox cell = createCell(hasScheduleResponse, col, row);
                 calendarGrid.add(cell, col + 1, row + 1);
             }
         }
@@ -124,12 +124,12 @@ public class CalendarModern extends VBox {
     }
 
     private VBox createCell(boolean hasScheduleResponse, int col, int row) {
-        VBox cell = new VBox();
+        final VBox cell = new VBox();
         if (hasScheduleResponse) {
-            List<String> courseNames = checkSchedule(col, row);
+            final List<String> courseNames = checkSchedule(col, row);
             if (!courseNames.isEmpty()) {
-                for (String courseName : courseNames) {
-                    Label label = new Label(courseName);
+                for (final String courseName : courseNames) {
+                    final Label label = new Label(courseName);
                     label.setStyle("-fx-text-fill: #000000");
                     cell.getChildren().add(label);
                 }

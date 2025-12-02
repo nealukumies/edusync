@@ -32,17 +32,17 @@ public class AssignmentList {
             return null;
         }
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(AssignmentList.class.getResource("/components/AssignmentTable.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(AssignmentList.class.getResource("/components/AssignmentTable.fxml"));
             fxmlLoader.setResources(MainView.getBundle());
-            TableView<ViewableAssignment> table = fxmlLoader.load();
-            SubController subController = fxmlLoader.getController();
+            final TableView<ViewableAssignment> table = fxmlLoader.load();
+            final SubController subController = fxmlLoader.getController();
             subController.setMainViewController(mainController);
             subController.initializeFully();
-            for (Assignment assignment : assignmentList) {
-                int courseId = assignment.getCourseId() != null ? assignment.getCourseId() : -1;
-                Course course = getCourse(courses, courseId);
+            for (final Assignment assignment : assignmentList) {
+                final int courseId = assignment.getCourseId() != null ? assignment.getCourseId() : -1;
+                final Course course = getCourse(courses, courseId);
 
-                ViewableAssignment viewableAssignment = new ViewableAssignment(assignment, course);
+                final ViewableAssignment viewableAssignment = new ViewableAssignment(assignment, course);
                 table.getItems().add(viewableAssignment);
             }
             table.sort();
@@ -61,7 +61,7 @@ public class AssignmentList {
      * @return
      */
     public Course getCourse(List<Course> courses, int courseId) {
-        for (Course c : courses) {
+        for (final Course c : courses) {
             if (c.getCourseId() == courseId) {
                 return c;
             }

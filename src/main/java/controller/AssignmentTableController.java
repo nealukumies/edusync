@@ -54,7 +54,7 @@ public class AssignmentTableController extends SubController {
 
         public TitleCell() {
             link.setOnAction(event -> {
-                ViewableAssignment viewableAssignment = getTableRow().getItem();
+                final ViewableAssignment viewableAssignment = getTableRow().getItem();
                 if (viewableAssignment != null) {
                     getMainController().setAssignment(viewableAssignment.getAssignment());
                     getMainController().setCourse(viewableAssignment.getCourseObject());
@@ -66,7 +66,7 @@ public class AssignmentTableController extends SubController {
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
-            ViewableAssignment viewableAssignment = getTableRow().getItem();
+            final ViewableAssignment viewableAssignment = getTableRow().getItem();
             if (empty || viewableAssignment == null) {
                 setGraphic(null);
                 return;
@@ -81,7 +81,7 @@ public class AssignmentTableController extends SubController {
 
         public CourseCell() {
             link.setOnAction(event -> {
-                ViewableAssignment viewableAssignment = getTableRow().getItem();
+                final ViewableAssignment viewableAssignment = getTableRow().getItem();
                 if (viewableAssignment != null) {
                     getMainController().setCourse(viewableAssignment.getCourseObject());
                     getMainController().changePage(Page.COURSE_PAGE);
@@ -92,7 +92,7 @@ public class AssignmentTableController extends SubController {
         @Override
         protected void updateItem(Integer item, boolean empty) {
             super.updateItem(item, empty);
-            ViewableAssignment viewableAssignment = getTableRow().getItem();
+            final ViewableAssignment viewableAssignment = getTableRow().getItem();
             if (empty || viewableAssignment == null) {
                 setGraphic(null);
                 return;

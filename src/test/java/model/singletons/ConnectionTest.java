@@ -8,8 +8,8 @@ class ConnectionTest {
 
     @Test
     void getInstance() {
-        Connection instance1 = Connection.getInstance();
-        Connection instance2 = Connection.getInstance();
+        final Connection instance1 = Connection.getInstance();
+        final Connection instance2 = Connection.getInstance();
         assertSame(instance1, instance2);
     }
 }

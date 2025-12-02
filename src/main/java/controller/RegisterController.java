@@ -33,9 +33,9 @@ public class RegisterController extends SubController {
 
     public void register() {
         if (isUsernameValid() && isPasswordValid() && isEmailValid()) {
-            String nameString = username.getText();
-            String emailString = email.getText();
-            String passwordString = password.getText();
+            final String nameString = username.getText();
+            final String emailString = email.getText();
+            final String passwordString = password.getText();
             try {
                 UserHandler.registerUser(nameString, emailString, passwordString);
                 getMainController().goToPrevPage();
@@ -47,7 +47,7 @@ public class RegisterController extends SubController {
 
     public boolean isUsernameValid() {
         if (username.getText().isEmpty()) {
-            String errorText = MainView.getBundle().getString("username_empty_error");
+            final String errorText = MainView.getBundle().getString("username_empty_error");
             errorMessage.setText(errorText);
             return false;
         }
@@ -56,12 +56,12 @@ public class RegisterController extends SubController {
 
     public boolean isPasswordValid() {
         if (password.getText().length() < 3) {
-            String errorText = MainView.getBundle().getString("password_length_error");
+            final String errorText = MainView.getBundle().getString("password_length_error");
             errorMessage.setText(errorText);
             return false;
         }
         if (!password.getText().equals(confirmPassword.getText())) {
-            String errorText = MainView.getBundle().getString("password_mismatch_error");
+            final String errorText = MainView.getBundle().getString("password_mismatch_error");
             errorMessage.setText(errorText);
             return false;
         }
@@ -70,7 +70,7 @@ public class RegisterController extends SubController {
 
     public boolean isEmailValid() {
         if (!email.getText().contains("@") || !email.getText().contains(".")) {
-            String errorText = MainView.getBundle().getString("invalid_email_error");
+            final String errorText = MainView.getBundle().getString("invalid_email_error");
             errorMessage.setText(errorText);
             return false;
         }

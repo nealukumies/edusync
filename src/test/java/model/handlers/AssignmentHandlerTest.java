@@ -51,7 +51,7 @@ class AssignmentHandlerTest {
 
     @Test
     void createAssignment() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
         assertTrue(assignmentId > 0);
 
         AssignmentHandler.deleteAssignment(assignmentId);
@@ -60,7 +60,7 @@ class AssignmentHandlerTest {
     @Test
     void createAssignmentNotLoggedIn() throws JsonProcessingException {
         Account.getInstance().clearAccount();
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
         assertEquals(-1, assignmentId);
     }
 
@@ -71,7 +71,7 @@ class AssignmentHandlerTest {
 
     @Test
     void updateAssignment() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
 
         assertEquals(1, AssignmentHandler.updateAssignment(assignmentId, 174, updatedAssignmentString, updatedTestString, deadlineString, completedString));
 
@@ -85,7 +85,7 @@ class AssignmentHandlerTest {
 
     @Test //x
     void updateAssignmentNotLoggedIn() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
 
         Account.getInstance().clearAccount();
 
@@ -97,7 +97,7 @@ class AssignmentHandlerTest {
 
     @Test
     void deleteAssignment() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
 
         assertEquals(1, AssignmentHandler.deleteAssignment(assignmentId));
     }
@@ -109,7 +109,7 @@ class AssignmentHandlerTest {
 
     @Test //x
     void deleteAssignmentNotLoggedIn() throws JsonProcessingException {
-        int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
+        final int assignmentId = AssignmentHandler.createAssignment(174, testAssignmentTitle, testString, deadlineString);
         Account.getInstance().clearAccount();
 
         assertEquals(1, AssignmentHandler.deleteAssignment(assignmentId));

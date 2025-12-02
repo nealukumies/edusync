@@ -18,7 +18,7 @@ public class ParseHandler {
     private ParseHandler() {}
 
     public static List<Course> getCourses() throws JsonProcessingException {
-        HttpResponse<String> res = CourseHandler.getCourses();
+        final HttpResponse<String> res = CourseHandler.getCourses();
         if (res != null) {
             return DBObjectParser.parseCourseList(res);
         }
@@ -26,7 +26,7 @@ public class ParseHandler {
     }
 
     public static List<Assignment> getAssignments() throws JsonProcessingException {
-        HttpResponse<String> res = AssignmentHandler.getAssignmentsForUser();
+        final HttpResponse<String> res = AssignmentHandler.getAssignmentsForUser();
         if (res != null) {
             return DBObjectParser.parseAssignmentList(res);
         }
@@ -34,9 +34,9 @@ public class ParseHandler {
     }
 
     public static List<Assignment> getAssignmentsForCourse(Course course) throws JsonProcessingException {
-        List<Assignment> assignments = new ArrayList<>();
-        List<Assignment> data = getAssignments();
-        for (Assignment assignment : data) {
+        final List<Assignment> assignments = new ArrayList<>();
+        final List<Assignment> data = getAssignments();
+        for (final Assignment assignment : data) {
             if (assignment.getCourseId() == course.getCourseId()) {
                 assignments.add(assignment);
             }
@@ -45,7 +45,7 @@ public class ParseHandler {
     }
 
     public static List<Schedule> getSchedulesForCourse(Course course) throws JsonProcessingException {
-        HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
+        final HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
         if (res != null) {
             return DBObjectParser.parseScheduleList(res);
         }

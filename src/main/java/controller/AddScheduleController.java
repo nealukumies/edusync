@@ -38,11 +38,11 @@ public class AddScheduleController extends SubController {
     }
 
     public void addSchedule() {
-        String day = weekDaySelect.getValue().toString();
-        int[] timeStartInt = parseTimeString(startTime.getText());
-        int[] timeEndInt = parseTimeString(endTime.getText());
-        String startString = String.format("%02d", timeStartInt[0]) + ":" + String.format("%02d", timeStartInt[1]) + ":" + String.format("%02d", 0);
-        String endString = String.format("%02d", timeEndInt[0]) + ":" + String.format("%02d", timeEndInt[1]) + ":" + String.format("%02d", 0);
+        final String day = weekDaySelect.getValue().toString();
+        final int[] timeStartInt = parseTimeString(startTime.getText());
+        final int[] timeEndInt = parseTimeString(endTime.getText());
+        final String startString = String.format("%02d", timeStartInt[0]) + ":" + String.format("%02d", timeStartInt[1]) + ":" + String.format("%02d", 0);
+        final String endString = String.format("%02d", timeEndInt[0]) + ":" + String.format("%02d", timeEndInt[1]) + ":" + String.format("%02d", 0);
         try {
             ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, startString, endString);
             getMainController().goToPrevPage();
@@ -52,7 +52,7 @@ public class AddScheduleController extends SubController {
     }
 
     public int[] parseTimeString(String ts) {
-        int[] time = new int[2];
+        final int[] time = new int[2];
         AssignmentUtility.parseTimeString(ts, time);
         return time;
     }

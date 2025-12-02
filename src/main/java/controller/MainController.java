@@ -89,16 +89,16 @@ public class MainController {
         headerContent.getChildren().clear();
 
         // Dynamically forces all content to the right edge of the container
-        Region spacer = new Region();
+        final Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         if (account.isLoggedIn()) {
             // For now, just add username
-            Label label = new Label(account.getName());
+            final Label label = new Label(account.getName());
             label.getStyleClass().add("medium-title");
 
-            String logOutText = MainView.getBundle().getString("Header_Log_out");
-            Hyperlink logout = new Hyperlink(logOutText);
+            final String logOutText = MainView.getBundle().getString("Header_Log_out");
+            final Hyperlink logout = new Hyperlink(logOutText);
             logout.setOnAction(actionEvent -> {
                 UserHandler.logoutUser();
                 changePage(Page.FRONT_PAGE);
@@ -108,8 +108,8 @@ public class MainController {
 
             headerContent.getChildren().addAll(spacer, label, logout);
         } else {
-            String logOutText = MainView.getBundle().getString("Header_Log_In");
-            Hyperlink loginText = new Hyperlink(logOutText);
+            final String logOutText = MainView.getBundle().getString("Header_Log_In");
+            final Hyperlink loginText = new Hyperlink(logOutText);
             loginText.getStyleClass().add("medium-title");
             loginText.getStyleClass().add("link");
             loginText.setOnAction(e -> changePage(Page.LOGIN_PAGE));
@@ -129,8 +129,8 @@ public class MainController {
 
     public void goToPrevPage() {
         if (!this.pageHistory.isEmpty()) {
-            PageMemento current = this.createPageMemento();
-            PageMemento prev = this.pageHistory.remove(this.pageHistory.size() - 1);
+            final PageMemento current = this.createPageMemento();
+            final PageMemento prev = this.pageHistory.remove(this.pageHistory.size() - 1);
             this.pageBackHistory.add(current);
             this.restoreState(prev);
         }
@@ -138,8 +138,8 @@ public class MainController {
 
     public void goToNextPage() {
         if (!this.pageBackHistory.isEmpty()) {
-            PageMemento current = this.createPageMemento();
-            PageMemento prev = this.pageBackHistory.remove(this.pageBackHistory.size() - 1);
+            final PageMemento current = this.createPageMemento();
+            final PageMemento prev = this.pageBackHistory.remove(this.pageBackHistory.size() - 1);
             this.pageHistory.add(current);
             this.restoreState(prev);
         }
@@ -219,15 +219,15 @@ public class MainController {
 
     public void loadPage(String path) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             fxmlLoader.setResources(MainView.getBundle());
-            Parent loadPageRoot = fxmlLoader.load();
-            SubController subController = fxmlLoader.getController();
+            final Parent loadPageRoot = fxmlLoader.load();
+            final SubController subController = fxmlLoader.getController();
             subController.setMainViewController(this);
             subController.initializeFully();
             content.getChildren().add(loadPageRoot);
         } catch (IOException e) {
-            Label error = new Label();
+            final Label error = new Label();
             error.getStyleClass().add("error");
             error.setText("Error: " + e.getMessage());
             error.setWrapText(true);

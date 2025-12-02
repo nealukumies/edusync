@@ -25,15 +25,15 @@ public class LogInController extends SubController {
     }
 
     public void login() {
-        String emailString = email.getText();
-        String passwordString = password.getText();
+        final String emailString = email.getText();
+        final String passwordString = password.getText();
         try {
-            int id = UserHandler.loginUser(emailString, passwordString);
+            final int id = UserHandler.loginUser(emailString, passwordString);
             if (id > -1) {
                 getMainController().changePage(Page.FRONT_PAGE);
             }
             else {
-                String errorText = MainView.getBundle().getString("invalid_login_error");
+                final String errorText = MainView.getBundle().getString("invalid_login_error");
                 errorMessage.setText(errorText);
             }
         }

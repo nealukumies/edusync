@@ -26,8 +26,8 @@ public class DBObjectParser {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
 
         return new Student(
                 jsonNode.get("id").asInt(),
@@ -41,8 +41,8 @@ public class DBObjectParser {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
 
         return new Course(
                 jsonNode.get(COURSE_ID).asInt(),
@@ -58,12 +58,12 @@ public class DBObjectParser {
             return new ArrayList<>();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
-        ArrayList<Course> courses = new ArrayList<>();
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
+        final ArrayList<Course> courses = new ArrayList<>();
 
         if (jsonNode.isArray()) {
-            for (JsonNode node : jsonNode) {
+            for (final JsonNode node : jsonNode) {
                 courses.add(new Course(
                         node.get(COURSE_ID).asInt(),
                         node.get(STUDENT_ID).asInt(),
@@ -81,8 +81,8 @@ public class DBObjectParser {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
 
         return new Schedule(
                 jsonNode.get("scheduleId").asInt(),
@@ -98,12 +98,12 @@ public class DBObjectParser {
             return new ArrayList<>();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
-        ArrayList<Schedule> schedules = new ArrayList<>();
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
+        final ArrayList<Schedule> schedules = new ArrayList<>();
 
         if (jsonNode.isArray()) {
-            for (JsonNode node : jsonNode) {
+            for (final JsonNode node : jsonNode) {
                 schedules.add(new Schedule(
                         node.get("scheduleId").asInt(),
                         node.get(COURSE_ID).asInt(),
@@ -121,8 +121,8 @@ public class DBObjectParser {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
 
         return new Assignment(
                 jsonNode.get("assignmentId").asInt(),
@@ -140,13 +140,13 @@ public class DBObjectParser {
             return new ArrayList<>();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(data.body());
-        ArrayList<Assignment> assignments = new ArrayList<>();
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.readTree(data.body());
+        final ArrayList<Assignment> assignments = new ArrayList<>();
 
 
         if (jsonNode.isArray()) {
-            for (JsonNode node : jsonNode) {
+            for (final JsonNode node : jsonNode) {
 
                 assignments.add(new Assignment(
                         node.get("assignmentId").asInt(),

@@ -44,10 +44,10 @@ public class CourseController extends SubController {
         course = getMainController().getCourse();
         if (course != null) {
             name.setText(course.getCourseName());
-            String start = course.getStartDate().toString();
-            String end = course.getEndDate().toString();
-            String courseStarted = MainView.getBundle().getString("course_started");
-            String courseEnding = MainView.getBundle().getString("course_ending");
+            final String start = course.getStartDate().toString();
+            final String end = course.getEndDate().toString();
+            final String courseStarted = MainView.getBundle().getString("course_started");
+            final String courseEnding = MainView.getBundle().getString("course_ending");
             desc.setText(courseStarted + " " + start + " | " + courseEnding + " " + end);
 
             addAssignment.setOnMouseClicked(e -> getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE));
@@ -63,10 +63,10 @@ public class CourseController extends SubController {
 
             displaySchedules();
             try {
-                List<Assignment> assignmentsList = ParseHandler.getAssignmentsForCourse(course);
-                AssignmentList assignmentList = new AssignmentList(this.getMainController());
+                final List<Assignment> assignmentsList = ParseHandler.getAssignmentsForCourse(course);
+                final AssignmentList assignmentList = new AssignmentList(this.getMainController());
                 assignments.getChildren().clear();
-                TableView<ViewableAssignment> tableView = assignmentList.createList(assignmentsList, List.of(course));
+                final TableView<ViewableAssignment> tableView = assignmentList.createList(assignmentsList, List.of(course));
                 if (tableView != null) {
                     assignments.getChildren().add(tableView);
                 }
@@ -79,16 +79,16 @@ public class CourseController extends SubController {
     public void displaySchedules() {
         scheduleContainer.getChildren().clear();
         if (schedules != null) {
-            for (Schedule schedule : schedules) {
-                HBox hBox = new HBox();
-                Label scheduleDay = new Label(schedule.getWeekday().toString());
-                Label scheduleTime = new Label("");
-                String deleteText = MainView.getBundle().getString("delete");
-                Hyperlink del = new Hyperlink(deleteText);
+            for (final Schedule schedule : schedules) {
+                final HBox hBox = new HBox();
+                final Label scheduleDay = new Label(schedule.getWeekday().toString());
+                final Label scheduleTime = new Label("");
+                final String deleteText = MainView.getBundle().getString("delete");
+                final Hyperlink del = new Hyperlink(deleteText);
                 String time = schedule.getStartTime().toString();
                 time += " - " + schedule.getEndTime().toString();
                 scheduleTime.setText(time);
-                String textClass = "medium-text";
+                final String textClass = "medium-text";
                 scheduleDay.getStyleClass().add(textClass);
                 scheduleTime.getStyleClass().add(textClass);
                 del.getStyleClass().add(textClass);
@@ -101,15 +101,15 @@ public class CourseController extends SubController {
     }
 
     public void deleteSchedule(int scheduleId) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        String deleteScheduleText = MainView.getBundle().getString("delete_schedule_text");
-        String deleteScheduleHeader = MainView.getBundle().getString("delete_schedule_header");
-        String deleteScheduleContent = MainView.getBundle().getString("delete_schedule_content");
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        final String deleteScheduleText = MainView.getBundle().getString("delete_schedule_text");
+        final String deleteScheduleHeader = MainView.getBundle().getString("delete_schedule_header");
+        final String deleteScheduleContent = MainView.getBundle().getString("delete_schedule_content");
 
         alert.setTitle(deleteScheduleText);
         alert.setHeaderText(deleteScheduleHeader);
         alert.setContentText(deleteScheduleContent);
-        Optional<ButtonType> result = alert.showAndWait();
+        final Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             ScheduleHandler.deleteSchedule(scheduleId);
             // Refresh current page
@@ -119,15 +119,15 @@ public class CourseController extends SubController {
     }
 
     public void deleteThisCourse() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        String deleteCourseText = MainView.getBundle().getString("delete_course_text");
-        String deleteCourseHeader = MainView.getBundle().getString("delete_course_header");
-        String deleteCourseContent = MainView.getBundle().getString("delete_course_content");
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        final String deleteCourseText = MainView.getBundle().getString("delete_course_text");
+        final String deleteCourseHeader = MainView.getBundle().getString("delete_course_header");
+        final String deleteCourseContent = MainView.getBundle().getString("delete_course_content");
 
         alert.setTitle(deleteCourseText);
         alert.setHeaderText(deleteCourseHeader);
         alert.setContentText(deleteCourseContent);
-        Optional<ButtonType> result = alert.showAndWait();
+        final Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             CourseHandler.deleteCourse(course.getCourseId());
             getMainController().setCourse(null);

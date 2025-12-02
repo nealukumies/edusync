@@ -12,9 +12,9 @@ public class CourseUtility {
 
     public static void createCourse(String method, TextField title, DatePicker startDate, DatePicker endDate, MainController mainController, Label errorMessage) {
         if (validateTitle(title) && validateStartDate(startDate) && validateEndDate(endDate)) {
-            String titleString = title.getText();
-            String startDateString = startDate.getValue().toString();
-            String endDateString = endDate.getValue().toString();
+            final String titleString = title.getText();
+            final String startDateString = startDate.getValue().toString();
+            final String endDateString = endDate.getValue().toString();
             try {
                 if (method.equals("update")) {
                     CourseHandler.updateCourse(mainController.getCourse().getCourseId(), titleString, startDateString, endDateString);
@@ -26,7 +26,7 @@ public class CourseUtility {
                 errorMessage.setText(e.getMessage());
             }
         } else {
-            String errormessage = MainView.getBundle().getString("course_errortext");
+            final String errormessage = MainView.getBundle().getString("course_errortext");
             errorMessage.setText(errormessage);
         }
     }

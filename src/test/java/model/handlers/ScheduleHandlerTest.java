@@ -64,7 +64,7 @@ class ScheduleHandlerTest {
 
     @Test
     void createSchedule() throws JsonProcessingException {
-        int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
+        final int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
         assertTrue(scheduleId > 0);
 
         ScheduleHandler.deleteSchedule(scheduleId);
@@ -93,7 +93,7 @@ class ScheduleHandlerTest {
 
     @Test
     void deleteSchedule() throws JsonProcessingException {
-        int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
+        final int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
 
         assertEquals(1, ScheduleHandler.deleteSchedule(scheduleId));
     }

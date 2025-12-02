@@ -40,7 +40,7 @@ public class MainView extends Application {
 
         final String SMALL_SCALE = "small_scale";
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
+        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
         setRoot(fxmlLoader.load());
 
         updateOrientation();
@@ -48,7 +48,7 @@ public class MainView extends Application {
 
         if (Screen.getPrimary().getBounds() != null) {
             final double SCREEN_SCALE = 0.9;
-            Rectangle2D bounds = Screen.getPrimary().getBounds();
+            final Rectangle2D bounds = Screen.getPrimary().getBounds();
             stage.setWidth(bounds.getWidth() * SCREEN_SCALE);
             stage.setHeight(bounds.getHeight() * SCREEN_SCALE);
         }
@@ -85,10 +85,10 @@ public class MainView extends Application {
      * @return
      */
     public static boolean getSavedLanguage() {
-        String filePath = "language.txt";
+        final String filePath = "language.txt";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String fullcode = br.readLine();
+            final String fullcode = br.readLine();
             setLanguage(Language.getLanguage(fullcode));
             return true;
         } catch (FileNotFoundException e) {
@@ -102,8 +102,8 @@ public class MainView extends Application {
      * Saves current language select to file
      */
     public static void saveLanguage() {
-        String filePath = "language.txt";
-        byte[] data = (currentLanguage.getCode() + "-" + currentLanguage.getCountry())
+        final String filePath = "language.txt";
+        final byte[] data = (currentLanguage.getCode() + "-" + currentLanguage.getCountry())
                 .getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
@@ -120,9 +120,9 @@ public class MainView extends Application {
      */
     public static void setLanguage(Language lang) {
         currentLanguage = lang;
-        String code = lang.getCode();
-        String country = lang.getCountry();
-        Locale currentLocale = new Locale(code, country);
+        final String code = lang.getCode();
+        final String country = lang.getCountry();
+        final Locale currentLocale = new Locale(code, country);
         bundle = ResourceBundle.getBundle("Messages", currentLocale);
         saveLanguage();
         if (root != null) {

@@ -33,7 +33,7 @@ public class CourseListController extends SubController {
 
     @Override
     public void initializeFully() {
-        ObservableValue<Double> limit = this.getMainController().getRoot().widthProperty().multiply(0.6).asObject();
+        final ObservableValue<Double> limit = this.getMainController().getRoot().widthProperty().multiply(0.6).asObject();
         courseListContent.prefWrapLengthProperty().bind(limit);
         fetchAllAssignments();
         fetchCourseList();
@@ -41,12 +41,12 @@ public class CourseListController extends SubController {
 
     public void fetchCourseList() {
         try {
-            HttpResponse<String> response = CourseHandler.getCourses();
+            final HttpResponse<String> response = CourseHandler.getCourses();
 
             if (response == null) {
                 courseListContent.getChildren().clear();
-                String labelText = MainView.getBundle().getString("no_courses_label");
-                Label emptyCourseList = new Label(labelText);
+                final String labelText = MainView.getBundle().getString("no_courses_label");
+                final Label emptyCourseList = new Label(labelText);
                 courseListContent.getChildren().add(emptyCourseList);
                 return;
             }
@@ -56,8 +56,8 @@ public class CourseListController extends SubController {
             generateCourseList();
         } catch (Exception e) {
             courseListContent.getChildren().clear();
-            String errorLabel = MainView.getBundle().getString("error_title");
-            Label label = new Label(errorLabel + ": " + e.getMessage());
+            final String errorLabel = MainView.getBundle().getString("error_title");
+            final Label label = new Label(errorLabel + ": " + e.getMessage());
             label.getStyleClass().add("error");
             label.setTextFill(Color.RED);
             courseListContent.getChildren().add(label);
@@ -67,8 +67,8 @@ public class CourseListController extends SubController {
     public void generateCourseList() {
         courseListContent.getChildren().clear();
 
-        for (Course course : courses) {
-            CourseCard courseCard = new CourseCard(course, this, this.getMainController());
+        for (final Course course : courses) {
+            final CourseCard courseCard = new CourseCard(course, this, this.getMainController());
             courseListContent.getChildren().add(courseCard.create());
         }
     }
@@ -82,8 +82,8 @@ public class CourseListController extends SubController {
     }
 
     public List<Assignment> getAssignmentsByCourse(int id) {
-        List<Assignment> assignments = new ArrayList<>();
-        for (Assignment assignment : allAssignments) {
+        final List<Assignment> assignments = new ArrayList<>();
+        for (final Assignment assignment : allAssignments) {
             if (assignment.getCourseId() == id) {
                 assignments.add(assignment);
             }

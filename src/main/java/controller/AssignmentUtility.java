@@ -16,12 +16,12 @@ public class AssignmentUtility {
 
     public static void populateCourseList(ChoiceBox<CourseOption> courseSelect, List<Course> courses , MainController mainController) {
         courseSelect.getItems().clear();
-        for (Course c : courses) {
-            CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
+        for (final Course c : courses) {
+            final CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
             courseSelect.getItems().add(option);
         }
         if (mainController.getCourse() != null) {
-            CourseOption selected = new CourseOption(mainController.getCourse().getCourseId(), mainController.getCourse().getCourseName());
+            final CourseOption selected = new CourseOption(mainController.getCourse().getCourseId(), mainController.getCourse().getCourseName());
             courseSelect.setValue(selected);
         }
     }
@@ -29,9 +29,9 @@ public class AssignmentUtility {
     public static void parseTimeString(String ts, int[] time) {
         if (ts.contains(":")) {
             try {
-                String[] chars = ts.split(":");
-                int hours = Integer.parseInt(chars[0]);
-                int minutes = Integer.parseInt(chars[1]);
+                final String[] chars = ts.split(":");
+                final int hours = Integer.parseInt(chars[0]);
+                final int minutes = Integer.parseInt(chars[1]);
                 time[0] = hours;
                 time[1] = minutes;
                 if (hours > 23 || hours < 0) {
@@ -54,12 +54,12 @@ public class AssignmentUtility {
 
         try {
             parseTimeString(timeSelect.getText(), time);
-            CourseOption courseOption = courseSelect.getValue();
-            String titleString = title.getText();
-            String descString = desc.getText();
-            LocalDate dateLocalDate = dateSelect.getValue();
-            String timeString = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
-            String dateTimeString = dateLocalDate.toString() + " " + timeString;
+            final CourseOption courseOption = courseSelect.getValue();
+            final String titleString = title.getText();
+            final String descString = desc.getText();
+            final LocalDate dateLocalDate = dateSelect.getValue();
+            final String timeString = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
+            final String dateTimeString = dateLocalDate.toString() + " " + timeString;
             if (mainController.getAssignment() == null) {
                 AssignmentHandler.createAssignment(courseOption.getId(), titleString, descString, dateTimeString);
             } else {
