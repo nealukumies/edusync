@@ -41,7 +41,7 @@ public class MainView extends Application {
         final String SMALL_SCALE = "small_scale";
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
-        MainView.root = fxmlLoader.load();
+        setRoot(fxmlLoader.load());
 
         updateOrientation();
 
@@ -70,6 +70,13 @@ public class MainView extends Application {
     }
 
     /**
+     * Static setter for the root to avoid writing static fields directly from instance methods.
+     */
+    private static void setRoot(Parent newRoot) {
+        root = newRoot;
+    }
+
+    /**
      * Loads saved language from file
      * <p>
      * If no saved language is found, defaults to English
@@ -85,9 +92,9 @@ public class MainView extends Application {
             setLanguage(Language.getLanguage(fullcode));
             return true;
         } catch (FileNotFoundException e) {
-            throw new IllegalStateException("Failed to get saved language", e);
+            return false;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LanguageException("Failed to read saved language", e);
         }
     }
 

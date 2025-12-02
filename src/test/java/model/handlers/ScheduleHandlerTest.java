@@ -3,12 +3,16 @@ package model.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import model.singletons.Account;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScheduleHandlerTest {
+    static String mondayString = "Monday";
+    static String startTime10String = "10:00";
+    static String startTime11String = "11:00";
+    static String endTime12String = "12:00";
+    static String endTime13String = "13:00";
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
@@ -60,7 +64,7 @@ class ScheduleHandlerTest {
 
     @Test
     void createSchedule() throws JsonProcessingException {
-        int scheduleId = ScheduleHandler.createSchedule(174, "Monday", "10:00", "12:00");
+        int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
         assertTrue(scheduleId > 0);
 
         ScheduleHandler.deleteSchedule(scheduleId);
@@ -68,34 +72,28 @@ class ScheduleHandlerTest {
 
     @Test
     void createScheduleInvalidInput() throws JsonProcessingException {
-        assertEquals(-1, ScheduleHandler.createSchedule(-1, null, "10:00", "12:00"));
-    }
-
-    @Disabled //BROKEN
-    void createScheduleNotLoggedIn() throws JsonProcessingException {
-        Account.getInstance().clearAccount();
-        assertEquals(-1, ScheduleHandler.createSchedule(174, "Monday", "10:00", "12:00"));
+        assertEquals(-1, ScheduleHandler.createSchedule(-1, null, startTime10String, endTime12String));
     }
 
     @Test
     void updateSchedule() {
-        assertEquals(1, ScheduleHandler.updateSchedule(145, 174, "Monday", "11:00", "13:00"));
+        assertEquals(1, ScheduleHandler.updateSchedule(145, 174, mondayString, startTime11String, endTime13String));
     }
 
     @Test
     void updateScheduleNotFound() {
-        assertEquals(-1, ScheduleHandler.updateSchedule(99999, 174, "Monday", "11:00", "13:00"));
+        assertEquals(-1, ScheduleHandler.updateSchedule(99999, 174, mondayString, startTime11String, endTime13String));
     }
 
     @Test //x
     void updateScheduleNotLoggedIn() {
         Account.getInstance().clearAccount();
-        assertEquals(1, ScheduleHandler.updateSchedule(145, 174, "Monday", "11:00", "13:00"));
+        assertEquals(1, ScheduleHandler.updateSchedule(145, 174, mondayString, startTime11String, endTime13String));
     }
 
     @Test
     void deleteSchedule() throws JsonProcessingException {
-        int scheduleId = ScheduleHandler.createSchedule(174, "Monday", "10:00", "12:00");
+        int scheduleId = ScheduleHandler.createSchedule(174, mondayString, startTime10String, endTime12String);
 
         assertEquals(1, ScheduleHandler.deleteSchedule(scheduleId));
     }
@@ -105,9 +103,4 @@ class ScheduleHandlerTest {
         assertEquals(-1, ScheduleHandler.deleteSchedule(99999));
     }
 
-    @Disabled //BROKEN
-    void deleteScheduleNotLoggedIn() {
-        Account.getInstance().clearAccount();
-        assertEquals(-1, ScheduleHandler.deleteSchedule(143));
-    }
 }

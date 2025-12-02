@@ -30,12 +30,11 @@ public class AssignmentController extends SubController {
     private Button deleteButton;
 
     private Assignment assignment;
-    private Course course;
 
     @Override
     public void initializeFully() {
         this.assignment = getMainController().getAssignment();
-        this.course = getMainController().getCourse();
+        final Course course = getMainController().getCourse();
 
         title.setText(assignment.getTitle());
         courseName.setText(course.getCourseName());
@@ -60,10 +59,10 @@ public class AssignmentController extends SubController {
 
         deleteButton.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            String title = MainView.getBundle().getString("delete_alert_title");
+            String titleOnAction = MainView.getBundle().getString("delete_alert_title");
             String header = MainView.getBundle().getString("delete_alert_header");
             String content = MainView.getBundle().getString("delete_alert_content");
-            alert.setTitle(title);
+            alert.setTitle(titleOnAction);
             alert.setHeaderText(header);
             alert.setContentText(content);
             Optional<ButtonType> result = alert.showAndWait();

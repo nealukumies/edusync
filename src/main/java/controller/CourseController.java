@@ -37,7 +37,6 @@ public class CourseController extends SubController {
     @FXML
     private Button editBtn;
     private Course course = null;
-    private List<Assignment> assignmentsList;
     private List<Schedule> schedules;
 
     @Override
@@ -64,7 +63,7 @@ public class CourseController extends SubController {
 
             displaySchedules();
             try {
-                assignmentsList = ParseHandler.getAssignmentsForCourse(course);
+                List<Assignment> assignmentsList = ParseHandler.getAssignmentsForCourse(course);
                 AssignmentList assignmentList = new AssignmentList(this.getMainController());
                 assignments.getChildren().clear();
                 TableView<ViewableAssignment> tableView = assignmentList.createList(assignmentsList, List.of(course));

@@ -1,12 +1,12 @@
 package layout_model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import javafx.application.Application;
 import model.handlers.UserHandler;
 import view.MainView;
 
 public class Main {
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) {
         UserHandler.loadAccount();
-        MainView.launch(MainView.class);
+        Application.launch(MainView.class, args);
     }
 }
