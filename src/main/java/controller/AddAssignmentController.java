@@ -4,7 +4,7 @@ import component.CourseOption;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import layout_model.ParseHandler;
-import model.DBObjects.Course;
+import model.db_objects.Course;
 import model.handlers.AssignmentHandler;
 
 import java.time.LocalDate;
@@ -52,12 +52,8 @@ public class AddAssignmentController extends SubController {
     @Override
     public void initializeFully() {
         populateCourseList();
-        submit.setOnAction(event -> {
-            createAssignment();
-        });
-        cancel.setOnAction(event -> {
-            this.getMainController().goToPrevPage();
-        });
+        submit.setOnAction(event -> createAssignment());
+        cancel.setOnAction(event -> this.getMainController().goToPrevPage());
     }
 
     public void createAssignment() {
@@ -67,13 +63,13 @@ public class AddAssignmentController extends SubController {
 
         try {
             parseTimeString(timeSelect.getText());
-            CourseOption _course = courseSelect.getValue();
-            String _title = title.getText();
-            String _desc = desc.getText();
-            LocalDate _date = dateSelect.getValue();
-            String _time = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
-            String _datetime = _date.toString() + " " + _time;
-            AssignmentHandler.createAssignment(_course.getId(), _title, _desc, _datetime);
+            CourseOption courseString = courseSelect.getValue();
+            String titleString = title.getText();
+            String descString = desc.getText();
+            LocalDate dateLocalDate = dateSelect.getValue();
+            String timeString = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
+            String dateTimeString = dateLocalDate.toString() + " " + timeString;
+            AssignmentHandler.createAssignment(courseString.getId(), titleString, descString, dateTimeString);
             getMainController().goToPrevPage();
         } catch (Exception e) {
             throw new IllegalStateException("Failed to create assigment", e);

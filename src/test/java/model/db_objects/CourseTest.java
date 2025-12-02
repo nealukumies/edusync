@@ -1,4 +1,4 @@
-package model.DBObjects;
+package model.db_objects;
 
 import org.junit.jupiter.api.Test;
 

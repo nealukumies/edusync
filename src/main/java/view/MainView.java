@@ -7,7 +7,6 @@ import javafx.geometry.NodeOrientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -41,9 +40,6 @@ public class MainView extends Application {
 
         final String SMALL_SCALE = "small_scale";
 
-        // Load fonts
-        Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
         MainView.root = fxmlLoader.load();
 
@@ -69,7 +65,6 @@ public class MainView extends Application {
         });
 
         stage.setTitle("EduSync");
-        //stage.setResizable(false);
         stage.setScene(new Scene(MainView.root));
         stage.show();
     }

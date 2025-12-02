@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import model.Enums.Weekday;
+import model.enums.Weekday;
 import model.handlers.ScheduleHandler;
 
 public class AddScheduleController extends SubController {
     @FXML
-    private ChoiceBox courseSelect;
+    private ChoiceBox<String> courseSelect;
     @FXML
-    private ChoiceBox weekDaySelect;
+    private ChoiceBox<Weekday> weekDaySelect;
     @FXML
     private TextField startTime;
     @FXML
@@ -32,23 +32,19 @@ public class AddScheduleController extends SubController {
         courseSelect.getItems().setAll(getMainController().getCourse().getCourseName());
         courseSelect.setValue(getMainController().getCourse().getCourseName());
 
-        submit.setOnAction(e -> {
-            addSchedule();
-        });
+        submit.setOnAction(e -> addSchedule());
 
-        cancel.setOnAction(e -> {
-            getMainController().goToPrevPage();
-        });
+        cancel.setOnAction(e -> getMainController().goToPrevPage());
     }
 
     public void addSchedule() {
         String day = weekDaySelect.getValue().toString();
-        int[] _timeStart = parseTimeString(startTime.getText());
-        int[] _timeEnd = parseTimeString(endTime.getText());
-        String _start = String.format("%02d", _timeStart[0]) + ":" + String.format("%02d", _timeStart[1]) + ":" + String.format("%02d", 0);
-        String _end = String.format("%02d", _timeEnd[0]) + ":" + String.format("%02d", _timeEnd[1]) + ":" + String.format("%02d", 0);
+        int[] timeStartInt = parseTimeString(startTime.getText());
+        int[] timeEndInt = parseTimeString(endTime.getText());
+        String startString = String.format("%02d", timeStartInt[0]) + ":" + String.format("%02d", timeStartInt[1]) + ":" + String.format("%02d", 0);
+        String endString = String.format("%02d", timeEndInt[0]) + ":" + String.format("%02d", timeEndInt[1]) + ":" + String.format("%02d", 0);
         try {
-            ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, _start, _end);
+            ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, startString, endString);
             getMainController().goToPrevPage();
         } catch (Exception e) {
             throw new IllegalStateException("Failed to add schedule", e);

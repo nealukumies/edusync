@@ -1,4 +1,4 @@
-package model.DBObjects;
+package model.db_objects;
 
 public class Student {
     private int id;

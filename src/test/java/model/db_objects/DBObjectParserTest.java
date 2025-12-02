@@ -1,8 +1,7 @@
-package model.DBObjects;
+package model.db_objects;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 class DBObjectParserTest {
 
     @Test

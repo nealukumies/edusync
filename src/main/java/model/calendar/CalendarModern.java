@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import model.DBObjects.Course;
-import model.DBObjects.DBObjectParser;
-import model.DBObjects.Schedule;
-import model.Enums.Weekday;
+import model.db_objects.Course;
+import model.db_objects.DBObjectParser;
+import model.db_objects.Schedule;
+import model.enums.Weekday;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
 

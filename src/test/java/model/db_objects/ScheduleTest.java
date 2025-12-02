@@ -1,6 +1,6 @@
-package model.DBObjects;
+package model.db_objects;
 
-import model.Enums.Weekday;
+import model.enums.Weekday;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;

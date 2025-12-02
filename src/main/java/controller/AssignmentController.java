@@ -3,9 +3,9 @@ package controller;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.Enums.Status;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.enums.Status;
 import model.handlers.AssignmentHandler;
 import view.MainView;
 

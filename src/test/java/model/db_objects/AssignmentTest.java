@@ -1,7 +1,6 @@
-package model.DBObjects;
+package model.db_objects;
 
-import model.Enums.Status;
-import org.junit.jupiter.api.BeforeEach;
+import model.enums.Status;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;

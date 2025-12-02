@@ -1,4 +1,4 @@
-package model.Enums;
+package model.enums;
 
 public enum Weekday {
     MONDAY,

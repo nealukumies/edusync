@@ -1,12 +1,10 @@
 // This class represents an assignment entity in the system.
 
-package model.DBObjects;
+package model.db_objects;
 
-import model.Enums.Status;
+import model.enums.Status;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
 
 public class Assignment {
     private int assignmentId;

@@ -1,19 +1,22 @@
 package layout_model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.DBObjects.DBObjectParser;
-import model.DBObjects.Schedule;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.db_objects.DBObjectParser;
+import model.db_objects.Schedule;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
 
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParseHandler {
+
+    private ParseHandler() {}
 
     public static List<Course> getCourses() throws JsonProcessingException {
         HttpResponse<String> res = CourseHandler.getCourses();
@@ -43,7 +46,6 @@ public class ParseHandler {
     }
 
     public static List<Schedule> getSchedulesForCourse(Course course) throws JsonProcessingException {
-        List<Schedule> schedules = new ArrayList<>();
         HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
         if (res != null) {
             return DBObjectParser.parseScheduleList(res);

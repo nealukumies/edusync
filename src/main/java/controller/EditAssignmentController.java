@@ -4,7 +4,7 @@ import component.CourseOption;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import layout_model.ParseHandler;
-import model.DBObjects.Course;
+import model.db_objects.Course;
 import model.handlers.AssignmentHandler;
 
 import java.time.LocalDate;

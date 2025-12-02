@@ -25,12 +25,8 @@ public class AddCourseController extends SubController {
 
     @Override
     public void initializeFully() {
-        submit.setOnAction(event -> {
-            createCourse();
-        });
-        cancel.setOnAction(event -> {
-            this.getMainController().goToPrevPage();
-        });
+        submit.setOnAction(event -> createCourse());
+        cancel.setOnAction(event -> this.getMainController().goToPrevPage());
 
     }
 
@@ -48,11 +44,11 @@ public class AddCourseController extends SubController {
 
     public void createCourse() {
         if (validateTitle() && validateStartDate() && validateEndDate()) {
-            String _title = title.getText();
-            String _startDate = startDate.getValue().toString();
-            String _endDate = endDate.getValue().toString();
+            String titleString = title.getText();
+            String startDateString = startDate.getValue().toString();
+            String endDateString = endDate.getValue().toString();
             try {
-                CourseHandler.createCourse(_title, _startDate, _endDate);
+                CourseHandler.createCourse(titleString, startDateString, endDateString);
                 this.getMainController().changePage(Page.COURSE_LIST_PAGE);
             } catch (Exception e) {
                 errorMessage.setText(e.getMessage());
