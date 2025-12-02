@@ -1,7 +1,7 @@
 package model.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.Singletons.Account;
+import model.singletons.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

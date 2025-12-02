@@ -3,8 +3,8 @@ package model.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Singletons.Account;
-import model.Singletons.Connection;
+import model.singletons.Account;
+import model.singletons.Connection;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import model.DBObjects.Assignment;
 import model.DBObjects.Course;
-import model.Singletons.Account;
+import model.singletons.Account;
 import model.handlers.UserHandler;
 import view.MainView;
 

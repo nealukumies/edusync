@@ -1,7 +1,7 @@
 package model.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.Singletons.Account;
+import model.singletons.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class AssignmentHandlerTest {
 
     @Test //x
     void getAssignmentNotLoggedIn() {
-        model.Singletons.Account.getInstance().clearAccount();
+        model.singletons.Account.getInstance().clearAccount();
         assertNotNull(AssignmentHandler.getAssignment(237));
     }
 
@@ -37,7 +37,7 @@ class AssignmentHandlerTest {
 
     @Test //x
     void getAssignmentsForUserNotLoggedIn() {
-        model.Singletons.Account.getInstance().clearAccount();
+        model.singletons.Account.getInstance().clearAccount();
         assertNull(AssignmentHandler.getAssignmentsForUser());
     }
 
