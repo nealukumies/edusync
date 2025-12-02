@@ -9,19 +9,21 @@ import model.Singletons.Connection;
 import java.net.http.HttpResponse;
 
 public class ScheduleHandler {
+    static final String SCHEDULES_STRING = "/schedules/";
+
+    private ScheduleHandler() {}
+
     public static HttpResponse<String> getSchedule(int scheduleId) {
         final Connection conn = Connection.getInstance();
 
-        final String endpoint = "/schedules/" + scheduleId;
+        final String endpoint = SCHEDULES_STRING + scheduleId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 201 -> {
-                return response;
-            }
+        if (status == 201) {
+            return response;
         }
         return null;
     }
@@ -29,16 +31,14 @@ public class ScheduleHandler {
     public static HttpResponse<String> getSchedulesForCourse(int courseId) {
         final Connection conn = Connection.getInstance();
 
-        final String endpoint = "/schedules/courses/" + courseId;
+        final String endpoint = SCHEDULES_STRING + "courses/" + courseId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return response;
-            }
+        if (status == 200) {
+            return response;
         }
         return null;
     }
@@ -47,16 +47,14 @@ public class ScheduleHandler {
         final Connection conn = Connection.getInstance();
 
         final int studentId = Account.getInstance().getStudentId();
-        final String endpoint = "/schedules/students/" + studentId;
+        final String endpoint = SCHEDULES_STRING + "students/" + studentId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return response;
-            }
+        if (status == 200) {
+            return response;
         }
         return null;
     }
@@ -76,16 +74,12 @@ public class ScheduleHandler {
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 201 -> {
-                final ObjectMapper mapper = new ObjectMapper();
+        if (status == 201) {
+            final ObjectMapper mapper = new ObjectMapper();
 
-                final JsonNode jsonNode = mapper.readTree(response.body());
+            final JsonNode jsonNode = mapper.readTree(response.body());
 
-                final int scheduleId = jsonNode.get("scheduleId").asInt();
-
-                return scheduleId;
-            }
+            return jsonNode.get("scheduleId").asInt();
         }
         return -1;
     }
@@ -101,16 +95,14 @@ public class ScheduleHandler {
                 "end_time": "%s"
             }""", courseId, weekday, startTime, endTime);
 
-        final String endpoint = "/schedules/" + scheduleId;
+        final String endpoint = SCHEDULES_STRING + scheduleId;
 
         final HttpResponse<String> response = conn.sendPutRequest(inputString, endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return 1;
-            }
+        if (status == 200) {
+            return 1;
         }
         return -1;
     }
@@ -118,16 +110,14 @@ public class ScheduleHandler {
     public static int deleteSchedule(int scheduleId) {
         final Connection conn = Connection.getInstance();
 
-        final String endpoint = "/schedules/" + scheduleId;
+        final String endpoint = SCHEDULES_STRING + scheduleId;
 
         final HttpResponse<String> response = conn.sendDeleteRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return 1;
-            }
+        if (status == 200) {
+            return 1;
         }
         return -1;
     }
