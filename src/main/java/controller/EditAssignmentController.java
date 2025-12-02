@@ -5,9 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import layout_model.ParseHandler;
 import model.db_objects.Course;
-import model.handlers.AssignmentHandler;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class EditAssignmentController extends SubController {
@@ -26,8 +24,8 @@ public class EditAssignmentController extends SubController {
     @FXML
     private Button cancel;
 
-    private int[] time = new int[2];
     private List<Course> courses;
+    private int[] time = new int[2];
 
     public void initialize() {
         try {
@@ -38,15 +36,7 @@ public class EditAssignmentController extends SubController {
     }
 
     private void populateCourseList() {
-        courseSelect.getItems().clear();
-        for (Course c : courses) {
-            CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
-            courseSelect.getItems().add(option);
-        }
-        if (getMainController().getCourse() != null) {
-            CourseOption selected = new CourseOption(getMainController().getCourse().getCourseId(), getMainController().getCourse().getCourseName());
-            courseSelect.setValue(selected);
-        }
+        AssignmentUtility.populateCourseList(courseSelect, courses, getMainController());
     }
 
     @Override
@@ -73,43 +63,6 @@ public class EditAssignmentController extends SubController {
     }
 
     public void createAssignment() {
-        if (dateSelect.getValue() == null) {
-            return;
-        }
-
-        try {
-            parseTimeString(timeSelect.getText());
-            CourseOption courseOption = courseSelect.getValue();
-            String titleString = title.getText();
-            String descString = desc.getText();
-            LocalDate dateLocalDate = dateSelect.getValue();
-            String timeString = String.format("%02d", time[0]) + ":" + String.format("%02d", time[1]) + ":" + String.format("%02d", 0);
-            String dateTimeString = dateLocalDate.toString() + " " + timeString;
-            AssignmentHandler.updateAssignment(getMainController().getAssignment().getAssignmentId(), courseOption.getId(), titleString, descString, dateTimeString, getMainController().getAssignment().getStatus().getDbValue());
-            getMainController().goToPrevPage();
-        } catch (Exception e) {
-            throw new IllegalStateException("Failed to create assigment", e);
-        }
-    }
-
-    public void parseTimeString(String ts) {
-        if (ts.contains(":")) {
-            try {
-                String[] chars = ts.split(":");
-                int hours = Integer.parseInt(chars[0]);
-                int minutes = Integer.parseInt(chars[1]);
-                time[0] = hours;
-                time[1] = minutes;
-                if (hours > 23 || hours < 0) {
-                    time[0] = 0;
-                }
-                if (minutes > 59 || minutes < 0) {
-                    time[1] = 0;
-                }
-            } catch (Exception e) {
-                time[0] = 0;
-                time[1] = 0;
-            }
-        }
+        AssignmentUtility.submitAssignment(dateSelect, timeSelect, time, courseSelect, title, desc, getMainController());
     }
 }

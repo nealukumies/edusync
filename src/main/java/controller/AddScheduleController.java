@@ -53,24 +53,7 @@ public class AddScheduleController extends SubController {
 
     public int[] parseTimeString(String ts) {
         int[] time = new int[2];
-        if (ts.contains(":")) {
-            try {
-                String[] chars = ts.split(":");
-                int hours = Integer.parseInt(chars[0]);
-                int minutes = Integer.parseInt(chars[1]);
-                time[0] = hours;
-                time[1] = minutes;
-                if (hours > 23 || hours < 0) {
-                    time[0] = 0;
-                }
-                if (minutes > 59 || minutes < 0) {
-                    time[1] = 0;
-                }
-            } catch (Exception e) {
-                time[0] = 0;
-                time[1] = 0;
-            }
-        }
+        AssignmentUtility.parseTimeString(ts, time);
         return time;
     }
 }

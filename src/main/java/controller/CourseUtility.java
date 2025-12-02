@@ -1,0 +1,45 @@
+package controller;
+
+import enums.Page;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import model.handlers.CourseHandler;
+import view.MainView;
+
+public class CourseUtility {
+    private CourseUtility() {}
+
+    public static void createCourse(String method, TextField title, DatePicker startDate, DatePicker endDate, MainController mainController, Label errorMessage) {
+        if (validateTitle(title) && validateStartDate(startDate) && validateEndDate(endDate)) {
+            String titleString = title.getText();
+            String startDateString = startDate.getValue().toString();
+            String endDateString = endDate.getValue().toString();
+            try {
+                if (method.equals("update")) {
+                    CourseHandler.updateCourse(mainController.getCourse().getCourseId(), titleString, startDateString, endDateString);
+                } else if (method.equals("create")) {
+                    CourseHandler.createCourse(titleString, startDateString, endDateString);
+                }
+                mainController.changePage(Page.COURSE_LIST_PAGE);
+            } catch (Exception e) {
+                errorMessage.setText(e.getMessage());
+            }
+        } else {
+            String errormessage = MainView.getBundle().getString("course_errortext");
+            errorMessage.setText(errormessage);
+        }
+    }
+
+    public static boolean validateTitle(TextField title) {
+        return !title.getText().trim().isEmpty();
+    }
+
+    public static boolean validateStartDate(DatePicker startDate) {
+        return startDate.getValue() != null;
+    }
+
+    public static boolean validateEndDate(DatePicker endDate) {
+        return endDate.getValue() != null;
+    }
+}
