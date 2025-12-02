@@ -160,4 +160,5 @@ The application underwent both functional and non-functional testing.
 - Error handling: NullPointerExceptions were detected and fixed
 - Integration testing: Manual and non-functional tests confirmed smooth integration between frontend and backend services
 - Unit testing: Backend unit tests achieved 83% code coverage, necessary frontend features were unit-tested and JavaFX components were tested manually
+- Performance testing: JMeter tests using both local and external databases showed stable response times, good throughput and confirmed that the system performs best with a local database setup.
   
