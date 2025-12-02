@@ -10,7 +10,7 @@ import view.MainView;
 public class CourseUtility {
     private CourseUtility() {}
 
-    public static void createCourse(String method, TextField title, DatePicker startDate, DatePicker endDate, MainController mainController, Label errorMessage) {
+    public static void createCourse(final String method, final TextField title, final DatePicker startDate, final DatePicker endDate, final MainController mainController, final Label errorMessage) {
         if (validateTitle(title) && validateStartDate(startDate) && validateEndDate(endDate)) {
             final String titleString = title.getText();
             final String startDateString = startDate.getValue().toString();
@@ -31,15 +31,15 @@ public class CourseUtility {
         }
     }
 
-    public static boolean validateTitle(TextField title) {
+    public static boolean validateTitle(final TextField title) {
         return !title.getText().trim().isEmpty();
     }
 
-    public static boolean validateStartDate(DatePicker startDate) {
+    public static boolean validateStartDate(final DatePicker startDate) {
         return startDate.getValue() != null;
     }
 
-    public static boolean validateEndDate(DatePicker endDate) {
+    public static boolean validateEndDate(final DatePicker endDate) {
         return endDate.getValue() != null;
     }
 }

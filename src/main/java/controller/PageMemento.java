@@ -9,7 +9,7 @@ public class PageMemento {
     private Course course;
     private Assignment assignment;
 
-    public PageMemento(Page page, Course course, Assignment assignment) {
+    public PageMemento(final Page page, final Course course, final Assignment assignment) {
         this.page = page;
         this.course = course;
         this.assignment = assignment;

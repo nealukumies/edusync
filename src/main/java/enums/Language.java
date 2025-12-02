@@ -27,7 +27,7 @@ public enum Language {
     private final boolean isRTL;
 
 
-    Language(String code, String country, String displayName, boolean isRTL) {
+    Language(final String code, final String country, final String displayName, final boolean isRTL) {
         this.code = code;
         this.country = country;
         this.displayName = displayName;

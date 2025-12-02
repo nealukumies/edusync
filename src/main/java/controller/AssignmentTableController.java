@@ -64,7 +64,7 @@ public class AssignmentTableController extends SubController {
         }
 
         @Override
-        protected void updateItem(String item, boolean empty) {
+        protected void updateItem(final String item, final boolean empty) {
             super.updateItem(item, empty);
             final ViewableAssignment viewableAssignment = getTableRow().getItem();
             if (empty || viewableAssignment == null) {
@@ -90,7 +90,7 @@ public class AssignmentTableController extends SubController {
         }
 
         @Override
-        protected void updateItem(Integer item, boolean empty) {
+        protected void updateItem(final Integer item, final boolean empty) {
             super.updateItem(item, empty);
             final ViewableAssignment viewableAssignment = getTableRow().getItem();
             if (empty || viewableAssignment == null) {

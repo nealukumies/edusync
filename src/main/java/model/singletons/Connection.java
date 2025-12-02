@@ -35,7 +35,7 @@ public class Connection {
         return instance;
     }
 
-    public HttpResponse<String> sendGetRequest(String endpoint) {
+    public HttpResponse<String> sendGetRequest(final String endpoint) {
         HttpResponse<String> response = null;
 
         try {
@@ -58,7 +58,7 @@ public class Connection {
         return response;
     }
 
-    public HttpResponse<String> sendPostRequest(String req, String endpoint) {
+    public HttpResponse<String> sendPostRequest(final String req, final String endpoint) {
         HttpResponse<String> response = null;
 
         try {
@@ -81,7 +81,7 @@ public class Connection {
         return response;
     }
 
-    public HttpResponse<String> sendPutRequest(String req, String endpoint) {
+    public HttpResponse<String> sendPutRequest(final String req, final String endpoint) {
         HttpResponse<String> response = null;
 
         try {
@@ -104,7 +104,7 @@ public class Connection {
         return response;
     }
 
-    public HttpResponse<String> sendDeleteRequest(String endpoint) {
+    public HttpResponse<String> sendDeleteRequest(final String endpoint) {
         HttpResponse<String> response = null;
 
         try {

@@ -9,7 +9,7 @@ public enum Weekday {
     SATURDAY,
     SUNDAY;
 
-    public static Weekday fromString(String dbValue) {
+    public static Weekday fromString(final String dbValue) {
         return Weekday.valueOf(dbValue.toUpperCase());
     }
 

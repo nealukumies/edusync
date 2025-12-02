@@ -9,7 +9,7 @@ public class ViewableAssignment {
     private Assignment assignment;
     private Course course;
 
-    public ViewableAssignment(Assignment assignment, Course course) {
+    public ViewableAssignment(final Assignment assignment, final Course course) {
         this.assignment = assignment;
         this.course = course;
     }

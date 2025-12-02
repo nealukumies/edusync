@@ -21,7 +21,7 @@ public class UserHandler {
 
     private UserHandler() {}
 
-    public static int loginUser(String inputEmail, String inputPassword) throws JsonProcessingException {
+    public static int loginUser(final String inputEmail, final String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -78,7 +78,7 @@ public class UserHandler {
         return null;
     }
 
-    public static int updateUser(String inputName, String inputEmail) throws JsonProcessingException {
+    public static int updateUser(final String inputName, final String inputEmail) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -114,7 +114,7 @@ public class UserHandler {
         return -1;
     }
 
-    public static int registerUser(String inputName, String inputEmail, String inputPassword) throws JsonProcessingException {
+    public static int registerUser(final String inputName, final String inputEmail, final String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""

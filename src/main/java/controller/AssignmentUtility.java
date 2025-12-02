@@ -14,7 +14,7 @@ import java.util.List;
 public class AssignmentUtility {
     private AssignmentUtility() {}
 
-    public static void populateCourseList(ChoiceBox<CourseOption> courseSelect, List<Course> courses , MainController mainController) {
+    public static void populateCourseList(final ChoiceBox<CourseOption> courseSelect, final List<Course> courses , final MainController mainController) {
         courseSelect.getItems().clear();
         for (final Course c : courses) {
             final CourseOption option = new CourseOption(c.getCourseId(), c.getCourseName());
@@ -26,7 +26,7 @@ public class AssignmentUtility {
         }
     }
 
-    public static void parseTimeString(String ts, int[] time) {
+    public static void parseTimeString(final String ts, final int[] time) {
         if (ts.contains(":")) {
             try {
                 final String[] chars = ts.split(":");
@@ -47,7 +47,7 @@ public class AssignmentUtility {
         }
     }
 
-    public static void submitAssignment(DatePicker dateSelect, TextField timeSelect, int[] time, ChoiceBox<CourseOption> courseSelect, TextField title, TextArea desc, MainController mainController) {
+    public static void submitAssignment(final DatePicker dateSelect, final TextField timeSelect, final int[] time, final ChoiceBox<CourseOption> courseSelect, final TextField title, final TextArea desc, final MainController mainController) {
         if (dateSelect.getValue() == null) {
             return;
         }

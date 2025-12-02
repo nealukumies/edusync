@@ -33,7 +33,7 @@ public class ParseHandler {
         return new ArrayList<>();
     }
 
-    public static List<Assignment> getAssignmentsForCourse(Course course) throws JsonProcessingException {
+    public static List<Assignment> getAssignmentsForCourse(final Course course) throws JsonProcessingException {
         final List<Assignment> assignments = new ArrayList<>();
         final List<Assignment> data = getAssignments();
         for (final Assignment assignment : data) {
@@ -44,7 +44,7 @@ public class ParseHandler {
         return assignments;
     }
 
-    public static List<Schedule> getSchedulesForCourse(Course course) throws JsonProcessingException {
+    public static List<Schedule> getSchedulesForCourse(final Course course) throws JsonProcessingException {
         final HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
         if (res != null) {
             return DBObjectParser.parseScheduleList(res);

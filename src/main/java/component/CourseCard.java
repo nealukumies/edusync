@@ -20,7 +20,7 @@ public class CourseCard {
     private CourseListController courseListController;
     private MainController mainController;
 
-    public CourseCard(Course course, CourseListController courseListController, MainController mainController) {
+    public CourseCard(final Course course, final CourseListController courseListController, final MainController mainController) {
         this.course = course;
         this.courseListController = courseListController;
         this.mainController = mainController;

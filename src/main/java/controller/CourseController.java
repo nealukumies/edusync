@@ -100,7 +100,7 @@ public class CourseController extends SubController {
         }
     }
 
-    public void deleteSchedule(int scheduleId) {
+    public void deleteSchedule(final int scheduleId) {
         final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         final String deleteScheduleText = MainView.getBundle().getString("delete_schedule_text");
         final String deleteScheduleHeader = MainView.getBundle().getString("delete_schedule_header");

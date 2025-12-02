@@ -53,7 +53,7 @@ public class MainController {
             private final ImageView flagView = new ImageView();
 
             @Override
-            protected void updateItem(Language item, boolean empty) {
+            protected void updateItem(final Language item, final boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
@@ -149,7 +149,7 @@ public class MainController {
         this.pageBackHistory.clear();
     }
 
-    public void restoreState(PageMemento state) {
+    public void restoreState(final PageMemento state) {
         this.course = state.getCourse();
         this.assignment = state.getAssignment();
         this.changePageWithoutChangingHistory(state.getPage());
@@ -199,7 +199,7 @@ public class MainController {
         updateButtons();
     }
 
-    public void loadPageURL(Page page) {
+    public void loadPageURL(final Page page) {
         switch (page) {
             case FRONT_PAGE -> loadPage("/view/FrontpageView.fxml");
             case DASHBOARD_PAGE -> loadPage("/view/DashboardView.fxml");
@@ -217,7 +217,7 @@ public class MainController {
         }
     }
 
-    public void loadPage(String path) {
+    public void loadPage(final String path) {
         try {
             final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             fxmlLoader.setResources(MainView.getBundle());
@@ -239,7 +239,7 @@ public class MainController {
         return assignment;
     }
 
-    public void setAssignment(Assignment assignment) {
+    public void setAssignment(final Assignment assignment) {
         this.assignment = assignment;
     }
 
@@ -247,7 +247,7 @@ public class MainController {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(final Course course) {
         this.course = course;
     }
 

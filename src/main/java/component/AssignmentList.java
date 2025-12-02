@@ -16,7 +16,7 @@ import java.util.List;
 public class AssignmentList {
     MainController mainController;
 
-    public AssignmentList(MainController mainController) {
+    public AssignmentList(final MainController mainController) {
         this.mainController = mainController;
     }
 
@@ -27,7 +27,7 @@ public class AssignmentList {
      * @param courses        List of courses
      * @return
      */
-    public TableView<ViewableAssignment> createList(List<Assignment> assignmentList, List<Course> courses) {
+    public TableView<ViewableAssignment> createList(final List<Assignment> assignmentList, final List<Course> courses) {
         if (assignmentList.isEmpty()) {
             return null;
         }
@@ -60,7 +60,7 @@ public class AssignmentList {
      * @param courseId ID of the course being searched
      * @return
      */
-    public Course getCourse(List<Course> courses, int courseId) {
+    public Course getCourse(final List<Course> courses, final int courseId) {
         for (final Course c : courses) {
             if (c.getCourseId() == courseId) {
                 return c;

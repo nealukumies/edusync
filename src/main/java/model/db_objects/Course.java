@@ -9,7 +9,7 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Course(int courseId, int studentId, String courseName, LocalDate startDate, LocalDate endDate) {
+    public Course(final int courseId, final int studentId, final String courseName, final LocalDate startDate, final LocalDate endDate) {
         this.courseId = courseId;
         this.studentId = studentId;
         this.courseName = courseName;

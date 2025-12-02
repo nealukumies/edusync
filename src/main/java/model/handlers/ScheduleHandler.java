@@ -13,7 +13,7 @@ public class ScheduleHandler {
 
     private ScheduleHandler() {}
 
-    public static HttpResponse<String> getSchedule(int scheduleId) {
+    public static HttpResponse<String> getSchedule(final int scheduleId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = SCHEDULES_STRING + scheduleId;
@@ -28,7 +28,7 @@ public class ScheduleHandler {
         return null;
     }
 
-    public static HttpResponse<String> getSchedulesForCourse(int courseId) {
+    public static HttpResponse<String> getSchedulesForCourse(final int courseId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = SCHEDULES_STRING + "courses/" + courseId;
@@ -59,7 +59,7 @@ public class ScheduleHandler {
         return null;
     }
 
-    public static int createSchedule(int courseId, String weekday, String startTime, String endTime) throws JsonProcessingException {
+    public static int createSchedule(final int courseId, final String weekday, final String startTime, final String endTime) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -84,7 +84,7 @@ public class ScheduleHandler {
         return -1;
     }
 
-    public static int updateSchedule(int scheduleId, int courseId, String weekday, String startTime, String endTime) {
+    public static int updateSchedule(final int scheduleId, final int courseId, final String weekday, final String startTime, final String endTime) {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -107,7 +107,7 @@ public class ScheduleHandler {
         return -1;
     }
 
-    public static int deleteSchedule(int scheduleId) {
+    public static int deleteSchedule(final int scheduleId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = SCHEDULES_STRING + scheduleId;

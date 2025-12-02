@@ -13,7 +13,7 @@ public class AssignmentHandler {
 
     private AssignmentHandler() {}
 
-    public static HttpResponse<String> getAssignment(int assignmentId) {
+    public static HttpResponse<String> getAssignment(final int assignmentId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = ASSIGNMENTS_STRING + assignmentId;
@@ -44,7 +44,7 @@ public class AssignmentHandler {
         return null;
     }
 
-    public static int createAssignment(int courseId, String title, String description, String deadline) throws JsonProcessingException {
+    public static int createAssignment(final int courseId, final String title, final String description, final String deadline) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -74,7 +74,7 @@ public class AssignmentHandler {
         return -1;
     }
 
-    public static int updateAssignment(int assignmentId, int courseId, String title, String description, String deadline, String assignmentStatus) {
+    public static int updateAssignment(final int assignmentId, final int courseId, final String title, final String description, final String deadline, final String assignmentStatus) {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""

@@ -33,7 +33,7 @@ public class MainView extends Application {
     private static Parent root;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
         if (!getSavedLanguage()) {
             setLanguage(Language.ENGLISH);
         }
@@ -72,7 +72,7 @@ public class MainView extends Application {
     /**
      * Static setter for the root to avoid writing static fields directly from instance methods.
      */
-    private static void setRoot(Parent newRoot) {
+    private static void setRoot(final Parent newRoot) {
         root = newRoot;
     }
 
@@ -118,7 +118,7 @@ public class MainView extends Application {
      *
      * @param lang New language enum reference
      */
-    public static void setLanguage(Language lang) {
+    public static void setLanguage(final Language lang) {
         currentLanguage = lang;
         final String code = lang.getCode();
         final String country = lang.getCountry();
@@ -154,7 +154,7 @@ public class MainView extends Application {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 }

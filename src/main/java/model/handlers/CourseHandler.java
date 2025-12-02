@@ -12,7 +12,7 @@ public class CourseHandler {
     static final String COURSES_STRING = "/courses/";
 
     private CourseHandler() {}
-    public static int createCourse(String courseName, String startDate, String endDate) throws JsonProcessingException {
+    public static int createCourse(final String courseName, final String startDate, final String endDate) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -36,7 +36,7 @@ public class CourseHandler {
         return -1;
     }
 
-    public static int updateCourse(int courseId, String courseName, String startDate, String endDate) {
+    public static int updateCourse(final int courseId, final String courseName, final String startDate, final String endDate) {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -58,7 +58,7 @@ public class CourseHandler {
         return -1;
     }
 
-    public static int deleteCourse(int courseId) {
+    public static int deleteCourse(final int courseId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = COURSES_STRING + courseId;
@@ -89,7 +89,7 @@ public class CourseHandler {
         return null;
     }
 
-    public static HttpResponse<String> getCourse(int courseId) {
+    public static HttpResponse<String> getCourse(final int courseId) {
         final Connection conn = Connection.getInstance();
 
         final String endpoint = COURSES_STRING + courseId;

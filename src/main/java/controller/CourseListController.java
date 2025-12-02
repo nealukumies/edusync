@@ -81,7 +81,7 @@ public class CourseListController extends SubController {
         }
     }
 
-    public List<Assignment> getAssignmentsByCourse(int id) {
+    public List<Assignment> getAssignmentsByCourse(final int id) {
         final List<Assignment> assignments = new ArrayList<>();
         for (final Assignment assignment : allAssignments) {
             if (assignment.getCourseId() == id) {

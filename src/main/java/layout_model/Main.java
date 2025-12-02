@@ -5,7 +5,7 @@ import model.handlers.UserHandler;
 import view.MainView;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         UserHandler.loadAccount();
         Application.launch(MainView.class, args);
     }

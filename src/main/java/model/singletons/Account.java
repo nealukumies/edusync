@@ -33,7 +33,7 @@ public class Account implements Serializable {
         this.role = null;
     }
 
-    public boolean setAccountDetails(int studentId, String name, String email, String role) {
+    public boolean setAccountDetails(final int studentId, final String name, final String email, final String role) {
         if (!isLoggedIn()) {
             this.studentId = studentId;
             this.name = name;

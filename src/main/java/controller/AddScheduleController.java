@@ -51,7 +51,7 @@ public class AddScheduleController extends SubController {
         }
     }
 
-    public int[] parseTimeString(String ts) {
+    public int[] parseTimeString(final String ts) {
         final int[] time = new int[2];
         AssignmentUtility.parseTimeString(ts, time);
         return time;

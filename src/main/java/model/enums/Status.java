@@ -11,7 +11,7 @@ public enum Status {
     private final String dbValue;
     Status(String dbValue) { this.dbValue = dbValue; }
     public String getDbValue() { return dbValue; }
-    public static Status fromDbValue(String dbValue) {
+    public static Status fromDbValue(final String dbValue) {
         for (final Status s : Status.values()) {
             if (s.getDbValue().equals(dbValue)) {
                 return s;

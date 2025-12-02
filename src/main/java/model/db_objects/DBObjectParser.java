@@ -21,7 +21,7 @@ public class DBObjectParser {
 
     private DBObjectParser () {}
 
-    public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
+    public static Student parseStudent(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
@@ -36,7 +36,7 @@ public class DBObjectParser {
         );
     }
 
-    public static Course parseCourse(HttpResponse<String> data) throws JsonProcessingException {
+    public static Course parseCourse(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
@@ -53,7 +53,7 @@ public class DBObjectParser {
         );
     }
 
-    public static List<Course> parseCourseList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Course> parseCourseList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }
@@ -76,7 +76,7 @@ public class DBObjectParser {
         return courses;
     }
 
-    public static Schedule parseSchedule(HttpResponse<String> data) throws JsonProcessingException {
+    public static Schedule parseSchedule(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
@@ -93,7 +93,7 @@ public class DBObjectParser {
         );
     }
 
-    public static List<Schedule> parseScheduleList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Schedule> parseScheduleList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }
@@ -116,7 +116,7 @@ public class DBObjectParser {
         return schedules;
     }
 
-    public static Assignment parseAssignment(HttpResponse<String> data) throws JsonProcessingException {
+    public static Assignment parseAssignment(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
         }
@@ -135,7 +135,7 @@ public class DBObjectParser {
         );
     }
 
-    public static List<Assignment> parseAssignmentList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Assignment> parseAssignmentList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }

@@ -15,7 +15,7 @@ public class Assignment {
     private Timestamp deadline;
     private Status status;
 
-    public Assignment(int assignmentId, int studentId, Integer courseId, String title, String description, Timestamp deadline, Status status) {
+    public Assignment(final int assignmentId, final int studentId, final Integer courseId, final String title, final String description, final Timestamp deadline, final Status status) {
         this.assignmentId = assignmentId;
         this.studentId = studentId;
         this.courseId = courseId; //note that courseId is nullable in the database

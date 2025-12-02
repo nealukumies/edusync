@@ -26,7 +26,7 @@ public class CalendarModern extends VBox {
     private final Map<Integer, String> courseNameById = new HashMap<>();
     Weekday weekday;
 
-    List<String> checkSchedule(int col, int row){
+    List<String> checkSchedule(final int col, final int row){
         weekday = checkWeekday(col);
         final List<String> courseNames = new ArrayList<>();
         for (final Schedule schedule : schedules){
@@ -42,7 +42,7 @@ public class CalendarModern extends VBox {
         return courseNames;
     }
 
-    Weekday checkWeekday(int col){
+    Weekday checkWeekday(final int col){
         return switch ((LocalDate.now().getDayOfWeek().getValue() - 1 + col) % 7) {
             case 0 -> Weekday.MONDAY;
             case 1 -> Weekday.TUESDAY;
@@ -70,7 +70,7 @@ public class CalendarModern extends VBox {
         buildCalendarGrid(scheduleResponse != null);
     }
 
-    private void loadSchedules(HttpResponse<String> scheduleResponse) {
+    private void loadSchedules(final HttpResponse<String> scheduleResponse) {
         try {
             schedules = DBObjectParser.parseScheduleList(scheduleResponse);
         } catch (JsonProcessingException e) {
@@ -78,7 +78,7 @@ public class CalendarModern extends VBox {
         }
     }
 
-    private void loadCourses(HttpResponse<String> courseResponse) {
+    private void loadCourses(final HttpResponse<String> courseResponse) {
         try {
             courses = DBObjectParser.parseCourseList(courseResponse);
             populateCourseMap();
@@ -94,7 +94,7 @@ public class CalendarModern extends VBox {
         }
     }
 
-    private void buildCalendarGrid(boolean hasScheduleResponse) {
+    private void buildCalendarGrid(final boolean hasScheduleResponse) {
         this.setPrefSize(1200, 600);
         final GridPane calendarGrid = new GridPane();
         calendarGrid.setPrefSize(1200, 600);
@@ -123,7 +123,7 @@ public class CalendarModern extends VBox {
         this.getChildren().add(calendarGrid);
     }
 
-    private VBox createCell(boolean hasScheduleResponse, int col, int row) {
+    private VBox createCell(final boolean hasScheduleResponse, final int col, final int row) {
         final VBox cell = new VBox();
         if (hasScheduleResponse) {
             final List<String> courseNames = checkSchedule(col, row);

@@ -11,7 +11,7 @@ public class Schedule {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Schedule(int scheduleId, int courseId, Weekday weekday, LocalTime startTime, LocalTime endTime) {
+    public Schedule(final int scheduleId, final int courseId, final Weekday weekday, final LocalTime startTime, final LocalTime endTime) {
         this.scheduleId = scheduleId;
         this.courseId = courseId;
         this.weekday = weekday;

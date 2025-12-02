@@ -1,11 +1,11 @@
 package controller;
 
 public class DataLoadException extends RuntimeException {
-    public DataLoadException(String message) {
+    public DataLoadException(final String message) {
         super(message);
     }
 
-    public DataLoadException(String message, Throwable cause) {
+    public DataLoadException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }
