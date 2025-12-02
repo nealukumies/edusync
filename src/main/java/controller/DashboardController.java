@@ -8,9 +8,9 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.DBObjects.DBObjectParser;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.db_objects.DBObjectParser;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import view.MainView;
@@ -40,21 +40,11 @@ public class DashboardController extends SubController {
         this.assignmentList = new ArrayList<>();
         this.courses = new ArrayList<>();
 
-        addAssignmentLink.setOnAction(e -> {
-            getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE);
-        });
-        assignmentsLink.setOnAction(e -> {
-            getMainController().changePage(Page.DASHBOARD_PAGE);
-        });
-        coursesLink.setOnAction(e -> {
-            getMainController().changePage(Page.COURSE_LIST_PAGE);
-        });
-        newCourseLink.setOnAction(e -> {
-            getMainController().changePage(Page.ADD_COURSE_PAGE);
-        });
-        calendar.setOnAction(e -> {
-            getMainController().changePage(Page.CALENDAR_PAGE);
-        });
+        addAssignmentLink.setOnAction(e -> getMainController().changePage(Page.ADD_ASSIGNMENT_PAGE));
+        assignmentsLink.setOnAction(e -> getMainController().changePage(Page.DASHBOARD_PAGE));
+        coursesLink.setOnAction(e -> getMainController().changePage(Page.COURSE_LIST_PAGE));
+        newCourseLink.setOnAction(e -> getMainController().changePage(Page.ADD_COURSE_PAGE));
+        calendar.setOnAction(e -> getMainController().changePage(Page.CALENDAR_PAGE));
     }
 
     public void loadAssignments() {
@@ -65,7 +55,7 @@ public class DashboardController extends SubController {
                 generateAssignments();
             } else {
                 String errorText = MainView.getBundle().getString("Assignments_not_found_error");
-                throw new Exception(errorText);
+                throw new DataLoadException(errorText);
             }
         } catch (Exception e) {
             assignments.getChildren().clear();
@@ -83,7 +73,7 @@ public class DashboardController extends SubController {
                 generateAssignments();
             } else {
                 String errorText = MainView.getBundle().getString("Assignments_not_found_error");
-                throw new Exception(errorText);
+                throw new DataLoadException(errorText);
             }
         } catch (Exception e) {
             throw new IllegalStateException("Failed to load courses", e);

@@ -1,10 +1,10 @@
 package layout_model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.DBObjects.DBObjectParser;
-import model.DBObjects.Schedule;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.db_objects.DBObjectParser;
+import model.db_objects.Schedule;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import model.handlers.ScheduleHandler;
@@ -15,12 +15,14 @@ import java.util.List;
 
 public class ParseHandler {
 
+    private ParseHandler() {}
+
     public static List<Course> getCourses() throws JsonProcessingException {
         HttpResponse<String> res = CourseHandler.getCourses();
         if (res != null) {
             return DBObjectParser.parseCourseList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<Assignment> getAssignments() throws JsonProcessingException {
@@ -28,7 +30,7 @@ public class ParseHandler {
         if (res != null) {
             return DBObjectParser.parseAssignmentList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<Assignment> getAssignmentsForCourse(Course course) throws JsonProcessingException {
@@ -43,11 +45,10 @@ public class ParseHandler {
     }
 
     public static List<Schedule> getSchedulesForCourse(Course course) throws JsonProcessingException {
-        List<Schedule> schedules = new ArrayList<>();
         HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
         if (res != null) {
             return DBObjectParser.parseScheduleList(res);
         }
-        return null;
+        return new ArrayList<>();
     }
 }

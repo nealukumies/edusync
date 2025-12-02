@@ -1,13 +1,17 @@
 package model.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import model.Singletons.Account;
+import model.singletons.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CourseHandlerTest {
+    static String test101String = "test 101";
+    static String test102String = "test 102";
+    static String startDateString = "2024-01-01";
+    static String endDateString = "2024-12-31";
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
@@ -16,7 +20,7 @@ class CourseHandlerTest {
 
     @Test
     void createCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse("test 101", "2024-01-01", "2024-12-31");
+        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertNotEquals(-1, courseId);
 
@@ -27,38 +31,38 @@ class CourseHandlerTest {
     void createCourseNotLoggedIn() throws JsonProcessingException {
         Account.getInstance().clearAccount();
 
-        int courseId = CourseHandler.createCourse("test 101", "2024-01-01", "2024-12-31");
+        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertEquals(-1, courseId);
     }
 
     @Test
     void updateCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse("test 101", "2024-01-01", "2024-12-31");
+        int courseId = CourseHandler.createCourse(test102String, startDateString, endDateString);
 
-        assertEquals(1, CourseHandler.updateCourse(courseId, "test 102", "2024-01-01", "2024-12-31"));
+        assertEquals(1, CourseHandler.updateCourse(courseId, test102String, startDateString, endDateString));
 
         CourseHandler.deleteCourse(courseId);
     }
 
     @Test //x
-    void updateCourseNotLoggedIn() throws JsonProcessingException {
+    void updateCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
 
-        int result = CourseHandler.updateCourse(1, "test 102", "2024-01-01", "2024-12-31");
+        int result = CourseHandler.updateCourse(1, test101String, startDateString, endDateString);
 
         assertEquals(1, result);
     }
 
     @Test
     void deleteCourse() throws JsonProcessingException {
-        int courseId = CourseHandler.createCourse("test 101", "2024-01-01", "2024-12-31");
+        int courseId = CourseHandler.createCourse(test101String, startDateString, endDateString);
 
         assertEquals(1, CourseHandler.deleteCourse(courseId));
     }
 
     @Test
-    void deleteCourseNotLoggedIn() throws JsonProcessingException {
+    void deleteCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
 
         int result = CourseHandler.deleteCourse(1);
@@ -86,7 +90,6 @@ class CourseHandlerTest {
     @Test //x
     void getCourseNotLoggedIn() {
         Account.getInstance().clearAccount();
-        System.out.println(Account.getInstance().isLoggedIn());
 
         assertNotNull(CourseHandler.getCourse(174));
     }

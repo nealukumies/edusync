@@ -9,9 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.Singletons.Account;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.singletons.Account;
 import model.handlers.UserHandler;
 import view.MainView;
 
@@ -42,7 +42,7 @@ public class MainController {
     private Assignment assignment = null;
     private Course course = null;
 
-    public void initialize() throws IOException {
+    public void initialize() {
         this.pageHistory = new ArrayList<>();
         this.pageBackHistory = new ArrayList<>();
         this.account = Account.getInstance();
@@ -77,12 +77,8 @@ public class MainController {
             this.refreshCurrentPage();
         });
 
-        this.backButton.setOnAction(e -> {
-            goToPrevPage();
-        });
-        this.forwardButton.setOnAction(e -> {
-            goToNextPage();
-        });
+        this.backButton.setOnAction(e -> goToPrevPage());
+        this.forwardButton.setOnAction(e -> goToNextPage());
 
         this.changePage(Page.FRONT_PAGE);
         this.pageHistory.clear();
@@ -94,7 +90,7 @@ public class MainController {
 
         // Dynamically forces all content to the right edge of the container
         Region spacer = new Region();
-        headerContent.setHgrow(spacer, Priority.ALWAYS);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
         if (account.isLoggedIn()) {
             // For now, just add username
@@ -116,9 +112,7 @@ public class MainController {
             Hyperlink loginText = new Hyperlink(logOutText);
             loginText.getStyleClass().add("medium-title");
             loginText.getStyleClass().add("link");
-            loginText.setOnAction(e -> {
-                changePage(Page.LOGIN_PAGE);
-            });
+            loginText.setOnAction(e -> changePage(Page.LOGIN_PAGE));
             headerContent.getChildren().addAll(spacer, loginText);
         }
 
@@ -227,11 +221,11 @@ public class MainController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             fxmlLoader.setResources(MainView.getBundle());
-            Parent root = fxmlLoader.load();
+            Parent loadPageRoot = fxmlLoader.load();
             SubController subController = fxmlLoader.getController();
             subController.setMainViewController(this);
             subController.initializeFully();
-            content.getChildren().add(root);
+            content.getChildren().add(loadPageRoot);
         } catch (IOException e) {
             Label error = new Label();
             error.getStyleClass().add("error");

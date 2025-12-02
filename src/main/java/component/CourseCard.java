@@ -6,8 +6,8 @@ import enums.Page;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
 import view.MainView;
 
 import java.util.List;

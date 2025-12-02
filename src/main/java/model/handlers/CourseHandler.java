@@ -3,12 +3,15 @@ package model.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Singletons.Account;
-import model.Singletons.Connection;
+import model.singletons.Account;
+import model.singletons.Connection;
 
 import java.net.http.HttpResponse;
 
 public class CourseHandler {
+    static final String COURSES_STRING = "/courses/";
+
+    private CourseHandler() {}
     public static int createCourse(String courseName, String startDate, String endDate) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
@@ -23,16 +26,12 @@ public class CourseHandler {
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 201 -> {
-                final ObjectMapper mapper = new ObjectMapper();
+        if (status == 201) {
+            final ObjectMapper mapper = new ObjectMapper();
 
-                final JsonNode jsonNode = mapper.readTree(response.body());
+            final JsonNode jsonNode = mapper.readTree(response.body());
 
-                final int courseId = jsonNode.get("courseId").asInt();
-
-                return courseId;
-            }
+            return jsonNode.get("courseId").asInt();
         }
         return -1;
     }
@@ -47,16 +46,14 @@ public class CourseHandler {
                 "end_date": "%s"
             }""", courseName, startDate, endDate);
 
-        final String endpoint = "/courses/" + courseId;
+        final String endpoint = COURSES_STRING + courseId;
 
         final HttpResponse<String> response = conn.sendPutRequest(inputString, endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return 1;
-            }
+        if (status == 200) {
+            return 1;
         }
         return -1;
     }
@@ -64,16 +61,14 @@ public class CourseHandler {
     public static int deleteCourse(int courseId) {
         final Connection conn = Connection.getInstance();
 
-        final String endpoint = "/courses/" + courseId;
+        final String endpoint = COURSES_STRING + courseId;
 
         final HttpResponse<String> response = conn.sendDeleteRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return 1;
-            }
+        if (status == 200) {
+            return 1;
         }
         return -1;
     }
@@ -82,16 +77,14 @@ public class CourseHandler {
         final Connection conn = Connection.getInstance();
 
         final int studentId = Account.getInstance().getStudentId();
-        final String endpoint = "/courses/students/" + studentId;
+        final String endpoint = COURSES_STRING + "students/" + studentId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return response;
-            }
+        if (status == 200) {
+            return response;
         }
         return null;
     }
@@ -99,16 +92,14 @@ public class CourseHandler {
     public static HttpResponse<String> getCourse(int courseId) {
         final Connection conn = Connection.getInstance();
 
-        final String endpoint = "/courses/" + courseId;
+        final String endpoint = COURSES_STRING + courseId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return response;
-            }
+        if (status == 200) {
+            return response;
         }
         return null;
     }

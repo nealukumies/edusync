@@ -9,8 +9,6 @@ public class FrontpageController extends SubController {
     private Button startButton;
 
     public void initializeFully() {
-        startButton.setOnAction(event -> {
-            this.getMainController().changePage(Page.LOGIN_PAGE);
-        });
+        startButton.setOnAction(event -> this.getMainController().changePage(Page.LOGIN_PAGE));
     }
 }

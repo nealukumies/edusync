@@ -1,8 +1,8 @@
 package controller;
 
 import enums.Page;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
 
 public class PageMemento {
     private Page page;

@@ -7,7 +7,6 @@ import javafx.geometry.NodeOrientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -41,11 +40,8 @@ public class MainView extends Application {
 
         final String SMALL_SCALE = "small_scale";
 
-        // Load fonts
-        Font roboto = Font.loadFont(getClass().getResource("/font/RobotoSerif_28pt-Regular.ttf").toExternalForm(), 10);
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
-        MainView.root = fxmlLoader.load();
+        setRoot(fxmlLoader.load());
 
         updateOrientation();
 
@@ -69,9 +65,15 @@ public class MainView extends Application {
         });
 
         stage.setTitle("EduSync");
-        //stage.setResizable(false);
         stage.setScene(new Scene(MainView.root));
         stage.show();
+    }
+
+    /**
+     * Static setter for the root to avoid writing static fields directly from instance methods.
+     */
+    private static void setRoot(Parent newRoot) {
+        root = newRoot;
     }
 
     /**
@@ -90,9 +92,9 @@ public class MainView extends Application {
             setLanguage(Language.getLanguage(fullcode));
             return true;
         } catch (FileNotFoundException e) {
-            throw new IllegalStateException("Failed to get saved language", e);
+            return false;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LanguageException("Failed to read saved language", e);
         }
     }
 

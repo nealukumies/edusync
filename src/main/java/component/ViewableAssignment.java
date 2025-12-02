@@ -1,8 +1,7 @@
 package component;
 
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.Enums.Status;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
 
 import java.sql.Timestamp;
 
@@ -35,7 +34,7 @@ public class ViewableAssignment {
         return assignment.getDeadline();
     }
 
-    public Status getStatus() {
-        return assignment.getStatus();
+    public String getStatus() {
+        return assignment.getStatus().toString();
     }
 }

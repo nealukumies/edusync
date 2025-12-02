@@ -1,10 +1,10 @@
-package model.DBObjects;
+package model.db_objects;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Enums.Status;
-import model.Enums.Weekday;
+import model.enums.Status;
+import model.enums.Weekday;
 
 import java.net.http.HttpResponse;
 import java.sql.Timestamp;
@@ -12,11 +12,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBObjectParser {
     private static final String COURSE_ID = "courseId";
     private static final String STUDENT_ID = "studentId";
     private static final String TIME_STRING = "HH:mm";
+
+    private DBObjectParser () {}
 
     public static Student parseStudent(HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
@@ -50,7 +53,7 @@ public class DBObjectParser {
         );
     }
 
-    public static ArrayList<Course> parseCourseList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Course> parseCourseList(HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }
@@ -90,7 +93,7 @@ public class DBObjectParser {
         );
     }
 
-    public static ArrayList<Schedule> parseScheduleList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Schedule> parseScheduleList(HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }
@@ -132,7 +135,7 @@ public class DBObjectParser {
         );
     }
 
-    public static ArrayList<Assignment> parseAssignmentList(HttpResponse<String> data) throws JsonProcessingException {
+    public static List<Assignment> parseAssignmentList(HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
         }

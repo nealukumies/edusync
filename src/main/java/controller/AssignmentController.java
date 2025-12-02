@@ -3,9 +3,9 @@ package controller;
 import enums.Page;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.Enums.Status;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.enums.Status;
 import model.handlers.AssignmentHandler;
 import view.MainView;
 
@@ -30,12 +30,11 @@ public class AssignmentController extends SubController {
     private Button deleteButton;
 
     private Assignment assignment;
-    private Course course;
 
     @Override
     public void initializeFully() {
         this.assignment = getMainController().getAssignment();
-        this.course = getMainController().getCourse();
+        final Course course = getMainController().getCourse();
 
         title.setText(assignment.getTitle());
         courseName.setText(course.getCourseName());
@@ -46,24 +45,24 @@ public class AssignmentController extends SubController {
         initializeStatus();
 
         saveButton.setOnAction(e -> {
-            int _id = assignment.getAssignmentId();
-            int _courseId = course.getCourseId();
-            String _title = assignment.getTitle();
-            String _desc = assignment.getDescription();
+            int idInt = assignment.getAssignmentId();
+            int courseIdInt = course.getCourseId();
+            String titleString = assignment.getTitle();
+            String descString = assignment.getDescription();
 
-            String _deadline = assignment.getDeadline().toString();
-            String _status = status.getSelectionModel().getSelectedItem().getDbValue();
+            String deadlineString = assignment.getDeadline().toString();
+            String statusString = status.getSelectionModel().getSelectedItem().getDbValue();
 
-            AssignmentHandler.updateAssignment(_id, _courseId, _title, _desc, _deadline, _status);
+            AssignmentHandler.updateAssignment(idInt, courseIdInt, titleString, descString, deadlineString, statusString);
             getMainController().goToPrevPage();
         });
 
         deleteButton.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            String title = MainView.getBundle().getString("delete_alert_title");
+            String titleOnAction = MainView.getBundle().getString("delete_alert_title");
             String header = MainView.getBundle().getString("delete_alert_header");
             String content = MainView.getBundle().getString("delete_alert_content");
-            alert.setTitle(title);
+            alert.setTitle(titleOnAction);
             alert.setHeaderText(header);
             alert.setContentText(content);
             Optional<ButtonType> result = alert.showAndWait();

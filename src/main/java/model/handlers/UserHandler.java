@@ -3,17 +3,25 @@ package model.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Singletons.Account;
-import model.Singletons.Connection;
+import model.singletons.Account;
+import model.singletons.Connection;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.http.HttpResponse;
 
 public class UserHandler {
-    static public int loginUser(String inputEmail, String inputPassword) throws JsonProcessingException {
+    static final String STUDENTS_STRING = "/students/";
+    static final String EMAIL_STRING = "email";
+    static final String ID_STRING = "id";
+    static final String NAME_STRING = "name";
+    static final String ROLE_STRING = "role";
+    static final String ACCOUNT_STRING = "account.txt";
+
+    private UserHandler() {}
+
+    public static int loginUser(String inputEmail, String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -26,30 +34,26 @@ public class UserHandler {
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                final ObjectMapper mapper = new ObjectMapper();
+        if (status == 200) {
+            final ObjectMapper mapper = new ObjectMapper();
 
-                final JsonNode jsonNode = mapper.readTree(response.body());
+            final JsonNode jsonNode = mapper.readTree(response.body());
 
-                final int studentId = jsonNode.get("studentId").asInt();
-                final String name = jsonNode.get("name").asText();
-                final String email = jsonNode.get("email").asText();
-                final String role = jsonNode.get("role").asText();
+            final int studentId = jsonNode.get("studentId").asInt();
+            final String name = jsonNode.get(NAME_STRING).asText();
+            final String email = jsonNode.get(EMAIL_STRING).asText();
+            final String role = jsonNode.get(ROLE_STRING).asText();
 
-                final Account account = Account.getInstance();
-                if (!account.setAccountDetails(studentId, name, email, role)) {
-                    return -1;
-                }
-
-                saveAccount();
-
-                return studentId;
-            }
-            default -> {
+            final Account account = Account.getInstance();
+            if (!account.setAccountDetails(studentId, name, email, role)) {
                 return -1;
             }
+
+            saveAccount();
+
+            return studentId;
         }
+        return -1;
     }
 
     public static void logoutUser() {
@@ -62,21 +66,19 @@ public class UserHandler {
         final Connection conn = Connection.getInstance();
 
         final int studentId = Account.getInstance().getStudentId();
-        final String endpoint = "/students/" + studentId;
+        final String endpoint = STUDENTS_STRING + studentId;
 
         final HttpResponse<String> response = conn.sendGetRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                return response;
-            }
+        if (status == 200) {
+            return response;
         }
         return null;
     }
 
-    static public int updateUser(String inputName, String inputEmail) throws JsonProcessingException {
+    public static int updateUser(String inputName, String inputEmail) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -86,37 +88,33 @@ public class UserHandler {
                 }""", inputName, inputEmail);
 
         final int studentId = Account.getInstance().getStudentId();
-        final String endpoint = "/students/" + studentId;
+        final String endpoint = STUDENTS_STRING + studentId;
 
         final HttpResponse<String> response = conn.sendPutRequest(inputString, endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                final Account account = Account.getInstance();
-                account.clearAccount();
+        if (status == 200) {
+            final Account account = Account.getInstance();
+            account.clearAccount();
 
-                final ObjectMapper mapper = new ObjectMapper();
+            final ObjectMapper mapper = new ObjectMapper();
 
-                final JsonNode jsonNode = mapper.readTree(response.body());
+            final JsonNode jsonNode = mapper.readTree(response.body());
 
-                final int id = jsonNode.get("id").asInt();
-                final String name = jsonNode.get("name").asText();
-                final String email = jsonNode.get("email").asText();
-                final String role = jsonNode.get("role").asText();
+            final int id = jsonNode.get(ID_STRING).asInt();
+            final String name = jsonNode.get(NAME_STRING).asText();
+            final String email = jsonNode.get(EMAIL_STRING).asText();
+            final String role = jsonNode.get(ROLE_STRING).asText();
 
-                account.setAccountDetails(id, name, email, role);
+            account.setAccountDetails(id, name, email, role);
 
-                return 1;
-            }
-            default -> {
-                return -1;
-            }
+            return 1;
         }
+        return -1;
     }
 
-    static public int registerUser(String inputName, String inputEmail, String inputPassword) throws JsonProcessingException {
+    public static int registerUser(String inputName, String inputEmail, String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
         final String inputString = String.format("""
@@ -130,82 +128,78 @@ public class UserHandler {
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 201 -> {
-                final Account account = Account.getInstance();
-                account.clearAccount();
+        if (status == 201) {
+            final Account account = Account.getInstance();
+            account.clearAccount();
 
-                final ObjectMapper mapper = new ObjectMapper();
+            final ObjectMapper mapper = new ObjectMapper();
 
-                final JsonNode jsonNode = mapper.readTree(response.body());
+            final JsonNode jsonNode = mapper.readTree(response.body());
 
-                final int studentId = jsonNode.get("id").asInt();
-                final String name = jsonNode.get("name").asText();
-                final String email = jsonNode.get("email").asText();
-                final String role = jsonNode.get("role").asText();
+            final int studentId = jsonNode.get(ID_STRING).asInt();
+            final String name = jsonNode.get(NAME_STRING).asText();
+            final String email = jsonNode.get(EMAIL_STRING).asText();
+            final String role = jsonNode.get(ROLE_STRING).asText();
 
-                account.setAccountDetails(studentId, name, email, role);
+            account.setAccountDetails(studentId, name, email, role);
 
-                return 1;
-            }
-            default -> {
-                return -1;
-            }
+            return 1;
         }
+        return -1;
     }
 
     public static int deleteUser() {
         final Connection conn = Connection.getInstance();
 
         final int studentId = Account.getInstance().getStudentId();
-        final String endpoint = "/students/" + studentId;
+        final String endpoint = STUDENTS_STRING + studentId;
 
         final HttpResponse<String> response = conn.sendDeleteRequest(endpoint);
 
         final int status = response.statusCode();
 
-        switch (status) {
-            case 200 -> {
-                final Account account = Account.getInstance();
-                account.clearAccount();
+        if (status == 200) {
+            final Account account = Account.getInstance();
+            account.clearAccount();
 
-                return 1;
-            }
-            default -> {
-                return -1;
-            }
+            return 1;
         }
+        return -1;
     }
 
     public static void saveAccount() {
         final Account account = Account.getInstance();
-        final String filePath = "account.txt";
 
-        try (FileOutputStream fos = new FileOutputStream(filePath);
+        try (FileOutputStream fos = new FileOutputStream(ACCOUNT_STRING);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
              oos.writeObject(account);
-        } catch (IOException e) {}
+        } catch (IOException ignored) {
+            //block empty to ignore errors
+        }
     }
 
     public static void loadAccount() {
-        final String filePath = "account.txt";
         final Account account = Account.getInstance();
 
-        try (java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(ACCOUNT_STRING);
              java.io.ObjectInputStream ois = new java.io.ObjectInputStream(fis)) {
 
             final Account loadedAccount = (Account) ois.readObject();
             account.setAccountDetails(loadedAccount.getStudentId(), loadedAccount.getName(), loadedAccount.getEmail(), loadedAccount.getRole());
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            //block empty to ignore errors
+        }
     }
 
-    public static boolean removeSavedAccount() {
-        final java.io.File file = new java.io.File("account.txt");
+    public static void removeSavedAccount() {
+        final java.nio.file.Path path = java.nio.file.Paths.get(ACCOUNT_STRING);
         try {
-            return file.delete();
-        } catch (SecurityException e) {
+            java.nio.file.Files.delete(path);
+        } catch (java.io.IOException e) {
             throw new IllegalStateException("Failed to delete saved account file", e);
+        } catch (SecurityException e) {
+            throw new IllegalStateException("Security manager prevented deletion of saved account file: " + path, e);
         }
     }
 }

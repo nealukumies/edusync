@@ -23,9 +23,7 @@ public class RegisterController extends SubController {
     private Label errorMessage;
 
     public void initialize() {
-        registerButton.setOnAction(e -> {
-            register();
-        });
+        registerButton.setOnAction(e -> register());
     }
 
     @Override
@@ -35,11 +33,11 @@ public class RegisterController extends SubController {
 
     public void register() {
         if (isUsernameValid() && isPasswordValid() && isEmailValid()) {
-            String _name = username.getText();
-            String _email = email.getText();
-            String _password = password.getText();
+            String nameString = username.getText();
+            String emailString = email.getText();
+            String passwordString = password.getText();
             try {
-                UserHandler.registerUser(_name, _email, _password);
+                UserHandler.registerUser(nameString, emailString, passwordString);
                 getMainController().goToPrevPage();
             } catch (Exception e) {
                 errorMessage.setText(e.getMessage());

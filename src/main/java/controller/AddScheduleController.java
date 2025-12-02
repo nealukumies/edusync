@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import model.Enums.Weekday;
+import model.enums.Weekday;
 import model.handlers.ScheduleHandler;
 
 public class AddScheduleController extends SubController {
     @FXML
-    private ChoiceBox courseSelect;
+    private ChoiceBox<String> courseSelect;
     @FXML
-    private ChoiceBox weekDaySelect;
+    private ChoiceBox<Weekday> weekDaySelect;
     @FXML
     private TextField startTime;
     @FXML
@@ -32,23 +32,19 @@ public class AddScheduleController extends SubController {
         courseSelect.getItems().setAll(getMainController().getCourse().getCourseName());
         courseSelect.setValue(getMainController().getCourse().getCourseName());
 
-        submit.setOnAction(e -> {
-            addSchedule();
-        });
+        submit.setOnAction(e -> addSchedule());
 
-        cancel.setOnAction(e -> {
-            getMainController().goToPrevPage();
-        });
+        cancel.setOnAction(e -> getMainController().goToPrevPage());
     }
 
     public void addSchedule() {
         String day = weekDaySelect.getValue().toString();
-        int[] _timeStart = parseTimeString(startTime.getText());
-        int[] _timeEnd = parseTimeString(endTime.getText());
-        String _start = String.format("%02d", _timeStart[0]) + ":" + String.format("%02d", _timeStart[1]) + ":" + String.format("%02d", 0);
-        String _end = String.format("%02d", _timeEnd[0]) + ":" + String.format("%02d", _timeEnd[1]) + ":" + String.format("%02d", 0);
+        int[] timeStartInt = parseTimeString(startTime.getText());
+        int[] timeEndInt = parseTimeString(endTime.getText());
+        String startString = String.format("%02d", timeStartInt[0]) + ":" + String.format("%02d", timeStartInt[1]) + ":" + String.format("%02d", 0);
+        String endString = String.format("%02d", timeEndInt[0]) + ":" + String.format("%02d", timeEndInt[1]) + ":" + String.format("%02d", 0);
         try {
-            ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, _start, _end);
+            ScheduleHandler.createSchedule(getMainController().getCourse().getCourseId(), day, startString, endString);
             getMainController().goToPrevPage();
         } catch (Exception e) {
             throw new IllegalStateException("Failed to add schedule", e);
@@ -57,24 +53,7 @@ public class AddScheduleController extends SubController {
 
     public int[] parseTimeString(String ts) {
         int[] time = new int[2];
-        if (ts.contains(":")) {
-            try {
-                String[] chars = ts.split(":");
-                int hours = Integer.parseInt(chars[0]);
-                int minutes = Integer.parseInt(chars[1]);
-                time[0] = hours;
-                time[1] = minutes;
-                if (hours > 23 || hours < 0) {
-                    time[0] = 0;
-                }
-                if (minutes > 59 || minutes < 0) {
-                    time[1] = 0;
-                }
-            } catch (Exception e) {
-                time[0] = 0;
-                time[1] = 0;
-            }
-        }
+        AssignmentUtility.parseTimeString(ts, time);
         return time;
     }
 }

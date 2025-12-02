@@ -1,4 +1,4 @@
-package model.Singletons;
+package model.singletons;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ public class Account implements Serializable {
     private String email;
     private String role;
 
-    private final static String notLoggedInTxt = "Not logged in";
+    static final String NOT_LOGGED_IN_TXT = "Not logged in";
 
     private Account() {
     }
@@ -52,21 +52,21 @@ public class Account implements Serializable {
 
     public String getName() {
         if (name == null) {
-            return notLoggedInTxt;
+            return NOT_LOGGED_IN_TXT;
         }
         return name;
     }
 
     public String getEmail() {
         if (email == null) {
-            return notLoggedInTxt;
+            return NOT_LOGGED_IN_TXT;
         }
         return email;
     }
 
     public String getRole() {
         if (role == null) {
-            return notLoggedInTxt;
+            return NOT_LOGGED_IN_TXT;
         }
         return role;
     }

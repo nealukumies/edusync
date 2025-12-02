@@ -20,19 +20,15 @@ public class LogInController extends SubController {
 
     @Override
     public void initializeFully() {
-        registerLink.setOnAction(e -> {
-            this.getMainController().changePage(Page.REGISTER_PAGE);
-        });
-        loginButton.setOnAction(e -> {
-            login();
-        });
+        registerLink.setOnAction(e -> this.getMainController().changePage(Page.REGISTER_PAGE));
+        loginButton.setOnAction(e -> login());
     }
 
     public void login() {
-        String _email = email.getText();
-        String _password = password.getText();
+        String emailString = email.getText();
+        String passwordString = password.getText();
         try {
-            int id = UserHandler.loginUser(_email, _password);
+            int id = UserHandler.loginUser(emailString, passwordString);
             if (id > -1) {
                 getMainController().changePage(Page.FRONT_PAGE);
             }

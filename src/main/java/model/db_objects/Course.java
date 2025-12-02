@@ -1,7 +1,6 @@
-package model.DBObjects;
+package model.db_objects;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Course {
     private int courseId;

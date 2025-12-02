@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.DBObjects.Assignment;
-import model.DBObjects.Course;
-import model.DBObjects.DBObjectParser;
+import model.db_objects.Assignment;
+import model.db_objects.Course;
+import model.db_objects.DBObjectParser;
 import model.handlers.AssignmentHandler;
 import model.handlers.CourseHandler;
 import view.MainView;
@@ -68,7 +68,6 @@ public class CourseListController extends SubController {
         courseListContent.getChildren().clear();
 
         for (Course course : courses) {
-            System.out.println(this.getMainController());
             CourseCard courseCard = new CourseCard(course, this, this.getMainController());
             courseListContent.getChildren().add(courseCard.create());
         }
