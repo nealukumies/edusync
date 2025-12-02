@@ -7,14 +7,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for AssignmentHandler.
+ */
 class AssignmentHandlerTest {
+    /** String constant for email used in tests. */
     static String emailString = "katti@matikainen.fi";
+    /** String constant for password used in tests. */
     static String passwordString = "salasana";
+    /** String constant for assignment title used in tests. */
     static String testAssignmentTitle = "Test Assignment";
+    /** String constant for deadline used in tests. */
     static String deadlineString = "2024-10-01 13:00:00";
+    /** String constant for updated test content used in tests. */
     static String updatedTestString = "Updated Test";
+    /** String constant for updated assignment title used in tests. */
     static String updatedAssignmentString = "Updated Assignment";
+    /** String constant for email used in tests. */
     static String testString = "Test";
+    /** String constant indicating assignment completion status. */
     static String completedString = "completed";
 
     @BeforeEach

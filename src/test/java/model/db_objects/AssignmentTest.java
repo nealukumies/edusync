@@ -7,8 +7,12 @@ import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for the Assignment class.
+ */
 class AssignmentTest {
+    /** The title string for testing. */
     static String titleString = "Title";
+    /** The description string for testing. */
     static String descriptionString = "Description";
 
     @Test

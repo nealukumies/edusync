@@ -13,10 +13,18 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Utility class for parsing and fetching data related to courses, assignments, and schedules.
+ */
 public class ParseHandler {
 
     private ParseHandler() {}
 
+    /**
+     * Fetches all courses for the user.
+     *
+     * @return A list of courses.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Course> getCourses() throws JsonProcessingException {
         final HttpResponse<String> res = CourseHandler.getCourses();
         if (res != null) {
@@ -25,6 +33,13 @@ public class ParseHandler {
         return new ArrayList<>();
     }
 
+
+    /**
+     * Fetches all assignments for the user.
+     *
+     * @return A list of assignments.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Assignment> getAssignments() throws JsonProcessingException {
         final HttpResponse<String> res = AssignmentHandler.getAssignmentsForUser();
         if (res != null) {
@@ -33,6 +48,13 @@ public class ParseHandler {
         return new ArrayList<>();
     }
 
+    /**
+     * Fetches the assignments for a given course.
+     *
+     * @param course The course for which to fetch assignments.
+     * @return A list of assignments associated with the course.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Assignment> getAssignmentsForCourse(final Course course) throws JsonProcessingException {
         final List<Assignment> assignments = new ArrayList<>();
         final List<Assignment> data = getAssignments();
@@ -44,6 +66,13 @@ public class ParseHandler {
         return assignments;
     }
 
+    /**
+     * Fetches the schedules for a given course.
+     *
+     * @param course The course for which to fetch schedules.
+     * @return A list of schedules associated with the course.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Schedule> getSchedulesForCourse(final Course course) throws JsonProcessingException {
         final HttpResponse<String> res = ScheduleHandler.getSchedulesForCourse(course.getCourseId());
         if (res != null) {

@@ -11,9 +11,16 @@ import model.handlers.AssignmentHandler;
 import java.time.LocalDate;
 import java.util.List;
 
+/** Utility class for assignment-related operations. */
 public class AssignmentUtility {
     private AssignmentUtility() {}
 
+    /** Populates the course selection ChoiceBox with available courses.
+     *
+     * @param courseSelect   The ChoiceBox to populate.
+     * @param courses        The list of available courses.
+     * @param mainController The main controller to access the current course.
+     */
     public static void populateCourseList(final ChoiceBox<CourseOption> courseSelect, final List<Course> courses , final MainController mainController) {
         courseSelect.getItems().clear();
         for (final Course c : courses) {
@@ -26,6 +33,11 @@ public class AssignmentUtility {
         }
     }
 
+    /** Parses a time string in the format "HH:MM" and populates the provided time array.
+     *
+     * @param ts   The time string to parse.
+     * @param time An array to hold the parsed time (hours and minutes).
+     */
     public static void parseTimeString(final String ts, final int[] time) {
         if (ts.contains(":")) {
             try {
@@ -47,6 +59,17 @@ public class AssignmentUtility {
         }
     }
 
+    /**
+     * Submits the assignment data to create or update an assignment.
+     *
+     * @param dateSelect     The DatePicker for selecting the assignment date.
+     * @param timeSelect     The TextField for entering the assignment time.
+     * @param time           An array to hold the parsed time (hours and minutes).
+     * @param courseSelect   The ChoiceBox for selecting the course.
+     * @param title          The TextField for entering the assignment title.
+     * @param desc           The TextArea for entering the assignment description.
+     * @param mainController The main controller to access current assignment and navigation.
+     */
     public static void submitAssignment(final DatePicker dateSelect, final TextField timeSelect, final int[] time, final ChoiceBox<CourseOption> courseSelect, final TextField title, final TextArea desc, final MainController mainController) {
         if (dateSelect.getValue() == null) {
             return;

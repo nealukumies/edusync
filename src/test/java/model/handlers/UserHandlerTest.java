@@ -9,9 +9,17 @@ import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for UserHandler.
+ */
 class UserHandlerTest {
+    /** Email string for testing.
+     */
     static String emailString = "katti@matikainen.fi";
+    /** Password string for testing.
+     */
     static String passwordString = "salasana";
+    /** Not logged in string for comparison.
+     */
     static String notLoggedInString = "Not logged in";
 
     @BeforeEach

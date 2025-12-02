@@ -18,24 +18,36 @@ import view.MainView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the dashboard view.
+ */
 public class DashboardController extends SubController {
+    /** List of assignments */
     private List<Assignment> assignmentList;
+    /** List of courses */
     private List<Course> courses;
 
+    /**  * VBox container for displaying assignments. */
     @FXML
     private VBox assignments;
+    /**  * Hyperlink to navigate to the add assignment page. */
     @FXML
     private Hyperlink addAssignmentLink;
+    /**  * Hyperlink to navigate to the assignments page. */
     @FXML
     private Hyperlink assignmentsLink;
+    /**  * Hyperlink to navigate to the courses page. */
     @FXML
     private Hyperlink coursesLink;
+    /**  * Hyperlink to navigate to the new course page. */
     @FXML
     private Hyperlink newCourseLink;
+    /**  * Hyperlink to navigate to the calendar page. */
     @FXML
     private Hyperlink calendar;
 
-
+    /**     * Initializes the controller and sets up event handlers for navigation links.
+     */
     public void initialize() {
         this.assignmentList = new ArrayList<>();
         this.courses = new ArrayList<>();
@@ -47,6 +59,8 @@ public class DashboardController extends SubController {
         calendar.setOnAction(e -> getMainController().changePage(Page.CALENDAR_PAGE));
     }
 
+    /** Loads the list of assignments from the AssignmentHandler.
+     */
     public void loadAssignments() {
         try {
             final List<Assignment> data = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
@@ -65,6 +79,8 @@ public class DashboardController extends SubController {
         }
     }
 
+    /** Loads the list of courses from the CourseHandler.
+     */
     public void loadCourses() {
         try {
             final List<Course> data = DBObjectParser.parseCourseList(CourseHandler.getCourses());
@@ -80,6 +96,9 @@ public class DashboardController extends SubController {
         }
     }
 
+    /**
+     * Generates the assignment list UI by creating an AssignmentList component.
+     */
     public void generateAssignments() {
         assignments.getChildren().clear();
         if (!assignmentList.isEmpty()) {

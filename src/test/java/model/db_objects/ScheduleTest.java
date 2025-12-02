@@ -7,8 +7,14 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for Schedule.
+ */
 class ScheduleTest {
+    /** The start time string for testing.
+     */
     static String startTimeString = "09:00";
+    /** The end time string for testing.
+     */
     static String endTimeString = "10:00";
 
     @Test

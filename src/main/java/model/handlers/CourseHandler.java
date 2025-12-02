@@ -8,10 +8,21 @@ import model.singletons.Connection;
 
 import java.net.http.HttpResponse;
 
+/** Handler class for managing course-related operations. */
 public class CourseHandler {
+    /** String constant for courses endpoint. */
     static final String COURSES_STRING = "/courses/";
 
     private CourseHandler() {}
+    /**
+     * Creates a new course.
+     *
+     * @param courseName The name of the course.
+     * @param startDate  The start date of the course.
+     * @param endDate    The end date of the course.
+     * @return The ID of the newly created course, or -1 if creation failed.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static int createCourse(final String courseName, final String startDate, final String endDate) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
@@ -36,6 +47,15 @@ public class CourseHandler {
         return -1;
     }
 
+    /**
+     * Updates an existing course.
+     *
+     * @param courseId   The ID of the course to update.
+     * @param courseName The new name of the course.
+     * @param startDate  The new start date of the course.
+     * @param endDate    The new end date of the course.
+     * @return 1 if update was successful, -1 otherwise.
+     */
     public static int updateCourse(final int courseId, final String courseName, final String startDate, final String endDate) {
         final Connection conn = Connection.getInstance();
 
@@ -58,6 +78,12 @@ public class CourseHandler {
         return -1;
     }
 
+    /**
+     * Deletes a course by its ID.
+     *
+     * @param courseId The ID of the course to delete.
+     * @return 1 if deletion was successful, -1 otherwise.
+     */
     public static int deleteCourse(final int courseId) {
         final Connection conn = Connection.getInstance();
 
@@ -73,6 +99,11 @@ public class CourseHandler {
         return -1;
     }
 
+    /**
+     * Gets all courses for the logged-in student.
+     *
+     * @return The HttpResponse containing the list of courses, or null if not found.
+     */
     public static HttpResponse<String> getCourses() {
         final Connection conn = Connection.getInstance();
 
@@ -89,6 +120,12 @@ public class CourseHandler {
         return null;
     }
 
+    /**
+     * Gets a specific course by its ID.
+     *
+     * @param courseId The ID of the course to retrieve.
+     * @return The HttpResponse containing the course data, or null if not found.
+     */
     public static HttpResponse<String> getCourse(final int courseId) {
         final Connection conn = Connection.getInstance();
 

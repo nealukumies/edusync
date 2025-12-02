@@ -6,7 +6,10 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Unit tests for the Course class.
+ */
 class CourseTest {
+    /** A sample course name used in tests. */
     static String mathematicsString = "Mathematics";
 
     @Test

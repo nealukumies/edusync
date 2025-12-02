@@ -4,9 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for the Account singleton. */
 class AccountTest {
+    /** The name of the user. */
     static String nameString = "Test User";
+    /** The email of the user. */
     static String emailString = "katti@matikainen";
+    /** The role of the user in the account. */
     static String roleString = "user";
 
     @Test

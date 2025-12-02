@@ -14,8 +14,14 @@ import java.util.List;
  * TableView component to display a list of assignments.
  */
 public class AssignmentList {
+    /** MainController instance */
     MainController mainController;
 
+    /**
+     * Constructor for AssignmentList
+     *
+     * @param mainController MainController instance
+     */
     public AssignmentList(final MainController mainController) {
         this.mainController = mainController;
     }

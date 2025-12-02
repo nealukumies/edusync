@@ -19,29 +19,47 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the main view, managing navigation and page loading.
+ */
 public class MainController {
+    /** Header content area */
     @FXML
     private HBox headerContent;
+    /** Content area where different pages are loaded */
     @FXML
     private StackPane content;
+    /** Main title hyperlink for navigation to the front page */
     @FXML
     private Hyperlink mainTitle;
+    /** Backward navigation button */
     @FXML
     private Button backButton;
+    /** Forward navigation button */
     @FXML
     private Button forwardButton;
+    /** The root BorderPane of the main view */
     @FXML
     private BorderPane root;
+    /** Language selection ComboBox */
     @FXML
     private ComboBox<Language> languageSelect;
 
+    /** The currently displayed page. */
     private Page currentPage;
+    /** The history stack for backward navigation. */
     private List<PageMemento> pageHistory;
+    /** The history stack for forward navigation. */
     private List<PageMemento> pageBackHistory;
+    /** The current user's account. */
     private Account account = null;
+    /** The current assignment being viewed or edited. */
     private Assignment assignment = null;
+    /** The current course being viewed or edited. */
     private Course course = null;
 
+    /** Initializes the MainController, setting up navigation and language selection.
+     */
     public void initialize() {
         this.pageHistory = new ArrayList<>();
         this.pageBackHistory = new ArrayList<>();
@@ -50,6 +68,7 @@ public class MainController {
 
         // Custom cell factory to display images of flags
         this.languageSelect.setCellFactory(cb -> new ListCell<>() {
+            /** ImageView to display the flag */
             private final ImageView flagView = new ImageView();
 
             @Override
@@ -85,6 +104,8 @@ public class MainController {
         updateButtons();
     }
 
+    /** Generates the header content based on the user's login status.
+     */
     public void generateHeader() {
         headerContent.getChildren().clear();
 
@@ -118,15 +139,23 @@ public class MainController {
 
     }
 
+    /** Creates a PageMemento representing the current state of the MainController.
+     *
+     * @return A PageMemento containing the current page, course, and assignment.
+     */
     public PageMemento createPageMemento() {
         return new PageMemento(this.currentPage, this.course, this.assignment);
     }
 
+    /** Updates the state of the back and forward navigation buttons.
+     */
     public void updateButtons() {
         backButton.setDisable(this.pageHistory.isEmpty());
         forwardButton.setDisable(this.pageBackHistory.isEmpty());
     }
 
+    /** Goes to the previous page in the navigation history, if available.
+     */
     public void goToPrevPage() {
         if (!this.pageHistory.isEmpty()) {
             final PageMemento current = this.createPageMemento();
@@ -136,6 +165,8 @@ public class MainController {
         }
     }
 
+    /** Goes to the next page in the navigation history, if available.
+     */
     public void goToNextPage() {
         if (!this.pageBackHistory.isEmpty()) {
             final PageMemento current = this.createPageMemento();
@@ -145,16 +176,24 @@ public class MainController {
         }
     }
 
+    /** Clears the back navigation history.
+     */
     public void clearPageBackHistory() {
         this.pageBackHistory.clear();
     }
 
+    /** Restores the state of the MainController from a PageMemento.
+     *
+     * @param state The PageMemento containing the state to restore.
+     */
     public void restoreState(final PageMemento state) {
         this.course = state.getCourse();
         this.assignment = state.getAssignment();
         this.changePageWithoutChangingHistory(state.getPage());
     }
 
+    /** Refreshes the current page by reloading its content.
+     */
     public void refreshCurrentPage() {
         generateHeader();
         content.getChildren().clear();
@@ -162,6 +201,11 @@ public class MainController {
         updateButtons();
     }
 
+    /**
+     * Changes the page and updates the navigation history.
+     *
+     * @param page The page to navigate to.
+     */
     public void changePage(Page page) {
         if (page == currentPage) {
             return;
@@ -182,6 +226,11 @@ public class MainController {
         updateButtons();
     }
 
+    /**
+     * Changes the page without modifying the navigation history.
+     *
+     * @param page The page to navigate to.
+     */
     public void changePageWithoutChangingHistory(Page page) {
         if (page == currentPage) {
             return;
@@ -199,6 +248,11 @@ public class MainController {
         updateButtons();
     }
 
+    /**
+     * Loads the FXML page corresponding to the given Page enum.
+     *
+     * @param page The page to load.
+     */
     public void loadPageURL(final Page page) {
         switch (page) {
             case FRONT_PAGE -> loadPage("/view/FrontpageView.fxml");
@@ -217,6 +271,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Loads an FXML page into the content area.
+     *
+     * @param path The path to the FXML file.
+     */
     public void loadPage(final String path) {
         try {
             final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));

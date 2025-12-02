@@ -18,14 +18,22 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for managing and displaying the list of courses.
+ */
 public class CourseListController extends SubController {
+    /** List of courses to be displayed */
     private List<Course> courses;
+    /** The FlowPane that contains the list of course cards */
     @FXML
     private FlowPane courseListContent;
+    /** The base VBox layout for the course list view */
     @FXML
     private VBox base;
+    /** List of all assignments for the user */
     private List<Assignment> allAssignments;
 
+    /** Initializes the controller and sets up the base layout. */
     public void initialize() {
         courses = new ArrayList<>();
         base.setFillWidth(true);
@@ -39,6 +47,9 @@ public class CourseListController extends SubController {
         fetchCourseList();
     }
 
+    /**
+     * Fetches the list of courses from the CourseHandler and updates the UI accordingly.
+     */
     public void fetchCourseList() {
         try {
             final HttpResponse<String> response = CourseHandler.getCourses();
@@ -64,6 +75,9 @@ public class CourseListController extends SubController {
         }
     }
 
+    /**
+     * Generates the course list UI by creating CourseCard components for each course.
+     */
     public void generateCourseList() {
         courseListContent.getChildren().clear();
 
@@ -73,6 +87,9 @@ public class CourseListController extends SubController {
         }
     }
 
+    /**
+     * Fetches all assignments for the user and stores them in the allAssignments list.
+     */
     public void fetchAllAssignments() {
         try {
             this.allAssignments = DBObjectParser.parseAssignmentList(AssignmentHandler.getAssignmentsForUser());
@@ -81,6 +98,12 @@ public class CourseListController extends SubController {
         }
     }
 
+    /**
+     * Gets all assignments for a specific course by its ID.
+     *
+     * @param id The ID of the course.
+     * @return A list of assignments associated with the specified course.
+     */
     public List<Assignment> getAssignmentsByCourse(final int id) {
         final List<Assignment> assignments = new ArrayList<>();
         for (final Assignment assignment : allAssignments) {

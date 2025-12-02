@@ -19,11 +19,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A modern calendar view that displays schedules and courses in a grid format.
+ */
 public class CalendarModern extends VBox {
 
+    /** List of schedules for the user. */
     private List<Schedule> schedules = new ArrayList<>();
+    /** List of courses associated with the schedules. */
     private List<Course> courses = new ArrayList<>();
+    /** Map of course IDs to course names for quick lookup. */
     private final Map<Integer, String> courseNameById = new HashMap<>();
+    /** The current weekday being processed. */
     Weekday weekday;
 
     List<String> checkSchedule(final int col, final int row){
@@ -56,6 +63,7 @@ public class CalendarModern extends VBox {
     }
 
 
+    /** * Constructs a CalendarModern instance, fetching schedules and courses, and building the calendar grid. */
     public CalendarModern() {
         final HttpResponse<String> scheduleResponse = ScheduleHandler.getSchedulesForUser();
         if (scheduleResponse != null) {

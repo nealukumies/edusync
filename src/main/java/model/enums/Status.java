@@ -2,15 +2,24 @@ package model.enums;
 
 import view.MainView;
 
+/** Enumeration representing the status of an assignment. */
 public enum Status {
     PENDING("pending"),
     IN_PROGRESS("in-progress"),
     COMPLETED("completed"),
     OVERDUE("overdue");
 
+    /** The database value associated with the status. */
     private final String dbValue;
     Status(String dbValue) { this.dbValue = dbValue; }
     public String getDbValue() { return dbValue; }
+
+    /** Convert a database value to a Status enum.
+     *
+     * @param dbValue The database value as a string.
+     * @return The corresponding Status enum.
+     * @throws IllegalArgumentException if the dbValue does not match any Status.
+     */
     public static Status fromDbValue(final String dbValue) {
         for (final Status s : Status.values()) {
             if (s.getDbValue().equals(dbValue)) {

@@ -11,24 +11,36 @@ import view.MainView;
 
 import java.util.Optional;
 
+/**
+ * Controller for viewing and managing a specific assignment.
+ */
 public class AssignmentController extends SubController {
+    /** Label for assignment title */
     @FXML
     private Label title;
+    /** Hyperlink for course name */
     @FXML
     private Hyperlink courseName;
+    /** Label for assignment description */
     @FXML
     private Label desc;
+    /** Label for assignment deadline */
     @FXML
     private Label deadline;
+    /** ChoiceBox for assignment status */
     @FXML
     private ChoiceBox<Status> status;
+    /** ChoiceBox for assignment status */
     @FXML
     private Button saveButton;
+    /** Button to edit the assignment */
     @FXML
     private Button editButton;
+    /** Button to delete the assignment */
     @FXML
     private Button deleteButton;
 
+    /** The assignment being viewed or edited */
     private Assignment assignment;
 
     @Override
@@ -86,6 +98,7 @@ public class AssignmentController extends SubController {
         });
     }
 
+    /** Initializes the status ChoiceBox to reflect the current status of the assignment. */
     public void initializeStatus() {
         for (int i = 0; i < status.getItems().size(); i++) {
             if (status.getItems().get(i).equals(assignment.getStatus())) {

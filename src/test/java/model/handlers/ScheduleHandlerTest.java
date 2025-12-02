@@ -7,11 +7,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for ScheduleHandler.
+ */
 class ScheduleHandlerTest {
+    /** Monday string.
+     */
     static String mondayString = "Monday";
+    /** Start time string for 10:00.
+     */
     static String startTime10String = "10:00";
+    /** End time string for 12:00.
+     */
     static String startTime11String = "11:00";
+    /** End time string for 12:00.
+     */
     static String endTime12String = "12:00";
+    /** End time string for 13:00.
+     */
     static String endTime13String = "13:00";
 
     @BeforeEach

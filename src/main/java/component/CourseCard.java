@@ -16,16 +16,29 @@ import java.util.List;
  *
  */
 public class CourseCard {
+    /** Course associated with this card */
     private Course course;
+    /** CourseListController instance */
     private CourseListController courseListController;
+    /** MainController instance */
     private MainController mainController;
 
+    /** Constructor for CourseCard
+     *
+     * @param course Course associated with this card
+     * @param courseListController CourseListController instance
+     * @param mainController MainController instance
+     */
     public CourseCard(final Course course, final CourseListController courseListController, final MainController mainController) {
         this.course = course;
         this.courseListController = courseListController;
         this.mainController = mainController;
     }
 
+    /** Creates a VBox representing the course card
+     *
+     * @return VBox representing the course card
+     */
     public VBox create() {
         final VBox card = new VBox();
         card.setSpacing(10);

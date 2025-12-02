@@ -14,13 +14,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Utility class for parsing database objects from HTTP responses.
+ */
 public class DBObjectParser {
+    /** Course ID field name.
+     */
     private static final String COURSE_ID = "courseId";
+    /** Student ID field name.
+     */
     private static final String STUDENT_ID = "studentId";
+    /** Time format string for parsing time values.
+     */
     private static final String TIME_STRING = "HH:mm";
 
     private DBObjectParser () {}
 
+    /**
+     * Parses a single course from the given HTTP response.
+     *
+     * @param data The HTTP response containing the course data in JSON format.
+     * @return A Course object parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static Student parseStudent(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
@@ -36,6 +51,12 @@ public class DBObjectParser {
         );
     }
 
+    /** Parses a single course from the given HTTP response.
+     *
+     * @param data The HTTP response containing the course data in JSON format.
+     * @return A Course object parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static Course parseCourse(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
@@ -53,6 +74,13 @@ public class DBObjectParser {
         );
     }
 
+    /**
+     * Parses a list of courses from the given HTTP response.
+     *
+     * @param data The HTTP response containing the course data in JSON format.
+     * @return A list of Course objects parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Course> parseCourseList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
@@ -76,6 +104,13 @@ public class DBObjectParser {
         return courses;
     }
 
+    /**
+     * Parses a single schedule from the given HTTP response.
+     *
+     * @param data The HTTP response containing the schedule data in JSON format.
+     * @return A Schedule object parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static Schedule parseSchedule(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
@@ -93,6 +128,13 @@ public class DBObjectParser {
         );
     }
 
+    /**
+     * Parses a list of schedules from the given HTTP response.
+     *
+     * @param data The HTTP response containing the schedule data in JSON format.
+     * @return A list of Schedule objects parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Schedule> parseScheduleList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();
@@ -116,6 +158,13 @@ public class DBObjectParser {
         return schedules;
     }
 
+    /**
+     * Parses a single assignment from the given HTTP response.
+     *
+     * @param data The HTTP response containing the assignment data in JSON format.
+     * @return An Assignment object parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static Assignment parseAssignment(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return null;
@@ -135,6 +184,13 @@ public class DBObjectParser {
         );
     }
 
+    /**
+     * Parses a list of assignments from the given HTTP response.
+     *
+     * @param data The HTTP response containing the assignment data in JSON format.
+     * @return A list of Assignment objects parsed from the response.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static List<Assignment> parseAssignmentList(final HttpResponse<String> data) throws JsonProcessingException {
         if (data == null || data.body() == null || data.body().isEmpty() || data.statusCode() != 200) {
             return new ArrayList<>();

@@ -7,10 +7,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for CourseHandler. */
 class CourseHandlerTest {
+    /** Test course name 101. */
     static String test101String = "test 101";
+    /** Test course name 102. */
     static String test102String = "test 102";
+    /** Start date for the test courses. */
     static String startDateString = "2024-01-01";
+    /** End date for the test courses. */
     static String endDateString = "2024-12-31";
 
     @BeforeEach

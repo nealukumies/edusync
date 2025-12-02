@@ -11,16 +11,37 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.http.HttpResponse;
 
+/** Handler class for user-related operations such as login, logout, registration, and account management.
+ */
 public class UserHandler {
+    /** Students string for HTTP endpoints.
+     */
     static final String STUDENTS_STRING = "/students/";
+    /** Email string for HTTP headers and JSON keys.
+     */
     static final String EMAIL_STRING = "email";
+    /** ID string for HTTP headers and JSON keys.
+     */
     static final String ID_STRING = "id";
+    /** Name string for HTTP headers and JSON keys.
+     */
     static final String NAME_STRING = "name";
+    /** Role string for HTTP headers and JSON keys.
+     */
     static final String ROLE_STRING = "role";
+    /** Filename for storing account information.
+     */
     static final String ACCOUNT_STRING = "account.txt";
 
     private UserHandler() {}
 
+    /** Logs in a user with the provided email and password.
+     *
+     * @param inputEmail    The email of the user.
+     * @param inputPassword The password of the user.
+     * @return The student ID if login was successful, -1 otherwise.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static int loginUser(final String inputEmail, final String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
@@ -56,12 +77,18 @@ public class UserHandler {
         return -1;
     }
 
+    /** Logs out the current user by clearing the account details and removing the saved account file.
+     */
     public static void logoutUser() {
         final Account account = Account.getInstance();
         account.clearAccount();
         removeSavedAccount();
     }
 
+    /** Retrieves the current user's details from the backend.
+     *
+     * @return The HttpResponse containing the user's details if successful, null otherwise.
+     */
     public static HttpResponse<String> getUser() {
         final Connection conn = Connection.getInstance();
 
@@ -78,6 +105,13 @@ public class UserHandler {
         return null;
     }
 
+    /** Updates the current user's details in the backend.
+     *
+     * @param inputName  The new name of the user.
+     * @param inputEmail The new email of the user.
+     * @return 1 if the update was successful, -1 otherwise.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static int updateUser(final String inputName, final String inputEmail) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
@@ -114,6 +148,14 @@ public class UserHandler {
         return -1;
     }
 
+    /** Registers a new user in the backend.
+     *
+     * @param inputName     The name of the user.
+     * @param inputEmail    The email of the user.
+     * @param inputPassword The password of the user.
+     * @return 1 if the registration was successful, -1 otherwise.
+     * @throws JsonProcessingException If there is an error processing the JSON response.
+     */
     public static int registerUser(final String inputName, final String inputEmail, final String inputPassword) throws JsonProcessingException {
         final Connection conn = Connection.getInstance();
 
@@ -148,6 +190,10 @@ public class UserHandler {
         return -1;
     }
 
+    /** Deletes the current user from the backend.
+     *
+     * @return 1 if the deletion was successful, -1 otherwise.
+     */
     public static int deleteUser() {
         final Connection conn = Connection.getInstance();
 
@@ -167,6 +213,8 @@ public class UserHandler {
         return -1;
     }
 
+    /** Saves the current account to the filesystem.
+     */
     public static void saveAccount() {
         final Account account = Account.getInstance();
 
@@ -178,6 +226,9 @@ public class UserHandler {
         }
     }
 
+    /**
+     * Loads the saved account from the filesystem.
+     */
     public static void loadAccount() {
         final Account account = Account.getInstance();
 
@@ -192,6 +243,9 @@ public class UserHandler {
         }
     }
 
+    /**
+     * Removes the saved account file from the filesystem.
+     */
     public static void removeSavedAccount() {
         final java.nio.file.Path path = java.nio.file.Paths.get(ACCOUNT_STRING);
         try {

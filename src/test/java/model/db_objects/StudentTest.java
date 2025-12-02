@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** Test class for Student. */
 class StudentTest {
+    /** The name string used for testing. */
     static String nameString = "John Doe";
+    /** The email string used for testing. */
     static String emailString = "John.Doe@gmail.com";
 
     @Test

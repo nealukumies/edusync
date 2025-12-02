@@ -1,5 +1,6 @@
 package model.enums;
 
+/** Enum representing the days of the week with methods for database conversion. */
 public enum Weekday {
     MONDAY,
     TUESDAY,
@@ -9,10 +10,21 @@ public enum Weekday {
     SATURDAY,
     SUNDAY;
 
+    /**
+     * Converts a database string value to its corresponding enum constant.
+     *
+     * @param dbValue the string value from the database
+     * @return the corresponding Weekday enum constant
+     */
     public static Weekday fromString(final String dbValue) {
         return Weekday.valueOf(dbValue.toUpperCase());
     }
 
+    /**
+     * Converts the enum constant to its corresponding database string value.
+     *
+     * @return the lowercase string representation of the enum constant
+     */
     public String toDbValue() {
         return this.name().toLowerCase();
     }
