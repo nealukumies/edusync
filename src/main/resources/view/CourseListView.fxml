@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="base" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseListController">
+<VBox fx:id="base" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" styleClass="app" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseListController">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" styleClass="large-title" text="%Courses" />
-      <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="1.7976931348623157E308">
+      <ScrollPane fitToWidth="true" maxWidth="1.7976931348623157E308" vbarPolicy="ALWAYS">
          <content>
-              <FlowPane fx:id="courseListContent" hgap="30.0" maxWidth="1.7976931348623157E308" vgap="30.0">
+              <FlowPane fx:id="courseListContent" hgap="30.0" maxWidth="1.7976931348623157E308" minHeight="2900.0" vgap="30.0">
                   <padding>
                       <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                   </padding>
