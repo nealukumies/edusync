@@ -110,8 +110,8 @@ public class MainController {
         headerContent.getChildren().clear();
 
         // Dynamically forces all content to the right edge of the container
-        final Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
+//        final Region spacer = new Region();
+//        HBox.setHgrow(spacer, Priority.SOMETIMES);
 
         if (account.isLoggedIn()) {
             // For now, just add username
@@ -127,14 +127,14 @@ public class MainController {
                 updateButtons();
             });
 
-            headerContent.getChildren().addAll(spacer, label, logout);
+            headerContent.getChildren().addAll(label, logout);
         } else {
             final String logOutText = MainView.getBundle().getString("Header_Log_In");
             final Hyperlink loginText = new Hyperlink(logOutText);
             loginText.getStyleClass().add("medium-title");
             loginText.getStyleClass().add("link");
             loginText.setOnAction(e -> changePage(Page.LOGIN_PAGE));
-            headerContent.getChildren().addAll(spacer, loginText);
+            headerContent.getChildren().addAll(loginText);
         }
 
     }
