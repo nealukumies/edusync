@@ -50,7 +50,7 @@ public class AddScheduleController extends SubController {
      * Adds a new schedule entry based on user input.
      */
     public void addSchedule() {
-        final String day = weekDaySelect.getValue().toString();
+        final String day = weekDaySelect.getValue().getDbValue();
         final int[] timeStartInt = parseTimeString(startTime.getText());
         final int[] timeEndInt = parseTimeString(endTime.getText());
         final String startString = String.format("%02d", timeStartInt[0]) + ":" + String.format("%02d", timeStartInt[1]) + ":" + String.format("%02d", 0);
