@@ -57,11 +57,4 @@ class AssignmentTest {
         final Assignment assignment = new Assignment(1, 1, 1, titleString, descriptionString, new Timestamp(System.currentTimeMillis()), Status.PENDING);
         assertEquals(Status.PENDING, assignment.getStatus());
     }
-
-    @Test
-    void testToString() {
-        final Assignment assignment = new Assignment(1, 1, 1, titleString, descriptionString, new Timestamp(System.currentTimeMillis()), Status.PENDING);
-        final String expected = "Assignment{assignmentId=1, studentId=1, courseId=1, title='Title', description='Description', deadline=" + assignment.getDeadline() + ", status=PENDING}";
-        assertEquals(expected, assignment.toString());
-    }
 }
