@@ -152,6 +152,14 @@
     -fx-padding: 4 0 4 0;
 }
 
+.scroll-pane {
+    -fx-background-color:transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color:transparent;
+}
+
 /* SMALL SCALING */
 
 /* Misc sizes */
