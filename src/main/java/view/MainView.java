@@ -38,7 +38,7 @@ public class MainView extends Application {
             setLanguage(Language.ENGLISH);
         }
 
-        final String SMALL_SCALE = "small_scale";
+        final String SMALL_SCALE = "small-scale";
 
         final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainLayout.fxml"), bundle);
         setRoot(fxmlLoader.load());
